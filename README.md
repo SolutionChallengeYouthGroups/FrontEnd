@@ -8,6 +8,18 @@
 
 > DCS Solution Challenge PWA to help Youth Groups
 
+## Technologies
+### Technical
+[ReactJS](https://reactjs.org/) : Basic Front end framework
+[NextJS](https://nextjs.org/) : Work with React to help with routing and pre-render HTML
+
+### Looks
+[ChakraUI](https://chakra-ui.com/) : Relatively new Front-End UI Framework
+
+### Firebase
+[Firestore](https://firebase.google.com/docs/firestore)
+
+
 ## Install
 
 ```sh
