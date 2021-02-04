@@ -10,7 +10,7 @@
 
 ## Technologies
 ### Technical
-[ReactJS](https://reactjs.org/) : Basic Front end framework
+[ReactJS](https://reactjs.org/) : Basic Front end framework <br/>
 [NextJS](https://nextjs.org/) : Work with React to help with routing and pre-render HTML
 
 ### Looks
