@@ -6,13 +6,13 @@
   </a>
 </p>
 
-> DCS Solution Challenge PWA to help Youth Groups
+> University Of Warwick DCS Solution Challenge PWA to help Youth Groups
 
 ## Technologies
 ### Technical
 [ReactJS](https://reactjs.org/) : Basic Front end framework <br/>
-[NextJS](https://nextjs.org/) : Work with React to help with routing and pre-render HTML
-
+[NextJS](https://nextjs.org/) : Work with React to help with routing and pre-render HTML <br/>
+[Next-PWA](https://www.npmjs.com/package/next-pwa) : PWA Plugin for Next.js works with [workbox](https://developers.google.com/web/tools/workbox/)
 ### Looks
 [ChakraUI](https://chakra-ui.com/) : Relatively new Front-End UI Framework
 
@@ -35,6 +35,3 @@ yarn dev/yarn start
 ## Show your support
 
 Give a ⭐️ if this project helped you!
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
