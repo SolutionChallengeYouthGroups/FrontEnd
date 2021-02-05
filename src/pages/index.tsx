@@ -14,6 +14,7 @@ import { db } from "../firebase";
 import { Group } from "../types";
 
 const Index = () => {
+  // main homepage
   const [groups, setGroups] = useState<Group[]>([]);
   useEffect(() => {
     // useEffect will make sure I only request data on the first render

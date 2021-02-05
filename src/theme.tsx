@@ -3,6 +3,7 @@ import { createBreakpoints } from '@chakra-ui/theme-tools'
 
 const fonts = { mono: `'Menlo', monospace` }
 
+// Chakra -ui theme, shouldn't have to use too much
 const breakpoints = createBreakpoints({
   sm: '40em',
   md: '52em',

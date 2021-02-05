@@ -5,6 +5,7 @@ interface Props {
 }
 
 const login = (props: Props) => {
+  // page to login
   return (
     <div>
       login page

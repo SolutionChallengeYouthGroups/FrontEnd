@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 
+// SECRET KEY do not make public
 let firebaseConfig = {
   apiKey: "AIzaSyDC7dHYwCfbhfr3XKlz8x1CRWiApoA0at4",
   authDomain: "soltuionchallenge.firebaseapp.com",

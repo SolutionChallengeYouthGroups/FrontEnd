@@ -1,7 +1,7 @@
 const withPWA = require("next-pwa");
 const runtimeCaching = require("next-pwa/cache");
 
-console.log("ENV:" + process.env.NODE_ENV);
+// makes out app a PWA:
 module.exports = withPWA({
   pwa: {
     disable: process.env.NODE_ENV === "development",

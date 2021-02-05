@@ -5,6 +5,7 @@ import React from "react";
 interface Props {}
 
 const TopNav = (props: Props) => {
+  // top navbar of the home page
   return (
     <Flex
       as="nav"
