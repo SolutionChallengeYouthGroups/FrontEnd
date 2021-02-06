@@ -20,4 +20,4 @@ if (!firebase.apps.length) {
 
 let db = firebase.firestore();
 
-export { db };
+export { db, firebase };
