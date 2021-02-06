@@ -33,14 +33,14 @@ const Index = () => {
           const data = re.data();
           console.log(data);
           let group: Group = {
-            id: re.id,
-            name: data.name,
+            name: data.id,
             description: data.description,
             location: data.location,
             type: data.type,
             owner: data.owner,
             chat: re.ref.collection("chat"),
             announcements: re.ref.collection("announcements"),
+            createdAt:data.createdAt
           };
           setGroups([...groups, group]);
         });

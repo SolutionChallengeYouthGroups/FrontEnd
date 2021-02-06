@@ -21,15 +21,16 @@ interface User {
 type GroupTypes = "scouts" | "sports" | "religious" | "other";
 
 interface Group {
-  id: string;
+  // name is the id of the group
   name: string;
   location?: GeoPoint;
   description: string;
   type: GroupTypes;
   owner: DocumentReference; // reference to the onwer of the group
   chat: CollectionReference; // reference to a chat which contains ChatMessages
-  announcements: CollectionReference; //reference to list of announcements
+  announcements: DocumentReference[]; // array of announcements which are posts
   createdAt: Timestamp;
+  members: DocumentReference[];
   // implement meeting times not sure how
   // group picture is the id
 }
@@ -39,14 +40,6 @@ interface ChatMessage {
   content: string;
   // not sure how to do media yet
 }
-interface Announcement {
-  title: string;
-  author: DocumentReference; // reference to author
-  createdAt: Timestamp;
-  content: string;
-  // not sure how to do media yet
-}
-
 interface Post {
   title: string;
   author: DocumentReference;
@@ -60,12 +53,4 @@ interface Comment {
   content: string;
 }
 
-export type {
-  Group,
-  User,
-  GroupTypes,
-  Post,
-  Announcement,
-  ChatMessage,
-  Comment,
-};
+export type { Group, User, GroupTypes, Post, ChatMessage, Comment };
