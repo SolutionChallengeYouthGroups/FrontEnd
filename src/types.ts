@@ -60,7 +60,6 @@ interface Comment {
   content: string;
 }
 
-
 export type {
   Group,
   User,
