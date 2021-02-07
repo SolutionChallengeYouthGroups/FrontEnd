@@ -12,6 +12,7 @@ import { useGet } from "@typesaurus/react";
 import LinkWithIcon from "../../components/LinkWithIcon";
 import MemberCard from "../../components/MemberCard";
 import PostCard from "../../components/PostCard";
+import Head from "next/head";
 
 const Group = () => {
   // page for any kind of youth club, with their name location, contact details, members etc...
@@ -37,6 +38,9 @@ const Group = () => {
       w="100%"
       minH="100vh"
     >
+      <Head>
+        <title>{groupName}</title>
+      </Head>
       <Flex
         wrap="wrap"
         w="100%"
