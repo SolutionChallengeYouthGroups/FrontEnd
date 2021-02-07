@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/auth";
 
 // SECRET KEY do not make public
 let firebaseConfig = {
@@ -17,6 +18,5 @@ const initFirebase = () => {
     firebase.initializeApp(firebaseConfig);
   }
 };
-
 
 export { firebase, firebaseConfig, initFirebase };
