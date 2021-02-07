@@ -1,55 +1,33 @@
-import {
-  VStack,
-  Text,
-  Box,
-  Image,
-  Flex,
-  Center,
-  HStack,
-} from "@chakra-ui/react";
+import React from "react";
 import { useRouter } from "next/dist/client/router";
-import React, { useEffect, useState } from "react";
+
+// Chakra-UI
+import { VStack, Text, Image, Flex, HStack } from "@chakra-ui/react";
+
+// Firestore stuff:
+import { groups } from "../../firestoreCollections";
+import { useGet } from "@typesaurus/react";
+
+// Custom Components:
 import LinkWithIcon from "../../components/LinkWithIcon";
 import MemberCard from "../../components/MemberCard";
 import PostCard from "../../components/PostCard";
-import { db } from "../../firebase";
-import { Group as firestoreGroup } from "../../types";
 
-interface Props {}
-
-const Group = (props: Props) => {
+const Group = () => {
   // page for any kind of youth club, with their name location, contact details, members etc...
   // can be customized by the owner of the youth club
   const router = useRouter();
-  const { groupName } = router.query;
-  const [group, setGroup] = useState<firestoreGroup | undefined>(undefined);
-  useEffect(() => {
-    // whenever id changes:
-    if (typeof groupName == "string") {
-      // make sure the url is of format group/[id], e.g. it isnt just group/
-      db.collection("groups")
-        .doc(groupName)
-        .get()
-        .then(async (result) => {
-          let data = result.data();
-          console.log(data?.members);
-          setGroup({
-            announcements: data?.announcements,
-            chat: result.ref.collection("chat"),
-            name: groupName,
-            createdAt: data?.createdAt,
-            description: data?.description,
-            location: data?.location,
-            owner: data?.owner,
-            type: data?.type,
-            members: data?.members,
-          });
-        });
-    }
-  }, [groupName]);
-  if (!group) {
-    // if group is undefined, just render a loading screen
-    return <div>Loading</div>;
+  let { groupName } = router.query;
+  if (typeof groupName != "string") {
+    groupName = "";
+  }
+
+  const [group, { loading, error }] = useGet(groups, groupName);
+  if (loading) {
+    return <div>loading</div>;
+  }
+  if (error || !group) {
+    return <div>{JSON.stringify(error)}</div>;
   }
   return (
     <Flex
@@ -76,7 +54,7 @@ const Group = (props: Props) => {
           borderRadius="full"
           p="20px"
         />
-        <Text fontSize="3em">{group.name}</Text>
+        <Text fontSize="3em">{groupName}</Text>
 
         <VStack>
           <LinkWithIcon link="https://discord.com" />
@@ -92,8 +70,8 @@ const Group = (props: Props) => {
       >
         <VStack minW="500px" w="60%" alignSelf="flex-end">
           {/* Club announcements. map the announcement reference to a Post card, since an announcement is just a post*/}
-          {group.announcements.map((announcement) => (
-            <PostCard postRef={announcement} />
+          {group.data.announcements.map((announcement) => (
+            <PostCard postRef={announcement} key={announcement.id} />
           ))}
         </VStack>
         <VStack
@@ -108,8 +86,8 @@ const Group = (props: Props) => {
           <Text fontSize="2em" mb="20px">
             Members
           </Text>
-          {group.members.map((member) => (
-            <MemberCard username={member.id} />
+          {group.data.members.map((member) => (
+            <MemberCard userRef={member} key={member.id} />
           ))}
         </VStack>
       </HStack>

@@ -5,6 +5,7 @@ import {
   GeoPoint,
   Timestamp,
 } from "@firebase/firestore-types";
+import { Ref } from "typesaurus";
 
 interface User {
   id: string;
@@ -13,7 +14,7 @@ interface User {
   username: string;
   email: string;
   password: string;
-  groups: DocumentReference[]; // reference to Group
+  groups: Ref<Group>[]; // reference to Group
   createdAt: Timestamp;
   // profile picture is the userId
 }
@@ -26,29 +27,29 @@ interface Group {
   location?: GeoPoint;
   description: string;
   type: GroupTypes;
-  owner: DocumentReference; // reference to the onwer of the group
+  owner: Ref<User>; // reference to the onwer of the group
   chat: CollectionReference; // reference to a chat which contains ChatMessages
-  announcements: DocumentReference[]; // array of announcements which are posts
+  announcements: Ref<Post>[]; // array of announcements which are posts
   createdAt: Timestamp;
-  members: DocumentReference[];
+  members: Ref<User>[];
   // implement meeting times not sure how
   // group picture is the id
 }
 interface ChatMessage {
-  author: DocumentReference; // reference to author
+  author: Ref<User>; // reference to author
   createdAt: Timestamp;
   content: string;
   // not sure how to do media yet
 }
 interface Post {
   title: string;
-  author: DocumentReference;
+  author: Ref<User>;
   createdAt: Timestamp;
   content: string;
   comments: CollectionReference;
 }
 interface Comment {
-  author: DocumentReference; // reference to author
+  author: Ref<User>; // reference to author
   createdAt: Timestamp;
   content: string;
 }

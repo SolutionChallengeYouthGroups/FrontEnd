@@ -1,33 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { DocumentReference } from "@firebase/firestore-types";
-import { Post } from "../types";
+import { Post } from "../firestoreTypes";
 import { Box } from "@chakra-ui/react";
+import { Ref } from "typesaurus";
+import { useGet } from "@typesaurus/react";
 
 interface Props {
-  postRef: DocumentReference;
+  postRef: Ref<Post>;
 }
 
-const PostCard = (props: Props) => {
-  const [post, setPost] = useState<Post | undefined>(undefined);
-  useEffect(() => {
-    props.postRef.get().then(async (result) => {
-      let data = result.data();
-      console.log(data);
-      setPost({
-        title: data?.title,
-        content: data?.content,
-        comments: result.ref.collection("comments"),
-        createdAt: data?.createdAt,
-        author: data?.author,
-      });
-    });
-  }, []);
+const PostCard = ({ postRef }: Props) => {
+  const [post] = useGet(postRef);
   return (
     <Box border="1px">
-      title:{post?.title}
+      title:{post?.data?.title}
       <br />
-      content:{post?.content}
+      content:{post?.data?.content}
     </Box>
   );
 };

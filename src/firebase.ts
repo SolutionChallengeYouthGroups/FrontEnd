@@ -12,12 +12,11 @@ let firebaseConfig = {
   measurementId: "G-BWV8G22JDE",
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-} else {
-  firebase.app();
-}
+const initFirebase = () => {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+};
 
-let db = firebase.firestore();
 
-export { db, firebase };
+export { firebase, firebaseConfig, initFirebase };

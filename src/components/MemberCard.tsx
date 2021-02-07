@@ -2,12 +2,14 @@ import { Text, HStack, Image } from "@chakra-ui/react";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React from "react";
+import { Ref } from "typesaurus";
+import { User } from "../firestoreTypes";
 
 interface Props {
-  username:string;
+  userRef: Ref<User>;
 }
 
-const MemberCard = (props: Props) => {
+const MemberCard = ({ userRef }: Props) => {
   const router = useRouter();
   return (
     <HStack
@@ -15,7 +17,7 @@ const MemberCard = (props: Props) => {
       onClick={() =>
         router.push({
           pathname: "/user/[username]",
-          query: { username: props.username },
+          query: { username: userRef.id },
         })
       }
       p="5px"
@@ -27,7 +29,7 @@ const MemberCard = (props: Props) => {
         src="https://via.placeholder.com/100"
         maxW="30%"
       />
-      <Text>{props.username}</Text>
+      <Text>{userRef.id}</Text>
     </HStack>
   );
 };

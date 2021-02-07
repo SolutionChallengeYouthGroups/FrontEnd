@@ -1,51 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 // NextJS Stuff
-import Link from "next/link";
 
 // CSS stuff
-import { Text, VStack, Button } from "@chakra-ui/react";
+import { Text, VStack } from "@chakra-ui/react";
 
 // Components
 import TopNav from "../components/TopNav";
 
 //firebase
-import { db } from "../firebase";
-import { Group } from "../types";
+import { useAll } from "@typesaurus/react";
+import { groups } from "../firestoreCollections";
 
 const Index = () => {
-  // main homepage
-  const [groups, setGroups] = useState<Group[]>([]);
-  useEffect(() => {
-    db.collection("users")
-      .get()
-      .then((results) => {
-        results.forEach((re) => {
-          const data = re.data();
-          console.log(data);
-        });
-      });
-    // useEffect will make sure I only request data on the first render
-    db.collection("groups")
-      .get()
-      .then((results) => {
-        results.forEach((re) => {
-          const data = re.data();
-          console.log(data);
-          let group: Group = {
-            name: data.id,
-            description: data.description,
-            location: data.location,
-            type: data.type,
-            owner: data.owner,
-            chat: re.ref.collection("chat"),
-            announcements: re.ref.collection("announcements"),
-            createdAt:data.createdAt
-          };
-          setGroups([...groups, group]);
-        });
-      });
-  }, []);
+  const [allGroups, { loading, error }] = useAll(groups);
+  if (loading) {
+    return <div>loading</div>;
+  }
+  if (error || !allGroups) {
+    return <div>{JSON.stringify(error)}</div>;
+  }
   return (
     <VStack
       height="100vh"
@@ -61,7 +35,7 @@ const Index = () => {
         align="center"
       >
         <Text>list of clubs fetched from firebase firestore</Text>
-        <Text>{JSON.stringify(groups)}</Text>
+        <Text>{allGroups.map((group) => JSON.stringify(group))}</Text>
       </VStack>
     </VStack>
   );

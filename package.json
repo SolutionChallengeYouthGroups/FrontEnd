@@ -12,19 +12,22 @@
     "@chakra-ui/theme-tools": "1.0.0",
     "@emotion/react": "11.1.1",
     "@emotion/styled": "11.0.0",
+    "@typesaurus/react": "^4.0.1",
     "firebase": "^8.2.5",
     "framer-motion": "^2.9.4",
     "next": "latest",
     "next-pwa": "^5.0.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-icons": "^4.1.0"
+    "react-icons": "^4.1.0",
+    "typesaurus": "^7.1.0"
   },
   "devDependencies": {
     "@types/firebase": "^3.2.1",
     "@types/node": "^14.6.0",
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",
+    "firebase-admin": "^9.4.2",
     "typescript": "4.0.5",
     "webpack": "4.43.0"
   },
