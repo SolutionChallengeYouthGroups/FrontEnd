@@ -22,7 +22,7 @@ interface User {
 type GroupTypes = "scouts" | "sports" | "religious" | "other";
 
 interface Group {
-  // name is the id of the group
+  // the ID is not the same as the name to avoid checking duplicates
   name: string;
   location?: GeoPoint;
   description: string;

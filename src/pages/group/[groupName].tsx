@@ -2,17 +2,16 @@ import React from "react";
 import { useRouter } from "next/dist/client/router";
 
 // Chakra-UI
-import { VStack, Text, Image, Flex, HStack } from "@chakra-ui/react";
+import { VStack, Text, Image, Flex, HStack, SimpleGrid, Spacer } from "@chakra-ui/react";
 
 // Firestore stuff:
 import { groups } from "../../firestoreCollections";
 import { useGet } from "@typesaurus/react";
 
 // Custom Components:
-import LinkWithIcon from "../../components/LinkWithIcon";
-import MemberCard from "../../components/MemberCard";
-import PostCard from "../../components/PostCard";
+import LinkWithIcon from "../../components/TextWithIcon";
 import Head from "next/head";
+import SocialGrid from "../../components/SocialGrid";
 
 const Group = () => {
   // page for any kind of youth club, with their name location, contact details, members etc...
@@ -22,7 +21,6 @@ const Group = () => {
   if (typeof groupName != "string") {
     groupName = "";
   }
-
   const [group, { loading, error }] = useGet(groups, groupName);
   if (loading) {
     return <div>loading</div>;
@@ -39,30 +37,29 @@ const Group = () => {
       minH="100vh"
     >
       <Head>
-        <title>{groupName}</title>
+        <title>{group.data.name}</title>
       </Head>
       <Flex
         wrap="wrap"
         w="100%"
         alignItems="center"
-        borderBottom="1px"
+        boxShadow="0 10px 5px -5px rgba(0, 0, 0, 0.2)"
+        borderRadius="30px"
         justifyContent="space-evenly"
-        margin="20px"
         minH="100%"
       >
         {/* Top bar with basic information */}
         <Image
-          src="https://via.placeholder.com/150"
+          src="https://via.placeholder.com/100"
           maxH="100%"
           maxW="100%"
           borderRadius="full"
           p="20px"
         />
-        <Text fontSize="3em">{groupName}</Text>
+        <Text fontSize="3em">{group.data.name}</Text>
+        <Spacer/>
+        <SocialGrid links={group.data.links}/>
 
-        <VStack>
-          <LinkWithIcon link="https://discord.com" />
-        </VStack>
       </Flex>
 
       <HStack
@@ -73,27 +70,8 @@ const Group = () => {
         justifyContent="space-around"
       >
         <VStack minW="500px" w="60%" alignSelf="flex-end">
-          {/* Club announcements. map the announcement reference to a Post card, since an announcement is just a post*/}
-          {group.data.announcements.map((announcement) => (
-            <PostCard postRef={announcement} key={announcement.id} />
-          ))}
         </VStack>
-        <VStack
-          overflowY="scroll"
-          w="30%"
-          // maxW="300px"
-          minW="200px"
-          h="100%"
-          maxH={["300px", "600px"]}
-          m="15px"
-        >
-          <Text fontSize="2em" mb="20px">
-            Members
-          </Text>
-          {group.data.members.map((member) => (
-            <MemberCard userRef={member} key={member.id} />
-          ))}
-        </VStack>
+        <Image src="https://via.placeholder.com/200?text=Google+Maps+Placeholder"/>
       </HStack>
     </Flex>
   );
