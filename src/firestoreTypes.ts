@@ -27,20 +27,23 @@ interface Group {
   location?: GeoPoint;
   description: string;
   type: GroupTypes;
-  owner: Ref<User>; // reference to the onwer of the group
-  chat: CollectionReference; // reference to a chat which contains ChatMessages
-  announcements: Ref<Post>[]; // array of announcements which are posts
   createdAt: Timestamp;
-  members: Ref<User>[];
+  owners: Ref<User>[];
+  links: Links;
   // implement meeting times not sure how
   // group picture is the id
 }
-interface ChatMessage {
-  author: Ref<User>; // reference to author
-  createdAt: Timestamp;
-  content: string;
-  // not sure how to do media yet
+
+interface Links{
+  email: string;
+  facebook: string;
+  instagram: string;
+  phone: string;
+  twitter: string;
+  website: string;
+  whatsapp: string;
 }
+
 interface Post {
   title: string;
   author: Ref<User>;
@@ -54,4 +57,4 @@ interface Comment {
   content: string;
 }
 
-export type { Group, User, GroupTypes, Post, ChatMessage, Comment };
+export type { Group, User, GroupTypes, Links, Post, Comment };
