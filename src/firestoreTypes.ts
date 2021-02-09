@@ -30,8 +30,14 @@ interface Group {
   createdAt: Timestamp;
   owners: Ref<User>[];
   links: Links;
-  // implement meeting times not sure how
+  ageRange: Range;
+  meetingTimes: MeetingTime[];
   // group picture is the id
+}
+
+interface Range{
+  min: number;
+  max: number;
 }
 
 interface Links{
@@ -42,6 +48,30 @@ interface Links{
   twitter: string;
   website: string;
   whatsapp: string;
+}
+
+export enum Day{
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday
+};
+
+interface MeetingTime{
+  name: string,
+  day: Day,
+  startTime: number, // minutes past midnight
+  endTime: number,   // minutes past midnight as well
+  frequency: Frequency
+}
+
+export enum Frequency{
+  weekly,
+  fortnightly,
+  monthly
 }
 
 interface Post {
@@ -57,4 +87,4 @@ interface Comment {
   content: string;
 }
 
-export type { Group, User, GroupTypes, Links, Post, Comment };
+export type { Group, User, GroupTypes, Links, Range, MeetingTime, Post, Comment };
