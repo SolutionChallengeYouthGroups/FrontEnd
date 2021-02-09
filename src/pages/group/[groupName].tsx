@@ -2,16 +2,17 @@ import React from "react";
 import { useRouter } from "next/dist/client/router";
 
 // Chakra-UI
-import { VStack, Text, Image, Flex, HStack, SimpleGrid, Spacer } from "@chakra-ui/react";
+import { VStack, Text, Image, Flex, HStack, Spacer } from "@chakra-ui/react";
 
 // Firestore stuff:
 import { groups } from "../../firestoreCollections";
 import { useGet } from "@typesaurus/react";
 
 // Custom Components:
-import LinkWithIcon from "../../components/TextWithIcon";
+import AgeRangeDisplay from "../../components/AgeRangeDisplay";
 import Head from "next/head";
 import SocialGrid from "../../components/SocialGrid";
+import MeetingTimeDisplay from "../../components/MeetingTimeDisplay";
 
 const Group = () => {
   // page for any kind of youth club, with their name location, contact details, members etc...
@@ -40,12 +41,11 @@ const Group = () => {
         <title>{group.data.name}</title>
       </Head>
       <Flex
-        wrap="wrap"
         w="100%"
         alignItems="center"
         boxShadow="0 10px 5px -5px rgba(0, 0, 0, 0.2)"
         borderRadius="30px"
-        justifyContent="space-evenly"
+        justifyContent="normal"
         minH="100%"
       >
         {/* Top bar with basic information */}
@@ -56,20 +56,27 @@ const Group = () => {
           borderRadius="full"
           p="20px"
         />
-        <Text fontSize="3em">{group.data.name}</Text>
-        <Spacer/>
+        <VStack flex="1 1 0" minWidth="0">
+          <Text title={group.data.name} maxWidth="100%" isTruncated={true} fontSize="2.5em">{group.data.name}</Text>
+          <HStack alignItems="center" justifyContent="space-evenly" width="100%">
+            <AgeRangeDisplay range={group.data.ageRange}/>
+            <MeetingTimeDisplay meetingTimes={group.data.meetingTimes}/>
+          </HStack>
+        </VStack>
         <SocialGrid links={group.data.links}/>
 
       </Flex>
 
       <HStack
-        wrap="wrap-reverse"
+        wrap="wrap"
         w="90%"
         margin="50px"
-        alignItems="center"
-        justifyContent="space-around"
+        alignItems="normal"
+        justifyContent="space-between"
       >
-        <VStack minW="500px" w="60%" alignSelf="flex-end">
+        <VStack alignItems="normal" w="40%">
+          <Text fontSize="1.5em" fontWeight="bold">Group Description:</Text>
+          <Text paddingLeft="10px">{group.data.description}</Text>
         </VStack>
         <Image src="https://via.placeholder.com/200?text=Google+Maps+Placeholder"/>
       </HStack>
