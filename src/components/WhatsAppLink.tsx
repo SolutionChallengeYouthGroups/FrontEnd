@@ -10,7 +10,6 @@ interface Props {
 const PhoneLink = (props: Props) => {
   // removes chars that are not friendly
   let newNumber = props.phoneNumber.replace(/\+0*|\-|\(|\)/g, "");
-  console.log(newNumber);
   if (isMobilePhone(newNumber)) {
     let link = "https://wa.me/"+newNumber;
     return <LinkWithIcon text={"+"+newNumber} icon={FaWhatsapp} link={link}/>;
