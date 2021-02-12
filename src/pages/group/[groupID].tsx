@@ -2,27 +2,29 @@ import React from "react";
 import { useRouter } from "next/dist/client/router";
 
 // Chakra-UI
-import { VStack, Text, Image, Flex, HStack, Spacer } from "@chakra-ui/react";
+import { VStack, Text, Image, Flex, HStack, Avatar } from "@chakra-ui/react";
 
 // Firestore stuff:
 import { groups } from "../../firestoreCollections";
 import { useGet } from "@typesaurus/react";
+import { getGroupAvatarURL } from "../../storageHelpers";
 
 // Custom Components:
 import AgeRangeDisplay from "../../components/AgeRangeDisplay";
 import Head from "next/head";
 import SocialGrid from "../../components/SocialGrid";
 import MeetingTimeDisplay from "../../components/MeetingTimeDisplay";
+import GroupCategoryDisplay from "../../components/GroupCategoryDisplay";
 
 const Group = () => {
   // page for any kind of youth club, with their name location, contact details, members etc...
   // can be customized by the owner of the youth club
   const router = useRouter();
-  let { groupName } = router.query;
-  if (typeof groupName != "string") {
-    groupName = "";
+  let { groupID } = router.query;
+  if (typeof groupID != "string") {
+    groupID = "";
   }
-  const [group, { loading, error }] = useGet(groups, groupName);
+  const [group, { loading, error }] = useGet(groups, groupID);
   if (loading) {
     return <div>loading</div>;
   }
@@ -49,16 +51,11 @@ const Group = () => {
         minH="100%"
       >
         {/* Top bar with basic information */}
-        <Image
-          src="https://via.placeholder.com/100"
-          maxH="100%"
-          maxW="100%"
-          borderRadius="full"
-          p="20px"
-        />
+        <Avatar src={getGroupAvatarURL(groupID)} width="100px" height="100px" margin="20px"/>
         <VStack flex="1 1 0" minWidth="0">
           <Text title={group.data.name} maxWidth="100%" isTruncated={true} fontSize="2.5em">{group.data.name}</Text>
           <HStack alignItems="center" justifyContent="space-evenly" width="100%">
+            <GroupCategoryDisplay groupCategory={group.data.category}/>
             <AgeRangeDisplay range={group.data.ageRange}/>
             <MeetingTimeDisplay meetingTimes={group.data.meetingTimes}/>
           </HStack>
