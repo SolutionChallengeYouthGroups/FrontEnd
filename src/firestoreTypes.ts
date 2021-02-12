@@ -19,17 +19,18 @@ interface User {
   // profile picture is the userId
 }
 
-type GroupTypes = "scouts" | "sports" | "religious" | "other";
+type GroupCategory = "scouting" | "physical" | "educational" | "social" | "artistic" | "board games" |
+                  "esports" | "faith-based" | "political" | "";
 
 interface Group {
   // the ID is not the same as the name to avoid checking duplicates
   name: string;
   location?: GeoPoint;
   description: string;
-  type: GroupTypes;
+  category: GroupCategory;
   createdAt: Timestamp;
   owners: Ref<User>[];
-  links: Links;
+  links: SocialLinks;
   ageRange: Range;
   meetingTimes: MeetingTime[];
   // group picture is the id
@@ -40,7 +41,7 @@ interface Range{
   max: number;
 }
 
-interface Links{
+interface SocialLinks{
   email: string;
   facebook: string;
   instagram: string;
@@ -50,7 +51,7 @@ interface Links{
   whatsapp: string;
 }
 
-export enum Day{
+export enum Day{ // the entries are ordered
   Monday,
   Tuesday,
   Wednesday,
@@ -68,7 +69,7 @@ interface MeetingTime{
   frequency: Frequency
 }
 
-export enum Frequency{
+export enum Frequency{ // the entries are ordered
   weekly,
   fortnightly,
   monthly
@@ -87,4 +88,4 @@ interface Comment {
   content: string;
 }
 
-export type { Group, User, GroupTypes, Links, Range, MeetingTime, Post, Comment };
+export type { Group, User, GroupCategory, SocialLinks , Range, MeetingTime, Post, Comment };

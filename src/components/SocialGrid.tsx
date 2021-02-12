@@ -1,4 +1,4 @@
-import { Links } from "../firestoreTypes";
+import { SocialLinks } from "../firestoreTypes";
 import { SimpleGrid } from "@chakra-ui/react"
 import React from "react";
 import PhoneLink from "./PhoneLink";
@@ -7,7 +7,7 @@ import ValidatedLinkWithIcon from "./ValidatedLinkWithIcon";
 import WhatsAppLink from "./WhatsAppLink";
 
 interface Props{
-    links: Links;
+    links: SocialLinks;
     columns?: number;
 }
 
