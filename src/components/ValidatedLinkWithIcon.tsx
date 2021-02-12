@@ -1,19 +1,16 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
 import React from "react";
 import isURL from "validator/lib/isURL";
 import LinkWithIcon from "./LinkWithIcon";
+import { socialLinkMapping } from "../iconMappings"
+import { Host } from "../helperTypes";
+import { title } from "../helperFunctions";
 
 interface Props {
   link: string;
   expectedHost?: Host;
 }
-export type Host = "twitter.com" | "instagram.com" | "facebook.com";
 // create a mapping between the host and icons
-const icons = new Map<Host, any>();
-icons.set("twitter.com", FaTwitter);
-icons.set("instagram.com", FaInstagram);
-icons.set("facebook.com", FaFacebook);
 
 const ValidatedLinkWithIcon = (props: Props) => {
   // depending on what link it is, render a different icon + text etc ...
@@ -27,7 +24,7 @@ const ValidatedLinkWithIcon = (props: Props) => {
   // probably a better way of checking but this will do for the time being
   if (props.link.includes(props.expectedHost)) {
     let display = props.expectedHost.split(".")[0];
-    return <LinkWithIcon text={display} icon={icons.get(props.expectedHost)} link={props.link}/>;
+    return <LinkWithIcon text={title(display)} icon={socialLinkMapping.get(props.expectedHost)} link={props.link}/>;
   }
   return <></>;
 };
