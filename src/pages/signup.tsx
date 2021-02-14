@@ -1,11 +1,4 @@
-import {
-  Flex,
-  VStack,
-  Button,
-  Icon,
-  Box,
-  Heading,
-} from "@chakra-ui/react";
+import { Flex, VStack, Button, Icon, Box, Heading } from "@chakra-ui/react";
 import React from "react";
 import { FaGoogle } from "react-icons/fa";
 import firebase from "../firebase";
@@ -14,26 +7,71 @@ import isStrongPassword from "validator/lib/isStrongPassword";
 import TextInput from "../components/forms/TextInput";
 import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/router";
+import { add, set } from "typesaurus";
+import { users } from "../firestoreCollections";
 
 interface Props {}
 
+interface form {
+  name: string;
+  email: string;
+  username: string;
+  password: string;
+}
+
+const createUser = async (
+  result: firebase.auth.UserCredential,
+  form?: form
+) => {
+  // after signing up, this funciton will add the user to the User colleciton in firestore
+  let user = result.user;
+  if (!user) {
+    return;
+  }
+  if (result.additionalUserInfo?.providerId == "password" && form) {
+    // if the user used email/password, get the info from the form
+    await set(users, user.uid, {
+      createdAt: firebase.firestore.Timestamp.now(),
+      email: form.email,
+      groups: [],
+      name: form.name,
+      username: form.username,
+    });
+  }
+  if (result.additionalUserInfo?.providerId == "google.com") {
+    // if user signed up using google, get info from his google account
+    await set(users, user.uid, {
+      createdAt: firebase.firestore.Timestamp.now(),
+      email: user.email ?? "",
+      groups: [],
+      name: user.displayName ?? "",
+      // there's a bug in types with firebase ignore this:
+      username: result.additionalUserInfo?.profile.given_name ?? "",
+    });
+    
+  }
+};
+
 const signup = () => {
-  // page to signup
+  // page to signup with google
   const router = useRouter();
+
   const signUpWithGoogle = () => {
     // sign up with google
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then((result) => {
-        // continue to home page
+      .then(async (result) => {
+        // create user then continue to home page
+        await createUser(result);
         router.push("./");
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
   return (
     <Flex w="100vw" h="100vh" justifyContent="center" alignItems="center">
       <Formik
@@ -45,18 +83,22 @@ const signup = () => {
         }}
         validateOnChange={false}
         validateOnBlur={false}
-        onSubmit={async (values,actions) => {
+        onSubmit={async (values, actions) => {
           let { email, password } = values;
           firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
-            .then(() => {
+            .then(async (result) => {
+              await createUser(result, values);
               router.push("./");
             })
             .catch((error) => {
               switch (error.code) {
                 case "auth/email-already-in-use":
-                  actions.setFieldError("email","Email already used, try to login")
+                  actions.setFieldError(
+                    "email",
+                    "Email already used, try to login"
+                  );
               }
             });
         }}
