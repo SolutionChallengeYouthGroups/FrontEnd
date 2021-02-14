@@ -19,28 +19,62 @@ interface User {
   // profile picture is the userId
 }
 
-type GroupTypes = "scouts" | "sports" | "religious" | "other";
+type GroupCategory = "scouting" | "physical" | "educational" | "social" | "artistic" | "board games" |
+                  "esports" | "faith-based" | "political" | "";
 
 interface Group {
-  // name is the id of the group
+  // the ID is not the same as the name to avoid checking duplicates
   name: string;
   location?: GeoPoint;
   description: string;
-  type: GroupTypes;
-  owner: Ref<User>; // reference to the onwer of the group
-  chat: CollectionReference; // reference to a chat which contains ChatMessages
-  announcements: Ref<Post>[]; // array of announcements which are posts
+  category: GroupCategory;
   createdAt: Timestamp;
-  members: Ref<User>[];
-  // implement meeting times not sure how
+  owners: Ref<User>[];
+  links: SocialLinks;
+  ageRange: Range;
+  meetingTimes: MeetingTime[];
   // group picture is the id
 }
-interface ChatMessage {
-  author: Ref<User>; // reference to author
-  createdAt: Timestamp;
-  content: string;
-  // not sure how to do media yet
+
+interface Range{
+  min: number;
+  max: number;
 }
+
+interface SocialLinks{
+  email: string;
+  facebook: string;
+  instagram: string;
+  phone: string;
+  twitter: string;
+  website: string;
+  whatsapp: string;
+}
+
+export enum Day{ // the entries are ordered
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday
+};
+
+interface MeetingTime{
+  name: string,
+  day: Day,
+  startTime: number, // minutes past midnight
+  endTime: number,   // minutes past midnight as well
+  frequency: Frequency
+}
+
+export enum Frequency{ // the entries are ordered
+  weekly,
+  fortnightly,
+  monthly
+}
+
 interface Post {
   title: string;
   author: Ref<User>;
@@ -54,4 +88,4 @@ interface Comment {
   content: string;
 }
 
-export type { Group, User, GroupTypes, Post, ChatMessage, Comment };
+export type { Group, User, GroupCategory, SocialLinks , Range, MeetingTime, Post, Comment };
