@@ -1,8 +1,14 @@
+import TopNav from "../components/TopNav"
+import UserSettingsSideBar from "../components/UserSettingsSideBar"
+import UserSettingsMain from "../components/UserSettingsMain"
+import { Container } from "@chakra-ui/react"
 const user_settings = () => {
     return (
         <div>
-            <h1>Hello from Settings</h1>
+            {/* <UserSettingsSideBar /> */}
+            <UserSettingsMain />
         </div>
+            
     )
 }
 

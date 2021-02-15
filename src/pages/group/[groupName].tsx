@@ -72,12 +72,12 @@ const Group = () => {
         alignItems="center"
         justifyContent="space-around"
       >
-        <VStack minW="500px" w="60%" alignSelf="flex-end">
+        {/* <VStack minW="500px" w="60%" alignSelf="flex-end"> */}
           {/* Club announcements. map the announcement reference to a Post card, since an announcement is just a post*/}
-          {group.data.announcements.map((announcement) => (
-            <PostCard postRef={announcement} key={announcement.id} />
-          ))}
-        </VStack>
+          {/* {group.data.announcements.map((announcement) => ( */}
+            {/* // <PostCard postRef={announcement} key={announcement.id} /> */}
+          {/* // ))} */}
+        {/* </VStack> */}
         <VStack
           overflowY="scroll"
           w="30%"
@@ -90,9 +90,9 @@ const Group = () => {
           <Text fontSize="2em" mb="20px">
             Members
           </Text>
-          {group.data.members.map((member) => (
-            <MemberCard userRef={member} key={member.id} />
-          ))}
+          {/* {group.data.members.map((member) => ( */}
+            {/* // <MemberCard userRef={member} key={member.id} /> */}
+          {/* // ))} */}
         </VStack>
       </HStack>
     </Flex>
