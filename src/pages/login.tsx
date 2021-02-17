@@ -1,12 +1,8 @@
 import {
-  Box,
   Button,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
+  Heading,
   Icon,
-  Input,
   VStack,
 } from "@chakra-ui/react";
 import firebase from "../firebase";
@@ -19,7 +15,7 @@ import TextInput from "../components/forms/TextInput";
 
 interface Props {}
 
-const login = (props: Props) => {
+const login = () => {
   // page to login
   const router = useRouter();
 
@@ -29,7 +25,7 @@ const login = (props: Props) => {
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then((result) => {
+      .then(() => {
         // continue to home page
         router.push("./");
       })
@@ -42,7 +38,7 @@ const login = (props: Props) => {
     firebase
       .auth()
       .signInAnonymously()
-      .then((result) => {
+      .then(() => {
         router.push("./");
       })
       .catch((error) => console.log(error));
@@ -85,6 +81,9 @@ const login = (props: Props) => {
       >
         <Form style={{ width: "100%", maxWidth: "300px" }}>
           <VStack w="100%">
+            <Heading as="h1" size="xl" pb="10px" mb="20px" borderBottom="1px">
+              Login
+            </Heading>
             <TextInput
               name="email"
               type="text"

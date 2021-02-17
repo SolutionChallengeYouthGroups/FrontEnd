@@ -5,12 +5,11 @@ import firebase from "../firebase";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import TextInput from "../components/forms/TextInput";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
-import { add, set } from "typesaurus";
+import { set } from "typesaurus";
 import { users } from "../firestoreCollections";
 
-interface Props {}
 
 interface form {
   name: string;
@@ -83,6 +82,7 @@ const signup = () => {
         }}
         validateOnChange={false}
         validateOnBlur={false}
+
         onSubmit={async (values, actions) => {
           let { email, password } = values;
           firebase
@@ -102,6 +102,7 @@ const signup = () => {
               }
             });
         }}
+
         validate={(values) => {
           let errors: any = {};
           if (!isEmail(values.email)) {
@@ -120,6 +121,7 @@ const signup = () => {
           return errors;
         }}
       >
+
         <Form style={{ width: "100%", maxWidth: "300px" }}>
           <VStack w="100%">
             <Heading as="h1" size="xl" pb="10px" mb="20px" borderBottom="1px">
