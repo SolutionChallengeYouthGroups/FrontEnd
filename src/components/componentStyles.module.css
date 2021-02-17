@@ -1,0 +1,7 @@
+.greytext{
+    color: #808080;
+}
+.underlineLinkHover:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
