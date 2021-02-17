@@ -22,7 +22,7 @@ const TopNav = (props: Props) => {
       <Button>Hello 2</Button>
       <Spacer />
       <Link href="/login">
-        <Button>Sign In</Button>
+        <Button>Login</Button>
       </Link>
       <Link href="/signup">
         <Button>Sign Up</Button>

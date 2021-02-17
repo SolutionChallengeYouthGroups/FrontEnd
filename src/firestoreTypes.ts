@@ -8,14 +8,12 @@ import {
 import { Ref } from "typesaurus";
 
 interface User {
-  id: string;
   name: string;
-  surname: string;
   username: string;
   email: string;
-  password: string;
-  groups: Ref<Group>[]; // reference to Group
+  groups: Ref<Group>[]; // reference to Groups this user is part of
   createdAt: Timestamp;
+  phoneNumber?:string; // optional phone number, probz just for adults
   // profile picture is the userId
 }
 

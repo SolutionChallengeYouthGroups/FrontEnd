@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/auth";
 
 // SECRET KEY do not make public
 let firebaseConfig = {
@@ -15,5 +16,6 @@ let firebaseConfig = {
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
+
 
 export default firebase;
