@@ -1,5 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react"
-import UserSettingsSideBar from "../components/UserSettingsSideBar"
+import UserSettingsSideBar from "./UserSettingsSideBar"
 import UserSettingsContent from "./UserSettingsContent"
 import { Container } from "@chakra-ui/react"
 
