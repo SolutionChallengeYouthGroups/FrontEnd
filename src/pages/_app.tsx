@@ -6,7 +6,6 @@ import theme from "../theme";
 import { IconContext } from "react-icons";
 
 // Firebase + firestore
-import { auth, firestore } from "../firebase";
 import firebase from "../firebase";
 
 // NextJS Context API
