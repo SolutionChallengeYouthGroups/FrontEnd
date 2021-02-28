@@ -29,15 +29,12 @@ const TopNav = (props: Props) => {
         <>
           <Text>Save the Scouts</Text>
           <Spacer />
-          <Link href="/userSettings">
-            <Button>Settings</Button>
-          </Link>
           <Menu>
             <MenuButton> profile image </MenuButton>
             <MenuList>
               <Text alignContent="center" >{username}</Text>
               <Text alignContent="center" >{email}</Text>
-              <MenuItem>Settings</MenuItem>
+              <MenuItem><Link href="/userSettings">Settings</Link></MenuItem>
               <MenuItem onClick={logout}>
                 Log out
               </MenuItem>
