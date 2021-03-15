@@ -42,7 +42,6 @@ const MeetingTimeDisplay = ({group, edit, ...rest}: Props) => {
     const { isOpen, onOpen, onClose } = useDisclosure(); // for modal
 
     function setTimes(times: MeetingTime[]){
-        console.log(group);
         group.meetingTimes = times;
         setNewTimesState(times);
     }
