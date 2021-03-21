@@ -10,6 +10,10 @@ export default class Document extends NextDocument {
           <meta name="theme-color" content="#FFFFFF" />
           {/* <link rel="apple-touch-icon" href="icons/apple-icon-180.png" /> */}
 
+          <link rel="preconnect" href="https://fonts.gstatic.com"/>
+          <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+
+
           <meta name="apple-mobile-web-app-capable" content="yes" />
 
           <link

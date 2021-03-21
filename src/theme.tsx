@@ -12,10 +12,19 @@ const breakpoints = createBreakpoints({
 });
 
 const theme = extendTheme({
+  styles: {
+    global: {
+      "html,body": {
+        fontFamily: "Roboto",
+        backgroundColor: "#f8f6f6",
+      },
+    },
+  },
   colors: {
     black: "#16161D",
-    white:"#f8f6f6",
+    white: "#f8f6f6",
     main: "#62BF8A",
+    pureWhite: "#ffffff",
   },
   components: {
     Button: {

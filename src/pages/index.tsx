@@ -3,7 +3,7 @@ import React from "react";
 // NextJS Stuff
 
 // CSS stuff
-import { Text, VStack } from "@chakra-ui/react";
+import { Grid, Text, VStack } from "@chakra-ui/react";
 
 // Components
 import TopNav from "../components/TopNav";
@@ -12,6 +12,7 @@ import TopNav from "../components/TopNav";
 import { useAll } from "@typesaurus/react";
 import { groups } from "../firestoreCollections";
 import Link from "next/link";
+import GroupCard from "../components/GroupCard";
 
 const Index = () => {
   const [allGroups, { loading, error }] = useAll(groups);
@@ -31,13 +32,17 @@ const Index = () => {
       <TopNav />
       <VStack
         width="100%"
-        maxW="800px"
+        maxW="90vw"
         justifyContent="space-around"
         align="center"
       >
         <Link href="/group/warwick-test-club">Club test</Link>
         <Text>list of clubs fetched from firebase firestore</Text>
-        <Text>{allGroups.map((group) => JSON.stringify(group))}</Text>
+        <Grid gap="15px" w="90%" templateColumns="repeat(auto-fill,minmax(350px,1fr))" >
+          {allGroups.map((group) => (
+            <GroupCard group={group.data} id={group.ref.id} />
+          ))}
+        </Grid>
       </VStack>
     </VStack>
   );

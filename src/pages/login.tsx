@@ -81,7 +81,15 @@ const login = () => {
       >
         <Form style={{ width: "100%", maxWidth: "300px" }}>
           <VStack w="100%">
-            <Heading as="h1" size="xl" pb="10px" mb="20px" borderBottom="1px">
+            <Heading
+              as="h1"
+              size="xl"
+              pb="10px"
+              mb="20px"
+              px="8px"
+              borderBottom="2px solid"
+              borderColor="main"
+            >
               Login
             </Heading>
             <TextInput

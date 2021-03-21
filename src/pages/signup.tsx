@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 import { set } from "typesaurus";
 import { users } from "../firestoreCollections";
 
-
 interface form {
   name: string;
   email: string;
@@ -47,7 +46,6 @@ const createUser = async (
       // there's a bug in types with firebase ignore this:
       username: result.additionalUserInfo?.profile.given_name ?? "",
     });
-    
   }
 };
 
@@ -82,7 +80,6 @@ const signup = () => {
         }}
         validateOnChange={false}
         validateOnBlur={false}
-
         onSubmit={async (values, actions) => {
           let { email, password } = values;
           firebase
@@ -102,7 +99,6 @@ const signup = () => {
               }
             });
         }}
-
         validate={(values) => {
           let errors: any = {};
           if (!isEmail(values.email)) {
@@ -121,10 +117,17 @@ const signup = () => {
           return errors;
         }}
       >
-
         <Form style={{ width: "100%", maxWidth: "300px" }}>
           <VStack w="100%">
-            <Heading as="h1" size="xl" pb="10px" mb="20px" borderBottom="1px">
+            <Heading
+              as="h1"
+              size="xl"
+              pb="10px"
+              mb="20px"
+              borderBottom="2px solid"
+              borderColor="main"
+              px="8px"
+            >
               Sign Up
             </Heading>
             <TextInput
