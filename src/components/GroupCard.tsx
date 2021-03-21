@@ -1,7 +1,5 @@
 import { Heading, Text, Flex, Image, Stack } from "@chakra-ui/react";
-import Link from "next/link";
 import React from "react";
-import { storage } from "../firebase";
 import { Group } from "../firestoreTypes";
 import { getGroupAvatarURL } from "../storageHelpers";
 import { useRouter } from "next/router";
@@ -45,10 +43,8 @@ const GroupCard = ({ group, id }: Props) => {
         <Heading>{group.name}</Heading>
       </Flex>
       <Flex flexDir="row" justifyContent="space-around" justifySelf="flex-end">
-        <Text>
-          {group.ageRange.toString()}
-          {group.category.toString()}
-        </Text>
+        <Text>{group.ageRange.min + " - " + group.ageRange.max}</Text>
+        <Text>{group.category.toString()}</Text>
       </Flex>
     </Stack>
   );

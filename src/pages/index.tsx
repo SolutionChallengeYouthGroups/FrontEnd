@@ -36,8 +36,6 @@ const Index = () => {
         justifyContent="space-around"
         align="center"
       >
-        <Link href="/group/warwick-test-club">Club test</Link>
-        <Text>list of clubs fetched from firebase firestore</Text>
         <Grid gap="15px" w="90%" templateColumns="repeat(auto-fill,minmax(350px,1fr))" >
           {allGroups.map((group) => (
             <GroupCard group={group.data} id={group.ref.id} />

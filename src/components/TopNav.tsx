@@ -11,11 +11,13 @@ import {
   Image,
   MenuDivider,
   MenuGroup,
+  Icon,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
+import { FiUser } from "react-icons/fi";
 import firebase from "../firebase";
 
 interface Props {}
@@ -51,11 +53,7 @@ const TopNav = (props: Props) => {
           <Spacer />
           <Menu colorScheme="blue">
             <MenuButton>
-              <Image
-                width="auto"
-                maxH="30px"
-                src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
-              />
+              <Icon as={FiUser} h="40px" w="auto" />
             </MenuButton>
             <MenuList textColor="black">
               <MenuGroup title={username} />
@@ -73,11 +71,7 @@ const TopNav = (props: Props) => {
         <>
           <Spacer />
           <Link href="/login">
-            <Button
-              colorScheme="whiteAlpha"
-            >
-              Login
-            </Button>
+            <Button colorScheme="whiteAlpha">Login</Button>
           </Link>
           <Link href="/signup">
             <Button marginLeft="30px" colorScheme="whiteAlpha">
