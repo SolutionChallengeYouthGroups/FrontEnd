@@ -1,10 +1,4 @@
-import {
-  Button,
-  Flex,
-  Heading,
-  Icon,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, Flex, Heading, Icon, VStack } from "@chakra-ui/react";
 import firebase from "../firebase";
 import { Form, Formik } from "formik";
 import React from "react";
@@ -19,11 +13,11 @@ const login = () => {
   // page to login
   const router = useRouter();
 
-  firebase.auth().getRedirectResult().then((result) => {
-    router.push("./");
-  }).catch((error) => {
-    console.log(error);
-  })
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      router.push("./");
+    }
+  });
 
   const signInWithGoogle = () => {
     // sign up with google
