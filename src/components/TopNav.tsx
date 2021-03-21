@@ -1,9 +1,18 @@
-import { Text, Button, Flex, Menu, MenuButton, MenuList, MenuItem, Spacer } from "@chakra-ui/react";
+import {
+  Text,
+  Button,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Spacer,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
-import { useContext } from "react"
-import { UserContext } from "../lib/context"
-import firebase from "../firebase"; 
+import { useContext } from "react";
+import { UserContext } from "../lib/context";
+import firebase from "../firebase";
 
 interface Props {}
 
@@ -12,7 +21,7 @@ const TopNav = (props: Props) => {
 
   const logout = () => {
     firebase.auth().signOut();
-  }
+  };
   // top navbar of the home page
   return (
     <Flex
@@ -25,23 +34,24 @@ const TopNav = (props: Props) => {
       top="0px"
       position="fixed"
     >
-      {user ? // If user is logged in (defined) then display the fragement before :
+      {user ? ( // If user is logged in (defined) then display the fragement before :
         <>
           <Text>Save the Scouts</Text>
           <Spacer />
           <Menu>
             <MenuButton> profile image </MenuButton>
             <MenuList>
-              <Text alignContent="center" >{username}</Text>
-              <Text alignContent="center" >{email}</Text>
-              <MenuItem><Link href="/userSettings">Settings</Link></MenuItem>
-              <MenuItem onClick={logout}>
-                Log out
+              <Text alignContent="center">{username}</Text>
+              <Text alignContent="center">{email}</Text>
+              <MenuItem>
+                <Link href="/userSettings">Settings</Link>
               </MenuItem>
+              <MenuItem onClick={logout}>Log out</MenuItem>
             </MenuList>
           </Menu>
         </>
-        : // Else display the fragment below (Sign Up and Login)
+      ) : (
+        // Else display the fragment below (Sign Up and Login)
         <>
           <Text>Save the Scouts</Text>
           <Spacer />
@@ -52,8 +62,7 @@ const TopNav = (props: Props) => {
             <Button>Sign Up</Button>
           </Link>
         </>
-      }
-      
+      )}
     </Flex>
   );
 };
