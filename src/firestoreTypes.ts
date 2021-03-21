@@ -18,7 +18,9 @@ interface User {
 }
 
 type GroupCategory = "scouting" | "physical" | "educational" | "social" | "artistic" | "board games" |
-                  "esports" | "faith-based" | "political" | "";
+                  "gaming" | "faith-based" | "political" | "";
+export const GroupCategories = ["scouting", "physical", "educational", "social", "artistic", "board games",
+"gaming", "faith-based", "political", ""]; // create a list for looping
 
 interface Group {
   // the ID is not the same as the name to avoid checking duplicates
@@ -34,7 +36,7 @@ interface Group {
   // group picture is the id
 }
 
-interface Range{
+interface Range{ // for ages, zero is a signifier for a missing value
   min: number;
   max: number;
 }

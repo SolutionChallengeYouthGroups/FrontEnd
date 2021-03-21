@@ -1,4 +1,5 @@
 import { Range, MeetingTime, Day, Frequency } from "./firestoreTypes";
+import { padStart, splitTime } from "./helperFunctions";
 
 export function convertRange(range: Range): string{
     let min = range.min;
@@ -21,9 +22,8 @@ export function convertMeetingTime(meeting: MeetingTime): string{
     Frequency[meeting.frequency];
 }
 export function convertTime(time: number): string{
-    const hour = Math.trunc(time / 60);
-    const min = Math.trunc(time % 60);
-    return (hour < 10 ? "0" + hour : hour) + ":" + (min < 10 ? "0" + min : min);
+    const [hour, min] = splitTime(time);
+    return padStart(hour, 2, "0") + ":" + padStart(min, 2, "0");
 }
 export function convertTimeRange(time1: number, time2: number){
     return `${convertTime(time1)} - ${convertTime(time2)}`;

@@ -19,6 +19,12 @@ const login = () => {
   // page to login
   const router = useRouter();
 
+  firebase.auth().getRedirectResult().then((result) => {
+    router.push("./");
+  }).catch((error) => {
+    console.log(error);
+  })
+
   const signInWithGoogle = () => {
     // sign up with google
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -30,7 +36,7 @@ const login = () => {
         router.push("./");
       })
       .catch((error) => {
-        console.log(error);
+        firebase.auth().signInWithRedirect(provider);
       });
   };
 
