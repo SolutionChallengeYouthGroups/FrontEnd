@@ -15,35 +15,41 @@ import Link from "next/link";
 import GroupCard from "../components/GroupCard";
 
 const Index = () => {
-  const [allGroups, { loading, error }] = useAll(groups);
-  if (loading) {
-    return <div>loading</div>;
-  }
-  if (error || !allGroups) {
-    return <div>{JSON.stringify(error)}</div>;
-  }
-  return (
-    <VStack
-      height="100vh"
-      align="center"
-      justifyContent="flex-start"
-      spacing="100"
-    >
-      <TopNav />
-      <VStack
-        width="100%"
-        maxW="90vw"
-        justifyContent="space-around"
-        align="center"
-      >
-        <Grid gap="15px" w="90%" templateColumns="repeat(auto-fill,minmax(350px,1fr))" >
-          {allGroups.map((group) => (
-            <GroupCard group={group.data} id={group.ref.id} />
-          ))}
-        </Grid>
-      </VStack>
-    </VStack>
-  );
+    let [allGroups, { loading, error }] = useAll(groups);
+    if (loading || error || !allGroups) {
+        allGroups = [];
+    }
+    return (
+        <VStack
+            height="100vh"
+            align="center"
+            justifyContent="flex-start"
+            spacing="100"
+        >
+            <TopNav />
+            <VStack
+                width="100%"
+                maxW="90vw"
+                justifyContent="space-around"
+                align="center"
+            >
+                <Grid
+                    gap="15px"
+                    w="90%"
+                    templateColumns="repeat(auto-fill,minmax(350px,1fr))"
+                    templateRows="repeat(auto-fill,minmax(250px,1fr))"
+                >
+                    {allGroups.map((group) => (
+                        <GroupCard
+                            group={group.data}
+                            id={group.ref.id}
+                            key={group.data.name}
+                        />
+                    ))}
+                </Grid>
+            </VStack>
+        </VStack>
+    );
 };
 
 export default Index;
