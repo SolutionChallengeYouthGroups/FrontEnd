@@ -23,8 +23,8 @@ import firebase from "../firebase";
 interface Props {}
 
 const TopNav = (props: Props) => {
-  const { user, username, email } = useContext(UserContext);
-  // const user = firebase.auth().currentUser;
+  // const { user, username, email } = useContext(UserContext);
+  const user = firebase.auth().currentUser;
 
   const logout = () => {
     firebase.auth().signOut();
@@ -52,12 +52,16 @@ const TopNav = (props: Props) => {
         <>
           <Spacer />
           <Menu colorScheme="blue">
-            <MenuButton>
+            <MenuButton
+              transitionProperty="transform"
+              transitionDuration="0.5s"
+              _hover={{ cursor: "pointer", transform: "scale(1.1)" }}
+            >
               <Icon as={FiUser} h="40px" w="auto" />
             </MenuButton>
             <MenuList textColor="black">
-              <MenuGroup title={username} />
-              <MenuGroup title={email} />
+              <MenuGroup title={user.displayName ?? ""} />
+              <MenuGroup title={user.email ?? ""} />
               <MenuDivider />
               <MenuItem>
                 <Link href="/userSettings">Settings</Link>
