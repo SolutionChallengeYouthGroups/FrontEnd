@@ -15,8 +15,10 @@ import Link from "next/link";
 import GroupCard from "../components/GroupCard";
 
 const Index = () => {
+    // getting all the groups from firestore
     let [allGroups, { loading, error }] = useAll(groups);
     if (loading || error || !allGroups) {
+        // if it is loading/there is an error, set allGroups to [], so that the .map still works
         allGroups = [];
     }
     return (

@@ -27,8 +27,7 @@ const theme = extendTheme({
         pureWhite: "#ffffff",
     },
     components: {
-        Badge:{
-        },
+        Badge: {},
         Button: {
             variants: {
                 incognito: {
