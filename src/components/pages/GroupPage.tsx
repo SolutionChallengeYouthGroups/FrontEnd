@@ -28,6 +28,7 @@ import { useRouter } from "next/router";
 
 import { useContext } from "react"
 import { UserContext } from "../../lib/context"
+import TopNav from "../TopNav";
 
 interface Props{
     group: Group;
@@ -105,26 +106,31 @@ const GroupPage = (props: Props) => {
       }
     }, []);
     return (
-        <>
+      <VStack
+      height="100vh"
+      align="center"
+      justifyContent="flex-start"
+      >
+        <TopNav/>
         {props.group.owners.some(owner => owner.id === uref.id) ? <FloatingButton icon={icon} backgroundColor="#00006E" aria-label="edit" 
         _hover={{backgroundColor: "#9595ff"}} onClick={setEditHandler} display={edit ? "none" : "flex"}/> : <></>}
+        <Head>
+          <title>{props.group.name}</title>
+        </Head>
         <Flex
           flexDir="column"
           justifyContent="start"
           alignItems="center"
           w="100%"
-          minH="100vh"
-        >
-          <Head>
-            <title>{props.group.name}</title>
-          </Head>
+          flex="auto"
+          padding="80px 0 0 0">
           <Flex
             w="100%"
             alignItems="center"
             boxShadow="0 10px 5px -5px rgba(0, 0, 0, 0.2)"
             borderRadius="30px"
             justifyContent="normal"
-            minH="100%"
+            position="fixed"
           >
             {/* Top bar with basic information */}
             <Avatar src={!props.groupID ? "" : getGroupAvatarURL(props.groupID)} 
@@ -148,15 +154,15 @@ const GroupPage = (props: Props) => {
             alignItems="normal"
             justifyContent="space-between"
             flex="auto"
+            padding="120px 0 0 0"
           >
             <Flex flexDir="column" alignItems="normal" w="40%" h="auto">
               <Text fontSize="1.5em" fontWeight="bold">Group Description:</Text>
               <GroupDescInput group={group} edit={edit}/>
             </Flex>
-            <Image w="200px" h="200px" src="https://via.placeholder.com/200?text=Google+Maps+Placeholder"/>
           </HStack>
         </Flex>
-        </>
+      </VStack>
     );
 }
 
