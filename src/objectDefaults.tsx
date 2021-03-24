@@ -33,7 +33,7 @@ export function defaultRange(): Range{
 export function defaultGroup(): Group{
     return {
         name: "New Group",
-        description: "Group Description...",
+        description: "",
         category: "",
         owners: [],
         createdAt: firebase.firestore.Timestamp.now(),
