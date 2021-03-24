@@ -85,7 +85,7 @@ const GroupPage = (props: Props) => {
             position: "bottom-right",
             duration: null,
             render: () => <Flex flexDir="row" justifyContent="space-around" 
-            backgroundColor="#00006E" boxShadow="-3px -3px 10px 0px rgba(0, 0, 0, 0.6)">
+            backgroundColor="mainLight" boxShadow="-3px -3px 10px 0px rgba(0, 0, 0, 0.6)">
                 <Button size="sm" margin="10px 0px" colorScheme="green"
                 leftIcon={<FaSave/>} borderRadius="0px" onClick={saveClick}>Save</Button>
                 <Button size="sm" margin="10px 0px" colorScheme="red" 
@@ -112,8 +112,9 @@ const GroupPage = (props: Props) => {
       justifyContent="flex-start"
       >
         <TopNav/>
-        {props.group.owners.some(owner => owner.id === uref.id) ? <FloatingButton icon={icon} backgroundColor="#00006E" aria-label="edit" 
-        _hover={{backgroundColor: "#9595ff"}} onClick={setEditHandler} display={edit ? "none" : "flex"}/> : <></>}
+        {props.group.owners.some(owner => owner.id === uref.id) ? 
+        <FloatingButton icon={icon} bg="main" aria-label="edit" 
+        _hover={{backgroundColor: "mainLight"}} onClick={setEditHandler} display={edit ? "none" : "flex"}/> : <></>}
         <Head>
           <title>{props.group.name}</title>
         </Head>
@@ -150,13 +151,14 @@ const GroupPage = (props: Props) => {
           <HStack
             wrap="wrap"
             w="90%"
-            margin="50px"
+            margin="10px"
             alignItems="normal"
             justifyContent="space-between"
             flex="auto"
-            padding="120px 0 0 0"
+            padding="160px 0 0 0"
           >
-            <Flex flexDir="column" alignItems="normal" w="40%" h="auto">
+            <Flex flexDir="column" alignItems="normal" w="40%" h="auto" padding="0 0 7px 5px"
+            border="2px solid" borderColor="main" borderRadius="8px">
               <Text fontSize="1.5em" fontWeight="bold">Group Description:</Text>
               <GroupDescInput group={group} edit={edit}/>
             </Flex>

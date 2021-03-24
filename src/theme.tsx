@@ -24,6 +24,7 @@ const theme = extendTheme({
         black: "#061308",
         white: "#f8f6f6",
         main: "#62BF8A",
+        mainLight: "#a8dec0",
         pureWhite: "#ffffff",
     },
     components: {
