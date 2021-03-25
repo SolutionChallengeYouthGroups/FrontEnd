@@ -8,14 +8,16 @@ import {
     MenuItem,
     Spacer,
     Heading,
-    Image,
     MenuDivider,
     MenuGroup,
     Icon,
+    LinkBox,
+    LinkOverlay,
     Portal,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
+import Logo from "../media/GlinkLogo";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
 import { FiUser } from "react-icons/fi";
@@ -44,14 +46,14 @@ const TopNav = (props: Props) => {
             w="100%"
             top="0px"
             position="fixed"
-            backgroundColor="mainLight"
+            backgroundColor="main"
             paddingY="20px"
             paddingX="40px"
             color="pureWhite"
         >
-            <Heading>
-                <a href="/">GLink</a>
-            </Heading>
+            <LinkBox>
+            <LinkOverlay href="/"><Logo /></LinkOverlay>
+            </LinkBox>
             {user ? ( // If user is logged in (defined) then display the fragement before :
                 <>
                     <Spacer/>
