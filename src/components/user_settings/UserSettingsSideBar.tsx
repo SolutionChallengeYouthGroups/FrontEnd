@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Button, VStack, StackDivider, Heading } from "@chakra-ui/react"
 
-const SettingsSideBar = ({ onClick }) => {
+const SettingsSideBar = ({ onClick }:any) => {
     return (
         <VStack
             divider={<StackDivider borderColor="gray.200" />}
