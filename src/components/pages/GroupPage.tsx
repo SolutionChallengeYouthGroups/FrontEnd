@@ -1,5 +1,5 @@
 // Chakra-UI
-import { VStack, Text, Image, Flex, HStack, Avatar, Input, Textarea, useToast, Button } from "@chakra-ui/react";
+import { VStack, Text, Image, Flex, HStack, Avatar, Input, Textarea, useToast, Button, Portal } from "@chakra-ui/react";
 
 import { FiEdit } from "react-icons/fi";
 import { FaSave } from "react-icons/fa";
@@ -111,20 +111,7 @@ const GroupPage = (props: Props) => {
       align="center"
       justifyContent="flex-start"
       >
-        <TopNav/>
-        {props.group.owners.some(owner => owner.id === uref.id) ? 
-        <FloatingButton icon={icon} bg="main" aria-label="edit" 
-        _hover={{backgroundColor: "mainLight"}} onClick={setEditHandler} display={edit ? "none" : "flex"}/> : <></>}
-        <Head>
-          <title>{props.group.name}</title>
-        </Head>
-        <Flex
-          flexDir="column"
-          justifyContent="start"
-          alignItems="center"
-          w="100%"
-          flex="auto"
-          padding="80px 0 0 0">
+        <Portal>
           <Flex
             w="100%"
             alignItems="center"
@@ -132,6 +119,9 @@ const GroupPage = (props: Props) => {
             borderRadius="30px"
             justifyContent="normal"
             position="fixed"
+            top="0px"
+            padding="80px 0 0 0"
+            background="white"
           >
             {/* Top bar with basic information */}
             <Avatar src={!props.groupID ? "" : getGroupAvatarURL(props.groupID)} 
@@ -147,24 +137,40 @@ const GroupPage = (props: Props) => {
             <SocialGrid group={group} edit={edit}/>
     
           </Flex>
-    
-          <HStack
-            wrap="wrap"
-            w="90%"
-            margin="10px"
-            alignItems="normal"
-            justifyContent="space-between"
-            flex="auto"
-            padding="160px 0 0 0"
-          >
-            <Flex flexDir="column" alignItems="normal" w="40%" h="auto" padding="0 0 7px 5px"
-            border="2px solid" borderColor="main" borderRadius="8px">
-              <Text fontSize="1.5em" fontWeight="bold">Group Description:</Text>
-              <GroupDescInput group={group} edit={edit}/>
-            </Flex>
-          </HStack>
-        </Flex>
-      </VStack>
+        </Portal>
+        <Portal>
+          <TopNav/>
+        </Portal>
+        {props.group.owners.some(owner => owner.id === uref.id) ? 
+        <Portal><FloatingButton icon={icon} bg="main" aria-label="edit" 
+        _hover={{backgroundColor: "mainLight"}} onClick={setEditHandler} display={edit ? "none" : "flex"}/></Portal> : <></>}
+        <Head>
+          <title>{props.group.name}</title>
+        </Head>
+        <Flex
+          flexDir="column"
+          justifyContent="start"
+          alignItems="center"
+          w="100%"
+          flex="auto"
+          padding="80px 0 0 0">    
+            <HStack
+              wrap="wrap"
+              w="90%"
+              margin="15px"
+              alignItems="normal"
+              justifyContent="space-between"
+              flex="auto"
+              padding="150px 0 0 0"
+            >
+              <Flex flexDir="column" alignItems="normal" w="40%" h="auto" padding="0 0 7px 5px"
+              border="2px solid" borderColor="mainLight" borderRadius="8px">
+                <Text fontSize="1.5em" fontWeight="bold">Group Description:</Text>
+                <GroupDescInput group={group} edit={edit}/>
+              </Flex>
+            </HStack>
+          </Flex>
+        </VStack>
     );
 }
 
