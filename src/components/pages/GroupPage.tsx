@@ -44,14 +44,17 @@ import TopNav from "../TopNav";
 
 interface Props {
     group: Group;
+    user: firebase.User | null;
     groupID?: string;
 }
 
 let lastGroup: Group;
 const GroupPage = (props: Props) => {
-  const { user, username, email } = useContext(UserContext);
-  const userany = user as any;
-  const uref = ref(users, userany?.uid);
+  const user = props.user;
+  let uref: (null | Ref<User>) = null;
+  if (user !== null){
+    uref = ref(users, user?.uid);
+  }
   const router = useRouter();
   const toast = useToast();
   const [group, setGroup] = useState(_.cloneDeep(props.group));
@@ -83,7 +86,7 @@ const GroupPage = (props: Props) => {
           return;
         }
         group.createdAt = firebase.firestore.Timestamp.now();
-        group.owners = [uref];
+        group.owners = [uref as Ref<User>];
         add(groups, group).then(
           (groupref) => {
             toast.closeAll();
@@ -141,10 +144,6 @@ const GroupPage = (props: Props) => {
         setEdit(true);
     };
     const icon = FiEdit({ color: "white", size: "30px" });
-    if ((userany === null || userany.isAnonymous) && !props.groupID) {
-        router.push("/");
-        return null;
-    }
     useEffect(() => {
         if (!props.groupID) {
             setEditHandler();
@@ -193,7 +192,7 @@ const GroupPage = (props: Props) => {
             <Portal>
                 <TopNav />
             </Portal>
-            {props.group.owners.some((owner) => owner.id === uref.id) ? (
+            {props.group.owners.some((owner) => owner.id === uref?.id) ? (
                 <Portal>
                     <FloatingButton
                         icon={icon}
