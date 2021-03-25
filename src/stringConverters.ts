@@ -1,7 +1,7 @@
 import { Range, MeetingTime, Day, Frequency } from "./firestoreTypes";
 import { padStart, splitTime } from "./helperFunctions";
 
-export function convertRange(range: Range): string{
+export function convertAgeRange(range: Range): string{
     let min = range.min;
     let max = range.max;
     if (min === 0 && max === 0){

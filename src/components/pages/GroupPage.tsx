@@ -1,5 +1,5 @@
 // Chakra-UI
-import { VStack, Text, Image, Flex, HStack, Avatar, Input, Textarea, useToast, Button } from "@chakra-ui/react";
+import { VStack, Text, Image, Flex, HStack, Avatar, Input, Textarea, useToast, Button, Portal } from "@chakra-ui/react";
 
 import { FiEdit } from "react-icons/fi";
 import { FaSave } from "react-icons/fa";
@@ -28,6 +28,7 @@ import { useRouter } from "next/router";
 
 import { useContext } from "react"
 import { UserContext } from "../../lib/context"
+import TopNav from "../TopNav";
 
 interface Props{
     group: Group;
@@ -84,7 +85,7 @@ const GroupPage = (props: Props) => {
             position: "bottom-right",
             duration: null,
             render: () => <Flex flexDir="row" justifyContent="space-around" 
-            backgroundColor="#00006E" boxShadow="-3px -3px 10px 0px rgba(0, 0, 0, 0.6)">
+            backgroundColor="mainLight" boxShadow="-3px -3px 10px 0px rgba(0, 0, 0, 0.6)">
                 <Button size="sm" margin="10px 0px" colorScheme="green"
                 leftIcon={<FaSave/>} borderRadius="0px" onClick={saveClick}>Save</Button>
                 <Button size="sm" margin="10px 0px" colorScheme="red" 
@@ -105,26 +106,22 @@ const GroupPage = (props: Props) => {
       }
     }, []);
     return (
-        <>
-        {props.group.owners.some(owner => owner.id === uref.id) ? <FloatingButton icon={icon} backgroundColor="#00006E" aria-label="edit" 
-        _hover={{backgroundColor: "#9595ff"}} onClick={setEditHandler} display={edit ? "none" : "flex"}/> : <></>}
-        <Flex
-          flexDir="column"
-          justifyContent="start"
-          alignItems="center"
-          w="100%"
-          minH="100vh"
-        >
-          <Head>
-            <title>{props.group.name}</title>
-          </Head>
+      <VStack
+      height="100vh"
+      align="center"
+      justifyContent="flex-start"
+      >
+        <Portal>
           <Flex
             w="100%"
             alignItems="center"
             boxShadow="0 10px 5px -5px rgba(0, 0, 0, 0.2)"
             borderRadius="30px"
             justifyContent="normal"
-            minH="100%"
+            position="fixed"
+            top="0px"
+            padding="80px 0 0 0"
+            background="white"
           >
             {/* Top bar with basic information */}
             <Avatar src={!props.groupID ? "" : getGroupAvatarURL(props.groupID)} 
@@ -140,23 +137,40 @@ const GroupPage = (props: Props) => {
             <SocialGrid group={group} edit={edit}/>
     
           </Flex>
-    
-          <HStack
-            wrap="wrap"
-            w="90%"
-            margin="50px"
-            alignItems="normal"
-            justifyContent="space-between"
-            flex="auto"
-          >
-            <Flex flexDir="column" alignItems="normal" w="40%" h="auto">
-              <Text fontSize="1.5em" fontWeight="bold">Group Description:</Text>
-              <GroupDescInput group={group} edit={edit}/>
-            </Flex>
-            <Image w="200px" h="200px" src="https://via.placeholder.com/200?text=Google+Maps+Placeholder"/>
-          </HStack>
-        </Flex>
-        </>
+        </Portal>
+        <Portal>
+          <TopNav/>
+        </Portal>
+        {props.group.owners.some(owner => owner.id === uref.id) ? 
+        <Portal><FloatingButton icon={icon} bg="main" aria-label="edit" 
+        _hover={{backgroundColor: "mainLight"}} onClick={setEditHandler} display={edit ? "none" : "flex"}/></Portal> : <></>}
+        <Head>
+          <title>{props.group.name}</title>
+        </Head>
+        <Flex
+          flexDir="column"
+          justifyContent="start"
+          alignItems="center"
+          w="100%"
+          flex="auto"
+          padding="80px 0 0 0">    
+            <HStack
+              wrap="wrap"
+              w="90%"
+              margin="15px"
+              alignItems="normal"
+              justifyContent="space-between"
+              flex="auto"
+              padding="150px 0 0 0"
+            >
+              <Flex flexDir="column" alignItems="normal" w="40%" h="auto" padding="0 0 7px 5px"
+              border="2px solid" borderColor="mainLight" borderRadius="8px">
+                <Text fontSize="1.5em" fontWeight="bold">Group Description:</Text>
+                <GroupDescInput group={group} edit={edit}/>
+              </Flex>
+            </HStack>
+          </Flex>
+        </VStack>
     );
 }
 
