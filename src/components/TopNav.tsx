@@ -1,5 +1,4 @@
 import {
-    Text,
     Button,
     Flex,
     Menu,
@@ -7,20 +6,16 @@ import {
     MenuList,
     MenuItem,
     Spacer,
-    Heading,
     MenuDivider,
     MenuGroup,
     Icon,
     LinkBox,
     LinkOverlay,
-    Portal,
 } from "@chakra-ui/react";
 import { AddIcon, SettingsIcon, SearchIcon } from "@chakra-ui/icons";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../media/GlinkLogo";
-import { useContext } from "react";
-import { UserContext } from "../lib/context";
 import { FiUser } from "react-icons/fi";
 import firebase from "../firebase";
 
@@ -35,6 +30,7 @@ const TopNav = (props: Props) => {
     const logout = () => {
         firebase.auth().signOut();
     };
+
     const headerStyle = styles.underlineLinkHover + " " + styles.largeFont;
     // top navbar of the home page
     return (
@@ -52,37 +48,40 @@ const TopNav = (props: Props) => {
             paddingX="40px"
             color="pureWhite"
         >
-            <LinkBox>
+            <LinkBox marginX="40px">
                 <LinkOverlay href="/">
                     <Logo />
                 </LinkOverlay>
             </LinkBox>
             {user ? ( // If user is logged in (defined) then display the fragement before :
                 <>
-                    <Spacer />
                     <Menu colorScheme="blue">
-                        <MenuButton className={headerStyle}>Groups</MenuButton>
+                        <MenuButton className={headerStyle} as="a" href="#">
+                            Groups
+                        </MenuButton>
                         <MenuList textColor="black">
                             <MenuItem icon={<SearchIcon />}>
-                                <Link href="#">Search for a Group</Link>
+                                <Link href="/search">Search for a Group</Link>
                             </MenuItem>
                             <MenuDivider />
-                            <MenuItem icon={<AddIcon />}>
-                                <Link href="/group/create">Create Group</Link>
-                            </MenuItem>
-                            <MenuItem icon={<SettingsIcon />}>
-                                <Link href="#">Manage Groups</Link>
-                            </MenuItem>
+                            <Link href="/group/create">
+                                <MenuItem icon={<AddIcon />}>
+                                    <a>Create Group</a>
+                                </MenuItem>
+                            </Link>
+                            <Link href="/group/manage">
+                                <MenuItem icon={<SettingsIcon />}>
+                                    Manage Groups
+                                </MenuItem>
+                            </Link>
                         </MenuList>
                     </Menu>
-                    <Spacer />
-                    <a href="#" className={headerStyle}>
-                        Network
-                    </a>
-                    <Spacer />
-                    <a href="#" className={headerStyle}>
-                        Collaborate
-                    </a>
+                    <Link href="/network">
+                        <a className={headerStyle}>Network</a>
+                    </Link>
+                    <Link href="/collaborate">
+                        <a className={headerStyle}>Collaborate</a>
+                    </Link>
                     <Spacer />
                     <Menu colorScheme="blue">
                         <MenuButton
