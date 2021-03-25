@@ -53,7 +53,7 @@ const GroupCard = ({ group, id }: Props) => {
                 px="16px"
                 py="10px"
             >
-                <Text textColor="gray.700">{group.description}</Text>
+                <Text textColor="gray.700" flex="auto" noOfLines={1}>{group.description}</Text>
                 <Heading>{group.name}</Heading>
             </Flex>
             <Flex
