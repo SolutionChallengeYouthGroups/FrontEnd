@@ -1,8 +1,19 @@
 .greytext{
     color: #808080;
 }
-.underlineLinkHover:hover{
-    text-decoration: underline;
+.underlineLinkHover{
+    margin: 0px 50px;
+    display:inline-block;
+}
+.underlineLinkHover::after{
+    content:'';
+    border-bottom: solid 2px white;
+    display:block;
+    transform: scaleX(0);
+    transition: 250ms ease-in-out;
+}
+.underlineLinkHover:hover::after{
+    transform: scaleX(1);
     cursor: pointer;
 }
 .largeFont{
