@@ -15,6 +15,7 @@ import {
     LinkOverlay,
     Portal,
 } from "@chakra-ui/react";
+import { AddIcon, SettingsIcon, SearchIcon } from "@chakra-ui/icons"
 import Link from "next/link";
 import React from "react";
 import Logo from "../media/GlinkLogo";
@@ -62,14 +63,14 @@ const TopNav = (props: Props) => {
                             Groups
                         </MenuButton>
                         <MenuList textColor="black">
-                            <MenuItem>
+                            <MenuItem icon={<SearchIcon/>}>
                                 <Link href="#">Search for a Group</Link>
                             </MenuItem>
                             <MenuDivider/>
-                            <MenuItem>
+                            <MenuItem icon={<AddIcon/>}>
                                 <Link href="/group/create">Create Group</Link>
                             </MenuItem>
-                            <MenuItem>
+                            <MenuItem icon={<SettingsIcon/>}>
                                 <Link href="#">Manage Groups</Link>
                             </MenuItem>
                         </MenuList>
