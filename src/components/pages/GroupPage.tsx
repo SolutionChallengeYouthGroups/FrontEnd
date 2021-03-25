@@ -47,43 +47,48 @@ interface Props {
     groupID?: string;
 }
 
-async function writeData(group: Group, user: Ref<User>, groupID?: string) {
-    if (!!groupID) {
-        return update(groups, groupID, group);
-    }
-    group.createdAt = firebase.firestore.Timestamp.now();
-    group.owners = [user];
-    return add(groups, group);
-}
 let lastGroup: Group;
 const GroupPage = (props: Props) => {
-    const { user, username, email } = useContext(UserContext);
-    const userany = user as any;
-    const uref = ref(users, userany?.uid);
-    const router = useRouter();
-    const toast = useToast();
-    const [group, setGroup] = useState(_.cloneDeep(props.group));
-    const [edit, setEdit] = useState(false);
-
-    function saveClick(e: MouseEvent<HTMLButtonElement>) {
+  const { user, username, email } = useContext(UserContext);
+  const userany = user as any;
+  const uref = ref(users, userany?.uid);
+  const router = useRouter();
+  const toast = useToast();
+  const [group, setGroup] = useState(_.cloneDeep(props.group));
+  const [edit, setEdit] = useState(false);
+  function success(){
+    toast.closeAll();
+    toast({
+        title: "Group saved",
+        status: "success",
+        duration: 2000,
+        isClosable: true
+    });
+    lastGroup = _.cloneDeep(group);
+    setEdit(false);
+  }
+  function failure(element: Element){
+    element.setAttribute("isLoading", "false");
+    toast({
+      title: "Error saving Group",
+      status: "error",
+      duration: 2000,
+      isClosable: true
+    });
+  }
+    function saveClick(e: MouseEvent<HTMLButtonElement>){
         (e.target as Element).setAttribute("isLoading", "true");
-        writeData(group, uref, props.groupID).then(
-            (groupref?: Ref<Group> | void) => {
-                if (!props.groupID) {
-                    router.push("/group/" + (groupref as Ref<Group>).id);
-                    return;
-                }
-                toast.closeAll();
-                toast({
-                    title: "Group saved",
-                    status: "success",
-                    duration: 2000,
-                    isClosable: true,
-                });
-                lastGroup = _.cloneDeep(group);
-                setEdit(false);
-            },
-            () => (e.target as Element).setAttribute("isLoading", "false")
+        if (!!props.groupID){
+          update(groups, props.groupID, group).then(() => success(), (error) => failure(e.target as Element));
+          return;
+        }
+        group.createdAt = firebase.firestore.Timestamp.now();
+        group.owners = [uref];
+        add(groups, group).then(
+          (groupref) => {
+            toast.closeAll();
+            router.push("/group/"+groupref.id);
+          }, (error) => failure(e.target as Element)
         );
     }
     function cancelClick() {
