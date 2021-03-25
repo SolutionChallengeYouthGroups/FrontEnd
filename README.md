@@ -38,6 +38,18 @@ yarn install
 yarn dev/yarn start
 ```
 
+## Deployment
+```
+npm run build
+npm run export
+firebase init hosting
+```
+Use `.out` when specifying the public directory.
+```sh
+firebase deploy --only hosting
+```
+(Deploys hosting content and config.)
+
 ## Show your support
 
 Give a ⭐️ if this project helped you!
