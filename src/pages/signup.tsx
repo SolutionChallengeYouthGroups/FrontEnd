@@ -43,8 +43,9 @@ const createUser = async (
             email: user.email ?? "",
             groups: [],
             name: user.displayName ?? "",
-            // there's a bug in types with firebase ignore this:
-            username: result.additionalUserInfo?.profile.given_name ?? "",
+            // there's a bug in types with firebase ignore this type
+            // @ts-ignore
+            username: result?.additionalUserInfo?.profile?.given_name ?? "",
         });
     }
 };
@@ -86,6 +87,7 @@ const signup = () => {
                         .auth()
                         .createUserWithEmailAndPassword(email, password)
                         .then(async (result) => {
+                            // add the user to firestore, then go back to homepage
                             await createUser(result, values);
                             router.push("./");
                         })
