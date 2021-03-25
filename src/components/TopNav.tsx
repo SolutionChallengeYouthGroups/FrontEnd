@@ -15,7 +15,7 @@ import {
     LinkOverlay,
     Portal,
 } from "@chakra-ui/react";
-import { AddIcon, SettingsIcon, SearchIcon } from "@chakra-ui/icons"
+import { AddIcon, SettingsIcon, SearchIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import React from "react";
 import Logo from "../media/GlinkLogo";
@@ -24,7 +24,7 @@ import { UserContext } from "../lib/context";
 import { FiUser } from "react-icons/fi";
 import firebase from "../firebase";
 
-import styles from "./componentStyles.module.css"
+import styles from "./componentStyles.module.css";
 
 interface Props {}
 
@@ -48,37 +48,41 @@ const TopNav = (props: Props) => {
             top="0px"
             position="fixed"
             backgroundColor="main"
-            paddingY="20px"
+            paddingY="6px"
             paddingX="40px"
             color="pureWhite"
         >
             <LinkBox>
-            <LinkOverlay href="/"><Logo /></LinkOverlay>
+                <LinkOverlay href="/">
+                    <Logo />
+                </LinkOverlay>
             </LinkBox>
             {user ? ( // If user is logged in (defined) then display the fragement before :
                 <>
-                    <Spacer/>
+                    <Spacer />
                     <Menu colorScheme="blue">
-                        <MenuButton className={headerStyle}>
-                            Groups
-                        </MenuButton>
+                        <MenuButton className={headerStyle}>Groups</MenuButton>
                         <MenuList textColor="black">
-                            <MenuItem icon={<SearchIcon/>}>
+                            <MenuItem icon={<SearchIcon />}>
                                 <Link href="#">Search for a Group</Link>
                             </MenuItem>
-                            <MenuDivider/>
-                            <MenuItem icon={<AddIcon/>}>
+                            <MenuDivider />
+                            <MenuItem icon={<AddIcon />}>
                                 <Link href="/group/create">Create Group</Link>
                             </MenuItem>
-                            <MenuItem icon={<SettingsIcon/>}>
+                            <MenuItem icon={<SettingsIcon />}>
                                 <Link href="#">Manage Groups</Link>
                             </MenuItem>
                         </MenuList>
                     </Menu>
-                    <Spacer/>
-                    <a href="#" className={headerStyle}>Network</a>
-                    <Spacer/>
-                    <a href="#" className={headerStyle}>Collaborate</a>
+                    <Spacer />
+                    <a href="#" className={headerStyle}>
+                        Network
+                    </a>
+                    <Spacer />
+                    <a href="#" className={headerStyle}>
+                        Collaborate
+                    </a>
                     <Spacer />
                     <Menu colorScheme="blue">
                         <MenuButton
