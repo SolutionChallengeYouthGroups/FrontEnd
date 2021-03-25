@@ -1,7 +1,7 @@
 import { Group, Range } from "../../firestoreTypes";
 import { IoPeople } from "react-icons/io5"
 import TextWithIcon from "../TextWithIcon";
-import { convertRange } from "../../stringConverters";
+import { convertAgeRange } from "../../stringConverters";
 import styles from "../componentStyles.module.css";
 import { Input, HStack, Text, Icon, BoxProps } from "@chakra-ui/react";
 import { useState } from "react"
@@ -52,7 +52,7 @@ const AgeRangeDisplay = ({group, edit, ...rest}: Props) => {
     </HStack>
   }
   return <TextWithIcon {...rest} title="Age Range" textClassname={styles.greytext} 
-  text={convertRange(group.ageRange)} icon={IoPeople}/>
+  text={convertAgeRange(group.ageRange)} icon={IoPeople}/>
 };
 
 export default AgeRangeDisplay;

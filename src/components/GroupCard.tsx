@@ -3,6 +3,7 @@ import React from "react";
 import { Group } from "../firestoreTypes";
 import { getGroupAvatarURL } from "../storageHelpers";
 import { useRouter } from "next/router";
+import { convertAgeRange } from "../stringConverters"
 
 interface Props {
     group: Group;
@@ -67,7 +68,7 @@ const GroupCard = ({ group, id }: Props) => {
                     backgroundColor="main"
                     textColor="pureWhite"
                 >
-                    {"Ages: " + group.ageRange.min + " - " + group.ageRange.max}
+                    {"Ages: " + convertAgeRange(group.ageRange)}
                 </Badge>
                 {group.category ? (
                     <Badge
