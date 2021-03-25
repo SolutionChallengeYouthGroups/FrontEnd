@@ -157,14 +157,14 @@ const GroupPage = (props: Props) => {
             <HStack
               wrap="wrap"
               w="90%"
-              margin="10px"
+              margin="15px"
               alignItems="normal"
               justifyContent="space-between"
               flex="auto"
-              padding="160px 0 0 0"
+              padding="150px 0 0 0"
             >
               <Flex flexDir="column" alignItems="normal" w="40%" h="auto" padding="0 0 7px 5px"
-              border="2px solid" borderColor="main" borderRadius="8px">
+              border="2px solid" borderColor="mainLight" borderRadius="8px">
                 <Text fontSize="1.5em" fontWeight="bold">Group Description:</Text>
                 <GroupDescInput group={group} edit={edit}/>
               </Flex>

@@ -21,6 +21,8 @@ import { UserContext } from "../lib/context";
 import { FiUser } from "react-icons/fi";
 import firebase from "../firebase";
 
+import styles from "./componentStyles.module.css"
+
 interface Props {}
 
 const TopNav = (props: Props) => {
@@ -30,6 +32,7 @@ const TopNav = (props: Props) => {
     const logout = () => {
         firebase.auth().signOut();
     };
+    const headerStyle = styles.underlineLinkHover + " " + styles.largeFont;
     // top navbar of the home page
     return (
         <Flex
@@ -41,16 +44,38 @@ const TopNav = (props: Props) => {
             w="100%"
             top="0px"
             position="fixed"
-            backgroundColor="main"
+            backgroundColor="mainLight"
             paddingY="20px"
             paddingX="40px"
             color="pureWhite"
         >
-            <Heading borderBottom="solid 1px white" marginBottom="2px">
-                Save the Scouts
+            <Heading>
+                <a href="/">GLink</a>
             </Heading>
             {user ? ( // If user is logged in (defined) then display the fragement before :
                 <>
+                    <Spacer/>
+                    <Menu colorScheme="blue">
+                        <MenuButton className={headerStyle}>
+                            Groups
+                        </MenuButton>
+                        <MenuList textColor="black">
+                            <MenuItem>
+                                <Link href="#">Search for a Group</Link>
+                            </MenuItem>
+                            <MenuDivider/>
+                            <MenuItem>
+                                <Link href="/group/create">Create Group</Link>
+                            </MenuItem>
+                            <MenuItem>
+                                <Link href="#">Manage Groups</Link>
+                            </MenuItem>
+                        </MenuList>
+                    </Menu>
+                    <Spacer/>
+                    <a href="#" className={headerStyle}>Network</a>
+                    <Spacer/>
+                    <a href="#" className={headerStyle}>Collaborate</a>
                     <Spacer />
                     <Menu colorScheme="blue">
                         <MenuButton
