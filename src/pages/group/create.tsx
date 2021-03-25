@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/dist/client/router";
 
 import GroupPage from "../../components/pages/GroupPage";
+import LoginRequired from "../../components/LoginRequired";
 
 // Firestore stuff:
 import { groups } from "../../firestoreCollections";
@@ -15,20 +16,11 @@ const Group = () => {
   // can be customized by the owner of the youth club
   const router = useRouter();
   const user = firebase.auth().currentUser;
-  console.log(user)
-  let { groupID } = router.query;
-  if (typeof groupID != "string") {
-    groupID = "";
+  if (user === null || user.isAnonymous){
+      return <LoginRequired />
   }
-  const [group, { loading, error }] = useGet(groups, groupID);
-
-  if (loading) {
-    return <div>loading</div>;
-  }
-  if (error || !group) {
-    return <div>{JSON.stringify(error)}</div>;
-  }
-  return <GroupPage group={group.data} groupID={groupID} user={user}/>
+  
+  return <GroupPage group={defaultGroup()} user={user}/>
 };
 
 export default Group;
