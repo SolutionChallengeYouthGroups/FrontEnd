@@ -8,6 +8,6 @@ export function storagePathToURL(path: string, args: string): string {
         args
     );
 }
-export async function getGroupAvatarURL(groupID: string){
+export function getGroupAvatarURL(groupID: string){
     return storagePathToURL("groups/" + groupID + "/profile.png", "alt=media");
 }
