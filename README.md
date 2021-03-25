@@ -39,14 +39,14 @@ yarn dev/yarn start
 ```
 
 ## Deployment
-```sh
+```
 npm run build
 npm run export
 firebase init hosting
 ```
 Use `.out` when specifying the public directory.
 ```sh
-firebase deploly --only hosting
+firebase deploy --only hosting
 ```
 (Deploys hosting content and config.)
 
