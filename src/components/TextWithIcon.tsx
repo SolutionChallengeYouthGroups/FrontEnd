@@ -3,13 +3,12 @@ import React from "react";
 interface Props extends StackProps {
   text: string;
   icon: any;
-  textClassname?: string;
 }
 
-const TextWithIcon = ({text, icon, textClassname, ...rest}: Props) => {return (
+const TextWithIcon = ({text, icon, ...rest}: Props) => {return (
     <HStack {...rest}>
-      <Icon as={icon} />
-      <Text className={textClassname || ""} paddingBottom="2px">{text}</Text>
+      <Icon as={icon} color="black"/>
+      <Text paddingBottom="2px">{text}</Text>
     </HStack>
   );
 };

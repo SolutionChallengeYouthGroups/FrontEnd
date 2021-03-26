@@ -24,7 +24,7 @@ const GroupCategoryDisplay = ({group, edit, ...rest}: Props) => {
     }
     if (edit !== undefined){
       return <React.Fragment {...rest}>
-      <TextWithIcon title="Group Category" textClassname={styles.greytext} display={edit ? "none" : "flex"}
+      <TextWithIcon title="Group Category" className={styles.greytext} display={edit ? "none" : "flex"}
       text={title(group.category)} icon={groupCategoryMapping.get(group.category)}/>
       <HStack display={edit ? "flex" : "none"}>
         {group.category === "" ? <></> : <Icon as={groupCategoryMapping.get(group.category)}/>}
@@ -36,7 +36,7 @@ const GroupCategoryDisplay = ({group, edit, ...rest}: Props) => {
       </HStack>
       </React.Fragment>
     }
-    return <React.Fragment {...rest}><TextWithIcon title="Group Category" textClassname={styles.greytext} 
+    return <React.Fragment {...rest}><TextWithIcon title="Group Category" className={styles.greytext} 
     text={title(group.category)} icon={groupCategoryMapping.get(group.category)}/>
     </React.Fragment>
 };
