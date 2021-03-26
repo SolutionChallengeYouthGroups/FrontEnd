@@ -51,7 +51,7 @@ const AgeRangeDisplay = ({group, edit, ...rest}: Props) => {
       placeholder="0" maxW="100px"/>
     </HStack>
   }
-  return <TextWithIcon {...rest} title="Age Range" textClassname={styles.greytext} 
+  return <TextWithIcon {...rest} title="Age Range" className={styles.greytext} 
   text={convertAgeRange(group.ageRange)} icon={IoPeople}/>
 };
 

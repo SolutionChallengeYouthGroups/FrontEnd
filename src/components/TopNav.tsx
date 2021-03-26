@@ -37,7 +37,7 @@ const TopNav = (props: Props) => {
         <Flex
             as="nav"
             align="center"
-            justify="flex-start"
+            justify="space-between"
             flexDir="row"
             wrap="wrap"
             w="100%"
@@ -48,7 +48,7 @@ const TopNav = (props: Props) => {
             paddingX="40px"
             color="pureWhite"
         >
-            <LinkBox marginX="40px">
+            <LinkBox>
                 <LinkOverlay href="/">
                     <Logo />
                 </LinkOverlay>
@@ -82,7 +82,6 @@ const TopNav = (props: Props) => {
                     <Link href="/collaborate">
                         <a className={headerStyle}>Collaborate</a>
                     </Link>
-                    <Spacer />
                     <Menu colorScheme="blue">
                         <MenuButton
                             transitionProperty="transform"

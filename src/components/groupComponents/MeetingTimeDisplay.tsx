@@ -51,7 +51,7 @@ const MeetingTimeDisplay = ({group, edit, ...rest}: Props) => {
             <PopoverTrigger>
                     <Link className={styles.underlineLinkHover}>
                         <React.Fragment {...rest}>
-                            <TextWithIcon textClassname={styles.greytext} icon={FaUserClock} 
+                            <TextWithIcon className={styles.greytext} icon={FaUserClock} 
                             text="Edit Meeting Times" title="Meeting Times"/>
                         </React.Fragment>
                     </Link>
@@ -81,11 +81,11 @@ const MeetingTimeDisplay = ({group, edit, ...rest}: Props) => {
         </Popover>
     }
     if (group.meetingTimes.length === 0){
-        return <React.Fragment {...rest}><TextWithIcon title="Meeting Time" textClassname={styles.greytext}
+        return <React.Fragment {...rest}><TextWithIcon title="Meeting Time" className={styles.greytext}
         text="No meeting times" icon={FaUserClock}/></React.Fragment>;
     }
     if (group.meetingTimes.length === 1){
-        return <React.Fragment {...rest}><TextWithIcon title="Meeting Time" textClassname={styles.greytext}
+        return <React.Fragment {...rest}><TextWithIcon title="Meeting Time" className={styles.greytext}
                 text={convertMeetingTime(group.meetingTimes[0])}
                 icon={FaUserClock}/></React.Fragment>;
     }
@@ -101,8 +101,8 @@ const MeetingTimeDisplay = ({group, edit, ...rest}: Props) => {
         dayTimes.splice(index, 0, meeting);
     }); // efficiently sorts the MeetingTimes into bins by day, and then by start time
 
-    return (<React.Fragment {...rest}><a className={styles.underlineLinkHover} onClick={onOpen}>
-        <TextWithIcon textClassname={styles.greytext} icon={FaUserClock} text="Multiple Meeting Times" title="Meeting Times"/>
+    return (<React.Fragment {...rest}><a className={styles.greytext + " " + styles.underlineLinkHover} onClick={onOpen}>
+        <TextWithIcon _hover={{cursor: "pointer"}} icon={FaUserClock} text="Multiple Meeting Times" title="Meeting Times"/>
 
         </a>
         <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="inside" size="lg">
