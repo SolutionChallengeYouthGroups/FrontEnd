@@ -1,0 +1,53 @@
+import SearchBox from './SearchBox'
+import firestore from "../../firebase"
+
+// ChakraUI
+import { Grid } from "@chakra-ui/react"
+import GroupCard from "../../components/GroupCard";
+
+import { Group } from "../../firestoreTypes"
+import { collection, where } from "typesaurus";
+import { useAll, useQuery } from "@typesaurus/react"
+
+interface Props {
+    search: string
+}
+
+const Results = (props: Props) => {
+    const searchTerm = props.search;
+    const groups = collection<Group>('groups');
+
+    // getting all the groups from firestore
+    let [allGroups, { loading, error }] = useAll(groups);
+    if (loading || error || !allGroups) {
+        // if it is loading/there is an error, set allGroups to [], so that the .map still works
+        allGroups = [];
+    }
+
+    const results = allGroups?.filter(group => 
+        group.data.name.toLowerCase().includes(searchTerm) ||
+        group.data.description.toLowerCase().includes(searchTerm) ||
+        group.data.category.includes(searchTerm));
+        
+    return (
+        <>
+            <Grid
+                gap="15px"
+                w="90%"
+                templateColumns="repeat(auto-fill,minmax(350px,1fr))"
+                templateRows="repeat(auto-fill,minmax(250px,1fr))"
+            >
+                    {results?.map((group) => (
+                        <GroupCard
+                            group={group.data}
+                            id={group.ref.id}
+                            key={group.data.name}
+                        />
+                    ))}
+            </Grid>
+        </>
+
+    )
+}
+
+export default Results
