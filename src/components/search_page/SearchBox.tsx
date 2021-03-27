@@ -7,15 +7,6 @@ interface Props {
 }
 
 const SearchBox = (props: Props) => {
-    // const createKeywords = (name: string) =>  {
-    //     const arrName: string[] = [];
-    //     let currentName = '';
-    //     name.split('').forEach((letter: string) => {
-    //         currentName += letter;
-    //         arrName.push(currentName);
-    //     });
-    //     return arrName;
-    // }
 
     return (
         <Flex w="100%" paddingY="15px" align='center' justify='center'>
@@ -29,6 +20,8 @@ const SearchBox = (props: Props) => {
                 variant='outline'
                 placeholder='Search' 
                 size='lg'
+                // Listens to a change in input event and pass the event.target.value to setSearch
+                // use .toLowerCase so we can search with case insensitivity
                 onChange={(e) => props.setSearch(e.target.value.toLowerCase())}
             />
         </Flex>
