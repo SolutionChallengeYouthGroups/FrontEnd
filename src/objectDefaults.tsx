@@ -1,4 +1,4 @@
-import { Day, Frequency, Group, MeetingTime, SocialLinks, Range } from "./firestoreTypes";
+import { Day, Frequency, Group, MeetingTime, SocialLinks, Range, GeoPointLocation } from "./firestoreTypes";
 import  firebase from "./firebase"
 
 export function meetingTimeDefault(): MeetingTime{
@@ -41,4 +41,7 @@ export function defaultGroup(): Group{
         ageRange: defaultRange(),
         meetingTimes: []
     }
+}
+export function defaultGeoPointLocation(): GeoPointLocation{
+    return new GeoPointLocation(52.383599, -1.56006);
 }
