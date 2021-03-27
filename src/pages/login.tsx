@@ -12,10 +12,14 @@ interface Props {}
 const login = () => {
     // page to login
     const router = useRouter();
-
+    const { next: next_query } = router.query;
+    let next = "/";
+    if (typeof next_query === "string"){
+        next = next_query;
+    }
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            router.push("./");
+            router.push(next);
         }
     });
 
@@ -27,7 +31,7 @@ const login = () => {
             .signInWithPopup(provider)
             .then(() => {
                 // continue to home page
-                router.push("./");
+                router.push(next);
             })
             .catch((error) => {
                 firebase.auth().signInWithRedirect(provider);
@@ -39,7 +43,7 @@ const login = () => {
             .auth()
             .signInAnonymously()
             .then(() => {
-                router.push("./");
+                router.push(next);
             })
             .catch((error) => console.log(error));
     };
@@ -59,7 +63,7 @@ const login = () => {
                         .auth()
                         .signInWithEmailAndPassword(email, password)
                         .then(() => {
-                            router.push("./");
+                            router.push(next);
                         })
                         .catch((error) => {
                             switch (error.code) {

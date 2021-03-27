@@ -1,6 +1,8 @@
 import {
     Box,
+    ColorProps,
     Icon,
+    IconProps,
     Popover,
     PopoverArrow,
     PopoverBody,
@@ -13,30 +15,39 @@ import React, { useState } from "react";
 import { FaMapMarker } from "react-icons/fa";
 import GroupCard from "../GroupCard";
 
-interface Props {
+interface Props extends IconProps{
     lat: number;
     lng: number;
     popup?: JSX.Element;
+    isOpen?: boolean;
 }
 
-const MapMarker = ({ popup }: Props) => {
+const MapMarker = ({ popup, isOpen, color, ...rest }: Props) => {
     // takes in a popup and will create a map maker, when clicked on will show the popup
     return (
-        <Popover>
+        popup ?
+        <Popover defaultIsOpen={!!isOpen} placement="top-end">
             <PopoverTrigger>
-                <Icon
+                <Icon transform="translate(-50%, -100%);"
                     as={FaMapMarker}
-                    color="main"
+                    color={color || "main"}
                     h="34px"
                     w="auto"
                     _hover={{ cursor: "pointer", color: "mainDark" }}
                     marginTop="-17px"
+                    {...rest}
                 />
             </PopoverTrigger>
             <PopoverContent w="300px">
                 <PopoverBody>{popup}</PopoverBody>
             </PopoverContent>
-        </Popover>
+        </Popover> : 
+        <Icon transform="translate(-50%, -100%);"
+            as={FaMapMarker}
+            color={color || "main"}
+            w="35px"
+            h="35px"
+            {...rest}/>
     );
 };
 

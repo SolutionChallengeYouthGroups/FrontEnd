@@ -5,7 +5,9 @@ import {
   GeoPoint,
   Timestamp,
 } from "@firebase/firestore-types";
+import firebase from "./firebase"
 import { Ref } from "typesaurus";
+import { Coords } from "google-map-react";
 
 interface User {
   name: string;
@@ -86,6 +88,32 @@ interface Comment {
   author: Ref<User>; // reference to author
   createdAt: Timestamp;
   content: string;
+}
+
+export class GeoPointLocation{
+  lat: number;
+  lon: number;
+  constructor (lat: number, lon: number){
+    this.lat = lat;
+    this.lon = lon;
+  }
+  static fromGeoPoint(geoPoint: firebase.firestore.GeoPoint): GeoPointLocation{
+    // @ts-ignore
+    return new GeoPointLocation(geoPoint.x_, geoPoint.N_);
+  }
+  toGeoPoint(): firebase.firestore.GeoPoint{
+    return new firebase.firestore.GeoPoint(this.lat, this.lon);
+  }
+  toMapCoords(): Coords{
+    return {
+      lat: this.lat,
+      lng: this.lon
+    }
+  }
+  equals(geoPointLocation: GeoPointLocation, tolerance: number = 1e-8): boolean{
+    return Math.abs(this.lat - geoPointLocation.lat) < tolerance &&
+    Math.abs(this.lon - geoPointLocation.lon) < tolerance;
+  }
 }
 
 export type { Group, User, GroupCategory, SocialLinks , Range, MeetingTime, Post, Comment };
