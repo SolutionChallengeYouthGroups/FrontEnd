@@ -31,7 +31,8 @@ const AgeRangeDisplay = ({group, edit, ...rest}: Props) => {
       <Input variant="outline" value={group.ageRange.min === 0 ? "" : group.ageRange.min} 
       onChange={(e) => {
         const newmin = sanitise(e.target.value);
-        const newRange = {min: newmin, max: group.ageRange.max === 0 ? 0 : Math.max(group.ageRange.max, newmin)};
+        const newRange = {min: newmin, max: group.ageRange.max};
+        // const newRange = {min: newmin, max: group.ageRange.max === 0 ? 0 : Math.max(group.ageRange.max, newmin)};
         setRange(newRange);
       }}
       placeholder="0" maxW="100px"/>
@@ -40,12 +41,7 @@ const AgeRangeDisplay = ({group, edit, ...rest}: Props) => {
       onChange={(e) => {
         const newmax = sanitise(e.target.value);
         let newRange;
-        if (newmax === 0){
-          newRange = {max: 0, min: group.ageRange.min}
-        }
-        else{
-          newRange = {max: newmax, min: group.ageRange.min === 0 ? 0 : Math.min(group.ageRange.min, newmax)};
-        }
+        newRange = {max: newmax, min: group.ageRange.min};
         setRange(newRange);
       }}
       placeholder="0" maxW="100px"/>
