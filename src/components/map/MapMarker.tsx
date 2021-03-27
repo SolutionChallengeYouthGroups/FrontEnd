@@ -31,9 +31,10 @@ const MapMarker = ({ popup, isOpen, color, ...rest }: Props) => {
                 <Icon transform="translate(-50%, -100%);"
                     as={FaMapMarker}
                     color={color || "main"}
-                    w="35px"
-                    h="35px"
-                    _hover={{ cursor: "pointer" }}
+                    h="34px"
+                    w="auto"
+                    _hover={{ cursor: "pointer", color: "mainDark" }}
+                    marginTop="-17px"
                     {...rest}
                 />
             </PopoverTrigger>
