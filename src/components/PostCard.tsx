@@ -1,23 +1,16 @@
 import React from "react";
 
 import { Post } from "../firestoreTypes";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Grid } from "@chakra-ui/react";
 import { Ref } from "typesaurus";
 import { useGet } from "@typesaurus/react";
 
 interface Props {
-  postRef: Ref<Post>;
+    post: Post;
 }
 
-const PostCard = ({ postRef }: Props) => {
-  const [post] = useGet(postRef);
-  return (
-    <Box border="1px">
-      title:{post?.data?.title}
-      <br />
-      content:{post?.data?.content}
-    </Box>
-  );
+const PostCard = ({ post }: Props) => {
+    return <Grid templateAreas=""></Grid>;
 };
 
 export default PostCard;
