@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+
 
 // NextJS Stuff
 
@@ -7,6 +8,8 @@ import { Grid, Text, VStack } from "@chakra-ui/react";
 
 // Components
 import TopNav from "../components/TopNav";
+import SearchBox from "../components/search_page/SearchBox"
+import Results from "../components/search_page/SearchResults"
 
 //firebase
 import { useAll } from "@typesaurus/react";
@@ -15,12 +18,9 @@ import Link from "next/link";
 import GroupCard from "../components/GroupCard";
 
 const Index = () => {
-    // getting all the groups from firestore
-    let [allGroups, { loading, error }] = useAll(groups);
-    if (loading || error || !allGroups) {
-        // if it is loading/there is an error, set allGroups to [], so that the .map still works
-        allGroups = [];
-    }
+    // Using useState, get input value from SearchBox and pass the new value of
+    // search to the Results component
+    const [search, setSearch] = useState("");
     return (
         <VStack
             height="100vh"
@@ -35,20 +35,8 @@ const Index = () => {
                 justifyContent="space-around"
                 align="center"
             >
-                <Grid
-                    gap="15px"
-                    w="90%"
-                    templateColumns="repeat(auto-fill,minmax(350px,1fr))"
-                    templateRows="repeat(auto-fill,minmax(250px,1fr))"
-                >
-                    {allGroups.map((group) => (
-                        <GroupCard
-                            group={group.data}
-                            id={group.ref.id}
-                            key={group.data.name}
-                        />
-                    ))}
-                </Grid>
+                <SearchBox setSearch={setSearch} />
+                <Results search={search}/>
             </VStack>
         </VStack>
     );
