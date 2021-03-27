@@ -63,10 +63,6 @@ const TopNav = (props: Props) => {
                             Groups
                         </MenuButton>
                         <MenuList textColor="black">
-                            <MenuItem icon={<SearchIcon />}>
-                                <Link href="/search">Search for a Group</Link>
-                            </MenuItem>
-                            <MenuDivider />
                             <Link href="/group/create">
                                 <MenuItem icon={<AddIcon />}>
                                     <a>Create Group</a>
