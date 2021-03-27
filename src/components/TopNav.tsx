@@ -59,14 +59,10 @@ const TopNav = (props: Props) => {
             {user ? ( // If user is logged in (defined) then display the fragement before :
                 <>
                     <Menu colorScheme="blue">
-                        <MenuButton className={headerStyle} as="a" href="#">
+                        <MenuButton className={headerStyle} as="a" href="javascript:;">
                             Groups
                         </MenuButton>
                         <MenuList textColor="black">
-                            <MenuItem icon={<SearchIcon />}>
-                                <Link href="/search">Search for a Group</Link>
-                            </MenuItem>
-                            <MenuDivider />
                             <Link href="/group/create">
                                 <MenuItem icon={<AddIcon />}>
                                     <a>Create Group</a>
