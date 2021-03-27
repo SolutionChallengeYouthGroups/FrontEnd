@@ -11,6 +11,7 @@ import {
     useToast,
     Button,
     Portal,
+    Box,
 } from "@chakra-ui/react";
 
 import { FiEdit } from "react-icons/fi";
@@ -28,9 +29,10 @@ import GroupCategoryDisplay from "../../components/groupComponents/GroupCategory
 import FloatingButton from "../../components/groupComponents/FloatingButton";
 import GroupNameInput from "../../components/groupComponents/GroupNameInput";
 import GroupDescInput from "../../components/groupComponents/GroupDescInput";
-import { Group, User } from "../../firestoreTypes";
+import GroupLocation from "../groupComponents/GroupLocation";
+import { GeoPointLocation, Group, User } from "../../firestoreTypes";
 
-import { MouseEvent, useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 
 import firebase from "../../firebase";
 import { add, update, ref, Ref } from "typesaurus";
@@ -113,14 +115,14 @@ const GroupPage = (props: Props) => {
 
     const setEditHandler = () => {
         toast({
-            position: "bottom-right",
+            position: "bottom",
             duration: null,
             render: () => (
                 <Flex
                     flexDir="row"
                     justifyContent="space-around"
                     backgroundColor="mainLight"
-                    boxShadow="-3px -3px 10px 0px rgba(0, 0, 0, 0.6)"
+                    boxShadow="0px 10px 10px 2px rgba(0, 0, 0, 0.6)"
                 >
                     <Button
                         size="sm"
@@ -153,6 +155,7 @@ const GroupPage = (props: Props) => {
             setEditHandler();
         }
     }, []);
+    const beforeChanges = lastGroup || props.group;
     return (
         <VStack height="100vh" align="center" justifyContent="flex-start">
             <Portal>
@@ -245,6 +248,19 @@ const GroupPage = (props: Props) => {
                         </Text>
                         <GroupDescInput group={group} edit={edit} />
                     </Flex>
+                    <Box w="40%">
+                        <GroupLocation
+                            group={group}
+                            edit={edit}
+                            originalLocation={
+                                beforeChanges.location
+                                    ? GeoPointLocation.fromGeoPoint(
+                                          beforeChanges.location
+                                      )
+                                    : null
+                            }
+                        />
+                    </Box>
                 </HStack>
             </Flex>
         </VStack>

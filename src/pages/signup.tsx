@@ -53,7 +53,11 @@ const createUser = async (
 const signup = () => {
     // page to signup with google
     const router = useRouter();
-
+    const { next: next_query } = router.query;
+    let next = "/";
+    if (typeof next_query === "string"){
+        next = next_query;
+    }
     const signUpWithGoogle = () => {
         // sign up with google
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -63,7 +67,7 @@ const signup = () => {
             .then(async (result) => {
                 // create user then continue to home page
                 await createUser(result);
-                router.push("./");
+                router.push(next);
             })
             .catch((error) => {
                 console.log(error);
@@ -89,7 +93,7 @@ const signup = () => {
                         .then(async (result) => {
                             // add the user to firestore, then go back to homepage
                             await createUser(result, values);
-                            router.push("./");
+                            router.push(next);
                         })
                         .catch((error) => {
                             switch (error.code) {

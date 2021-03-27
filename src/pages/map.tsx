@@ -7,6 +7,7 @@ import GroupCard from "../components/GroupCard";
 import MapMarker from "../components/map/MapMarker";
 import TopNav from "../components/TopNav";
 import { groups } from "../firestoreCollections";
+import { GeoPointLocation } from "../firestoreTypes";
 import { BiCurrentLocation } from "react-icons/bi";
 
 interface Props {}
@@ -50,12 +51,13 @@ const map = (props: Props) => {
                 >
                     {allGroups.map((group) => {
                         if (group.data.location) {
+                            let location = GeoPointLocation.fromGeoPoint(group.data.location);
                             return (
                                 <MapMarker
                                     // @ts-ignore
-                                    lat={group.data.location.x_}
+                                    lat={location.lat}
                                     // @ts-ignore
-                                    lng={group.data.location.N_}
+                                    lng={location.lon}
                                     popup={
                                         <GroupCard
                                             group={group.data}

@@ -15,9 +15,8 @@ const Group = () => {
   // can be customized by the owner of the youth club
   const router = useRouter();
   const user = firebase.auth().currentUser;
-  console.log(user)
   let { groupID } = router.query;
-  if (typeof groupID != "string") {
+  if (typeof groupID !== "string") {
     groupID = "";
   }
   const [group, { loading, error }] = useGet(groups, groupID);

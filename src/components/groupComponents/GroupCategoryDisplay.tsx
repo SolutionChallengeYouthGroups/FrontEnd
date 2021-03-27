@@ -18,7 +18,7 @@ const GroupCategoryDisplay = ({ group, edit, ...rest }: Props) => {
         group.category = category;
         setCategoryState(category);
     }
-    if (group.category === "" && edit !== true) {
+    if (group.category == "" && edit !== true) {
         return <React.Fragment {...rest} />;
     }
     if (edit !== undefined) {
@@ -32,7 +32,7 @@ const GroupCategoryDisplay = ({ group, edit, ...rest }: Props) => {
                     icon={groupCategoryMapping.get(group.category)}
                 />
                 <HStack display={edit ? "flex" : "none"}>
-                    {group.category === "" ? (
+                    {group.category == "" ? (
                         <></>
                     ) : (
                         <Icon as={groupCategoryMapping.get(group.category)} />
