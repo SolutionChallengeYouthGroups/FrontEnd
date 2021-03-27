@@ -15,6 +15,7 @@ interface Props {
 
 const Results = (props: Props) => {
     const searchTerm = props.search;
+    // Grab collection of groups with typesaurus
     const groups = collection<Group>('groups');
 
     // getting all the groups from firestore
@@ -24,10 +25,11 @@ const Results = (props: Props) => {
         allGroups = [];
     }
 
+    // Filter through all groups and only keep results if they satisfy the predicates inside
     const results = allGroups?.filter(group => 
-        group.data.name.toLowerCase().includes(searchTerm) ||
-        group.data.description.toLowerCase().includes(searchTerm) ||
-        group.data.category.includes(searchTerm));
+        group.data.name.toLowerCase().includes(searchTerm) ||        // If search term in group name 
+        group.data.description.toLowerCase().includes(searchTerm) || // If search term in description
+        group.data.category.toLowerCase().includes(searchTerm));     // If search term in categories
         
     return (
         <>
