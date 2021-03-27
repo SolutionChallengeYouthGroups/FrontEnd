@@ -18,9 +18,9 @@ interface User {
 }
 
 type GroupCategory = "scouting" | "physical" | "educational" | "social" | "artistic" | "board games" |
-                  "gaming" | "faith-based" | "political" | "";
+                  "gaming" | "faith-based" | "political" | "other";
 export const GroupCategories = ["scouting", "physical", "educational", "social", "artistic", "board games",
-"gaming", "faith-based", "political", ""]; // create a list for looping
+"gaming", "faith-based", "political", "other"]; // create a list for looping
 
 interface Group {
   // the ID is not the same as the name to avoid checking duplicates
