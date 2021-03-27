@@ -20,13 +20,15 @@ import { FiUser } from "react-icons/fi";
 import firebase from "../firebase";
 
 import styles from "./componentStyles.module.css";
+import { useRouter } from "next/router";
 
 interface Props {}
 
 const TopNav = (props: Props) => {
     // const { user, username, email } = useContext(UserContext);
     const user = firebase.auth().currentUser;
-
+    const router = useRouter();
+    const path = router.asPath;
     const logout = () => {
         firebase.auth().signOut();
     };
@@ -109,10 +111,10 @@ const TopNav = (props: Props) => {
                 // Else display the fragment below (Sign Up and Login)
                 <>
                     <Spacer />
-                    <Link href="/login">
+                    <Link href={"/login?next="+path}>
                         <Button colorScheme="whiteAlpha">Login</Button>
                     </Link>
-                    <Link href="/signup">
+                    <Link href={"/signup?next="+path}>
                         <Button marginLeft="30px" colorScheme="whiteAlpha">
                             Sign Up
                         </Button>
