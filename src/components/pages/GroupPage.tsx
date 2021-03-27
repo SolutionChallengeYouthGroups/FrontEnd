@@ -50,48 +50,52 @@ interface Props {
 
 let lastGroup: Group;
 const GroupPage = (props: Props) => {
-  const user = props.user;
-  let uref: (null | Ref<User>) = null;
-  if (user !== null){
-    uref = ref(users, user?.uid);
-  }
-  const router = useRouter();
-  const toast = useToast();
-  const [group, setGroup] = useState(_.cloneDeep(props.group));
-  const [edit, setEdit] = useState(false);
-  function success(){
-    toast.closeAll();
-    toast({
-        title: "Group saved",
-        status: "success",
-        duration: 2000,
-        isClosable: true
-    });
-    lastGroup = _.cloneDeep(group);
-    setEdit(false);
-  }
-  function failure(element: Element){
-    element.setAttribute("isLoading", "false");
-    toast({
-      title: "Error saving Group",
-      status: "error",
-      duration: 2000,
-      isClosable: true
-    });
-  }
-    function saveClick(e: MouseEvent<HTMLButtonElement>){
+    const user = props.user;
+    let uref: null | Ref<User> = null;
+    if (user !== null) {
+        uref = ref(users, user?.uid);
+    }
+    const router = useRouter();
+    const toast = useToast();
+    const [group, setGroup] = useState(_.cloneDeep(props.group));
+    const [edit, setEdit] = useState(false);
+    function success() {
+        toast.closeAll();
+        toast({
+            title: "Group saved",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+        });
+        lastGroup = _.cloneDeep(group);
+        setEdit(false);
+    }
+    function failure(element: Element) {
+        element.setAttribute("isLoading", "false");
+        toast({
+            title: "Error saving Group",
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+        });
+    }
+    function saveClick(e: MouseEvent<HTMLButtonElement>) {
         (e.target as Element).setAttribute("isLoading", "true");
-        if (!!props.groupID){
-          update(groups, props.groupID, group).then(() => success(), (error) => failure(e.target as Element));
-          return;
+        if (!!props.groupID) {
+            update(groups, props.groupID, group).then(
+                () => success(),
+                (error) => failure(e.target as Element)
+            );
+            return;
         }
         group.createdAt = firebase.firestore.Timestamp.now();
         group.owners = [uref as Ref<User>];
         add(groups, group).then(
-          (groupref) => {
-            toast.closeAll();
-            router.push("/group/"+groupref.id);
-          }, (error) => failure(e.target as Element)
+            (groupref) => {
+                toast.closeAll();
+                router.push("/group/" + groupref.id);
+            },
+            (error) => failure(e.target as Element)
         );
     }
     function cancelClick() {
