@@ -20,6 +20,7 @@ interface Props {
 }
 
 const MapMarker = ({ popup }: Props) => {
+    // takes in a popup and will create a map maker, when clicked on will show the popup
     return (
         <Popover>
             <PopoverTrigger>
