@@ -47,6 +47,7 @@ const TopNav = (props: Props) => {
             paddingY="6px"
             paddingX="40px"
             color="pureWhite"
+            zIndex={2}
         >
             <LinkBox>
                 <LinkOverlay href="/">
@@ -79,8 +80,8 @@ const TopNav = (props: Props) => {
                     <Link href="/network">
                         <a className={headerStyle}>Network</a>
                     </Link>
-                    <Link href="/collaborate">
-                        <a className={headerStyle}>Collaborate</a>
+                    <Link href="/map">
+                        <a className={headerStyle}>Map</a>
                     </Link>
                     <Menu colorScheme="blue">
                         <MenuButton
