@@ -98,9 +98,9 @@ const TopNav = (props: Props) => {
                             <MenuGroup title={user.displayName ?? ""} />
                             <MenuGroup title={user.email ?? ""} />
                             <MenuDivider />
-                            <MenuItem>
-                                <Link href="/userSettings">Settings</Link>
-                            </MenuItem>
+                            <Link href="/userSettings">
+                                <MenuItem>Settings</MenuItem>
+                            </Link>
                             <MenuItem onClick={logout}>Log out</MenuItem>
                         </MenuList>
                     </Menu>
