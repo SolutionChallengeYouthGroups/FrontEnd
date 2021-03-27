@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/layout";
-import { Box } from "@chakra-ui/react";
+import { Box, Icon } from "@chakra-ui/react";
 import { useAll } from "@typesaurus/react";
 import GoogleMapReact from "google-map-react";
 import React, { useEffect, useState } from "react";
@@ -7,6 +7,7 @@ import GroupCard from "../components/GroupCard";
 import MapMarker from "../components/map/MapMarker";
 import TopNav from "../components/TopNav";
 import { groups } from "../firestoreCollections";
+import { BiCurrentLocation } from "react-icons/bi";
 
 interface Props {}
 
@@ -21,8 +22,8 @@ const map = (props: Props) => {
     if (loading || error || !allGroups) {
         allGroups = [];
     }
-    useEffect(() => {
-        // onload get the location of the user, using the browser location
+
+    const centerOnCurrentLocation = () => {
         // set the map to centre on your current location
         navigator.geolocation.getCurrentPosition(({ coords }) => {
             setMapCenter({
@@ -30,7 +31,7 @@ const map = (props: Props) => {
                 lng: coords.longitude,
             });
         });
-    }, []);
+    };
     return (
         <Flex
             height="100vh"
@@ -66,6 +67,18 @@ const map = (props: Props) => {
                         }
                     })}
                 </GoogleMapReact>
+                <Icon
+                    as={BiCurrentLocation}
+                    color="main"
+                    position="absolute"
+                    left="20px"
+                    bottom="30px"
+                    zIndex="5"
+                    height="40px"
+                    w="auto"
+                    _hover={{ cursor: "pointer", color: "mainDark" }}
+                    onClick={() => centerOnCurrentLocation()}
+                />
             </Flex>
         </Flex>
     );

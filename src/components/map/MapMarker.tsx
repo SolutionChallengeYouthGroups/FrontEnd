@@ -27,9 +27,10 @@ const MapMarker = ({ popup }: Props) => {
                 <Icon
                     as={FaMapMarker}
                     color="main"
-                    w="35px"
-                    h="35px"
-                    _hover={{ cursor: "pointer" }}
+                    h="34px"
+                    w="auto"
+                    _hover={{ cursor: "pointer", color: "mainDark" }}
+                    marginTop="-17px"
                 />
             </PopoverTrigger>
             <PopoverContent w="300px">
