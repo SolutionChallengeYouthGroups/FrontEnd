@@ -51,7 +51,9 @@ const map = (props: Props) => {
                 >
                     {allGroups.map((group) => {
                         if (group.data.location) {
-                            let location = GeoPointLocation.fromGeoPoint(group.data.location);
+                            let location = GeoPointLocation.fromGeoPoint(
+                                group.data.location
+                            );
                             return (
                                 <MapMarker
                                     // @ts-ignore
