@@ -3,7 +3,8 @@ import React from "react";
 import { Group } from "../firestoreTypes";
 import { getGroupAvatarURL } from "../storageHelpers";
 import { useRouter } from "next/router";
-import { convertAgeRange } from "../stringConverters"
+import { convertAgeRange } from "../stringConverters";
+import { groupCategoryColorMapping } from "../typeMappings";
 
 interface Props {
     group: Group;
@@ -36,7 +37,6 @@ const GroupCard = ({ group, id }: Props) => {
                 router.push("./group/" + id);
             }}
             textColor="black"
-            my="5px"
         >
             <Image
                 src={getGroupAvatarURL(id)}
@@ -53,8 +53,12 @@ const GroupCard = ({ group, id }: Props) => {
                 px="16px"
                 py="10px"
             >
-                <Text textColor="gray.700" flex="auto" noOfLines={1}>{group.description}</Text>
-                <Heading>{group.name}</Heading>
+                <Text textColor="gray.700" flex="auto" noOfLines={1}>
+                    {group.description}
+                </Text>
+                <Heading fontSize="1.8rem" noOfLines={1}>
+                    {group.name}
+                </Heading>
             </Flex>
             <Flex
                 flexDir="row"
@@ -74,8 +78,10 @@ const GroupCard = ({ group, id }: Props) => {
                     <Badge
                         borderRadius="full"
                         px="2"
-                        backgroundColor="main"
-                        textColor="pureWhite"
+                        backgroundColor={groupCategoryColorMapping.get(
+                            group.category
+                        )}
+                        textColor="black"
                     >
                         {group.category}
                     </Badge>

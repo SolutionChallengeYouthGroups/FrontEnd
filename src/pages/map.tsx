@@ -1,5 +1,5 @@
-import { Flex } from "@chakra-ui/layout";
-import { Box, Icon, Portal } from "@chakra-ui/react";
+import { Flex, HStack } from "@chakra-ui/layout";
+import { Text, Switch, Icon, Portal } from "@chakra-ui/react";
 import { useAll } from "@typesaurus/react";
 import GoogleMapReact from "google-map-react";
 import React, { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import TopNav from "../components/TopNav";
 import { groups } from "../firestoreCollections";
 import { GeoPointLocation } from "../firestoreTypes";
 import { BiCurrentLocation } from "react-icons/bi";
+import { groupCategoryColorMapping } from "../typeMappings";
 
 interface Props {}
 
@@ -20,6 +21,7 @@ const map = (props: Props) => {
     });
     // get all the groups to create the markers on the map
     let [allGroups, { loading, error }] = useAll(groups);
+    let [isColored, setIsColored] = useState(true);
     if (loading || error || !allGroups) {
         allGroups = [];
     }
@@ -58,9 +60,7 @@ const map = (props: Props) => {
                             );
                             return (
                                 <MapMarker
-                                    // @ts-ignore
                                     lat={location.lat}
-                                    // @ts-ignore
                                     lng={location.lon}
                                     popup={
                                         <GroupCard
@@ -68,11 +68,34 @@ const map = (props: Props) => {
                                             id={group.ref.id}
                                         />
                                     }
+                                    color={
+                                        isColored
+                                            ? groupCategoryColorMapping.get(
+                                                  group.data.category
+                                              )
+                                            : "main"
+                                    }
                                 />
                             );
                         }
                     })}
                 </GoogleMapReact>
+                <HStack
+                    bg="white"
+                    position="absolute"
+                    right="60px"
+                    bottom="25px"
+                    zIndex="5"
+                    padding="5px"
+                    outline="1px solid black"
+                >
+                    <Text>Colour By Category</Text>
+                    <Switch
+                        colorScheme="green"
+                        isChecked={isColored}
+                        onChange={(e) => setIsColored(e.target.checked)}
+                    />
+                </HStack>
                 <Icon
                     as={BiCurrentLocation}
                     color="main"
