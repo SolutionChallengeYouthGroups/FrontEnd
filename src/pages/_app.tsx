@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         justifyContent="flex-start"
                         alignContent="flex-start"
                         minH="100vh"
-                        w="100vw"
+                        w="100%"
                     >
                         <TopNav />
                         <Component {...pageProps} />

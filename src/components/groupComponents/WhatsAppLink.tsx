@@ -32,12 +32,12 @@ const WhatsAppLink = ({ links, edit, ...rest }: Props) => {
         );
     }
     // removes chars that are not friendly
-    let newNumber = links.whatsapp.replace(/\+0*|\-|\(|\)/g, "");
-    if (isMobilePhone(newNumber)) {
+    let newNumber = links.whatsapp.replace(/\+0*|\D/g, "");
+    if (isMobilePhone("+" + newNumber, undefined, { strictMode: true })) {
         let link = "https://wa.me/" + newNumber;
         return (
             <LinkWithIcon
-                text={"+" + newNumber}
+                text={links.whatsapp}
                 icon={FaWhatsapp}
                 link={link}
                 {...rest}

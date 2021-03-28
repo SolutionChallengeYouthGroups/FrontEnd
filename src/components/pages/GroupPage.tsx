@@ -156,7 +156,7 @@ const GroupPage = (props: Props) => {
     }, []);
     const beforeChanges = lastGroup || props.group;
     return (
-        <VStack height="100vh" align="center" justifyContent="flex-start">
+        <VStack flexGrow={2} align="center" justifyContent="flex-start">
             <Portal>
                 <Flex
                     w="100%"
