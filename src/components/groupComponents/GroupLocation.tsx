@@ -77,7 +77,16 @@ const GroupLocation = ({ group, edit, originalLocation }: Props) => {
             defaultZoom={14}
         >
             <MapMarker
-                popup={<Text fontWeight="semibold">{group.name}</Text>}
+                popup={
+                    <Text
+                        padding="8px"
+                        bg="white"
+                        borderRadius="10px"
+                        fontWeight="semibold"
+                    >
+                        {group.name}
+                    </Text>
+                }
                 lat={location.lat}
                 lng={location.lon}
             />

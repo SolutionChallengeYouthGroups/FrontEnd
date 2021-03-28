@@ -15,6 +15,7 @@ const GroupCard = ({ group, id }: Props) => {
     const router = useRouter();
     return (
         <Flex
+            bg="white"
             direction="column"
             borderBottom="8px solid"
             borderColor="main"
