@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/layout";
-import { Box, Icon } from "@chakra-ui/react";
+import { Box, Icon, Portal } from "@chakra-ui/react";
 import { useAll } from "@typesaurus/react";
 import GoogleMapReact from "google-map-react";
 import React, { useEffect, useState } from "react";
@@ -40,7 +40,9 @@ const map = (props: Props) => {
             flexDir="column"
             justifyContent="start"
         >
-            <TopNav />
+            <Portal>
+                <TopNav />
+            </Portal>
             <Flex height="100%" width="100vw">
                 <GoogleMapReact
                     bootstrapURLKeys={{
@@ -51,7 +53,9 @@ const map = (props: Props) => {
                 >
                     {allGroups.map((group) => {
                         if (group.data.location) {
-                            let location = GeoPointLocation.fromGeoPoint(group.data.location);
+                            let location = GeoPointLocation.fromGeoPoint(
+                                group.data.location
+                            );
                             return (
                                 <MapMarker
                                     // @ts-ignore

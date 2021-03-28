@@ -9,6 +9,7 @@ import {
     MenuDivider,
     MenuGroup,
     Icon,
+    Portal,
     LinkBox,
     LinkOverlay,
 } from "@chakra-ui/react";
@@ -49,7 +50,6 @@ const TopNav = (props: Props) => {
             paddingY="6px"
             paddingX="40px"
             color="pureWhite"
-            zIndex={2}
         >
             <LinkBox>
                 <LinkOverlay href="/">
@@ -59,29 +59,28 @@ const TopNav = (props: Props) => {
             {user ? ( // If user is logged in (defined) then display the fragement before :
                 <>
                     <Menu colorScheme="blue">
-                        <MenuButton
-                            className={headerStyle}
-                            as="a"
-                        >
+                        <MenuButton className={headerStyle} as="a">
                             Groups
                         </MenuButton>
-                        <MenuList textColor="black">
-                            <Link href="/group/create">
-                                <MenuItem icon={<AddIcon />}>
-                                    <a>Create Group</a>
-                                </MenuItem>
-                            </Link>
-                            <Link href="/group/manage">
-                                <MenuItem icon={<SettingsIcon />}>
-                                    Manage Groups
-                                </MenuItem>
-                            </Link>
-                            <Link href="/map">
-                                <MenuItem icon={<Icon as={FiMap}/>}>
-                                    Map
-                                </MenuItem>
-                            </Link>
-                        </MenuList>
+                        <Portal>
+                            <MenuList textColor="black">
+                                <Link href="/group/create">
+                                    <MenuItem icon={<AddIcon />}>
+                                        <a>Create Group</a>
+                                    </MenuItem>
+                                </Link>
+                                <Link href="/group/manage">
+                                    <MenuItem icon={<SettingsIcon />}>
+                                        Manage Groups
+                                    </MenuItem>
+                                </Link>
+                                <Link href="/map">
+                                    <MenuItem icon={<Icon as={FiMap} />}>
+                                        Map
+                                    </MenuItem>
+                                </Link>
+                            </MenuList>
+                        </Portal>
                     </Menu>
                     <Link href="/network">
                         <a className={headerStyle}>Network</a>
@@ -93,6 +92,7 @@ const TopNav = (props: Props) => {
                         <MenuButton
                             transitionProperty="transform"
                             transitionDuration="0.5s"
+                            style={{ backgroundColor: "transparent" }}
                             _hover={{
                                 cursor: "pointer",
                                 transform: "scale(1.1)",
