@@ -7,9 +7,8 @@ import TopNavContents from "./TopNavContents";
 import firebase from "../firebase";
 import { useEffect, useState } from "react";
 
-interface Props {}
 
-const TopNav = (props: Props) => {
+const TopNav = () => {
     // true: user still loading, false otherwise
     // This dictates whether TopNavContents should be returned or not
     const [loading, setLoading] = useState(true);
