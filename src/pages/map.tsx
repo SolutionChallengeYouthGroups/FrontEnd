@@ -10,6 +10,7 @@ import { groups } from "../firestoreCollections";
 import { GeoPointLocation } from "../firestoreTypes";
 import { BiCurrentLocation } from "react-icons/bi";
 import { groupCategoryColorMapping } from "../typeMappings";
+import MapGroupCard from "../components/map/MapGroupCard";
 
 interface Props {}
 
@@ -62,7 +63,7 @@ const map = (props: Props) => {
                                     lat={location.lat}
                                     lng={location.lon}
                                     popup={
-                                        <GroupCard
+                                        <MapGroupCard
                                             group={group.data}
                                             id={group.ref.id}
                                         />
