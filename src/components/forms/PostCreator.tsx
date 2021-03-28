@@ -45,17 +45,20 @@ const PostCreator = (props: Props) => {
         if (!userRef) {
             return;
         }
+        let currentTime = firebase.firestore.Timestamp.now();
+        console.log(currentTime);
         let newPost = await add(posts, {
             author: userRef,
             content: post.content,
             title: post.title,
-            createdAt: firebase.firestore.Timestamp.now(),
+            createdAt: currentTime,
         });
         if (post.image) {
             uploadPost(post.image, newPost.id);
         }
+        // reset the post after upload:
+        setPost({ title: "", content: "" });
     };
-    console.log(post);
 
     const handleChange = (e: any) => {
         setPost({
@@ -69,7 +72,6 @@ const PostCreator = (props: Props) => {
             justifyContent="space-around"
             alignItems="flex-start"
             w="100%"
-            paddingX="40px"
             paddingY="10px"
             _after={{
                 content: `""`,
@@ -88,7 +90,7 @@ const PostCreator = (props: Props) => {
             <Textarea
                 placeholder="Write new post"
                 w="100%"
-                resize="none"
+                resize="vertical"
                 name="content"
                 onChange={handleChange}
             />
@@ -107,14 +109,6 @@ const PostCreator = (props: Props) => {
                     }}
                     onChange={handleImageUpload}
                 />
-                {/* <Input
-                    type="file"
-                    hidden={true}
-                    ref={(input) => {
-                        fileInput = input;
-                    }}
-                    onChange={handleImageUpload}
-                /> */}
                 <Icon
                     as={AiFillFileImage}
                     color="main"

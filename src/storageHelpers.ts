@@ -35,3 +35,7 @@ export function getCurrentUserRef(): Ref<User> | undefined {
         return ref(users, user.uid);
     }
 }
+
+export function timestampToDate(oldTimestamp:firebase.firestore.Timestamp):Date{
+    return new firebase.firestore.Timestamp(oldTimestamp.seconds,oldTimestamp.nanoseconds).toDate();
+}

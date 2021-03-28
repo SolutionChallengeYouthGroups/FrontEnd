@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FaMapMarker } from "react-icons/fa";
-import GroupCard from "../GroupCard";
+import GroupCard from "../cards/GroupCard";
 
 interface Props extends IconProps{
     lat: number;

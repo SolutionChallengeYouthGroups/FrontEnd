@@ -3,7 +3,7 @@ import firestore from "../../firebase";
 
 // ChakraUI
 import { Grid } from "@chakra-ui/react";
-import GroupCard from "../../components/GroupCard";
+import GroupCard from "../../components/cards/GroupCard";
 
 import { Group } from "../../firestoreTypes";
 import { collection, where } from "typesaurus";
@@ -41,24 +41,22 @@ const Results = (props: Props) => {
                 w="90%"
                 templateColumns="repeat(auto-fill,minmax(350px,1fr))"
                 templateRows="repeat(auto-fill,minmax(250px,1fr))"
-                >
-                {searchTerm != "" ? (
-                    results?.map((group) => (
-                        <GroupCard
-                            group={group.data}
-                            id={group.ref.id}
-                            key={group.data.name}
-                        />
-                    ))
-                ) : (
-                    allGroups.map((group) => (
-                        <GroupCard
-                            group={group.data}
-                            id={group.ref.id}
-                            key={group.data.name}
-                        />
-                    ))
-                )}
+            >
+                {searchTerm != ""
+                    ? results?.map((group) => (
+                          <GroupCard
+                              group={group.data}
+                              id={group.ref.id}
+                              key={group.data.name}
+                          />
+                      ))
+                    : allGroups.map((group) => (
+                          <GroupCard
+                              group={group.data}
+                              id={group.ref.id}
+                              key={group.data.name}
+                          />
+                      ))}
             </Grid>
         </>
     );
