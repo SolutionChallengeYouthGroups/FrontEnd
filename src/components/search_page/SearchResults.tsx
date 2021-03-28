@@ -36,11 +36,10 @@ const Results = (props: Props) => {
     return (
         <>
             <Grid
-                alignContent="center"
                 gap="15px"
                 w="90%"
-                templateColumns="repeat(auto-fill,minmax(350px,1fr))"
-                templateRows="repeat(auto-fill,minmax(250px,1fr))"
+                justifyContent="center"
+                templateColumns="repeat(auto-fit, minmax(400px,max-content))"
                 >
                 {searchTerm != "" ? (
                     results?.map((group) => (
