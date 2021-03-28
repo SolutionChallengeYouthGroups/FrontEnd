@@ -3,7 +3,7 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React from "react";
 import { Ref } from "typesaurus";
-import { User } from "../firestoreTypes";
+import { User } from "../../firestoreTypes";
 
 interface Props {
   userRef: Ref<User>;

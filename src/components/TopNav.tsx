@@ -1,40 +1,43 @@
-import {
-    Button,
-    Flex,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    Spacer,
-    MenuDivider,
-    MenuGroup,
-    Icon,
-    Portal,
-    LinkBox,
-    LinkOverlay,
-} from "@chakra-ui/react";
-import { AddIcon, SettingsIcon, SearchIcon } from "@chakra-ui/icons";
-import Link from "next/link";
-import React, { useState } from "react";
+// UI + Components
+import { Flex, LinkBox, LinkOverlay } from "@chakra-ui/react";
 import Logo from "../media/GlinkLogo";
-import { FiUser, FiMap } from "react-icons/fi";
-import firebase from "../firebase";
+import TopNavContents from "./TopNavContents";
 
-import styles from "./componentStyles.module.css";
-import { useRouter } from "next/router";
+// Firebase, React
+import firebase from "../firebase";
+import { useEffect, useState } from "react";
 
 interface Props {}
 
 const TopNav = (props: Props) => {
-    // const { user, username, email } = useContext(UserContext);
-    const user = firebase.auth().currentUser;
-    const router = useRouter();
-    const path = router.asPath;
-    const logout = () => {
-        firebase.auth().signOut();
-    };
+    // true: user still loading, false otherwise
+    // This dictates whether TopNavContents should be returned or not
+    const [loading, setLoading] = useState(true);
+    // user is loaded so we can just get the currentUser.
+    const [user, setUser] = useState(() => {
+        const usr = firebase.auth().currentUser;
+        return usr;
+    });
 
-    const headerStyle = styles.underlineLinkHover + " " + styles.largeFont;
+    // hasMounted is a boolean which is only true when components have mounted
+    const [hasMounted, setHasMounted] = useState(false);
+
+    // Because useEffect is only called when components are mounted, when there is
+    // a change we can setHasMounted to true.
+    useEffect(() => {
+        setHasMounted(true);
+        // On AuthStateChanged only changes when user is either logged in or out not loading.
+        firebase.auth().onAuthStateChanged((user) => {
+            setUser(user); // Since we know user has been loaded we can call setUser
+            setLoading(false); // this is called when we know user has "loaded"
+        });
+    }, []);
+
+    // If our components have not mounted return nothing so the DOM fits React's expectations
+    if (!hasMounted) {
+        return null;
+    }
+
     // top navbar of the home page
     return (
         <Flex
@@ -56,75 +59,7 @@ const TopNav = (props: Props) => {
                     <Logo />
                 </LinkOverlay>
             </LinkBox>
-            {user ? ( // If user is logged in (defined) then display the fragement before :
-                <>
-                    <Menu colorScheme="blue">
-                        <MenuButton className={headerStyle} as="a">
-                            Groups
-                        </MenuButton>
-                        <Portal>
-                            <MenuList textColor="black">
-                                <Link href="/group/create">
-                                    <MenuItem icon={<AddIcon />}>
-                                        <a>Create Group</a>
-                                    </MenuItem>
-                                </Link>
-                                <Link href="/group/manage">
-                                    <MenuItem icon={<SettingsIcon />}>
-                                        Manage Groups
-                                    </MenuItem>
-                                </Link>
-                                <Link href="/map">
-                                    <MenuItem icon={<Icon as={FiMap} />}>
-                                        Map
-                                    </MenuItem>
-                                </Link>
-                            </MenuList>
-                        </Portal>
-                    </Menu>
-                    <Link href="/network">
-                        <a className={headerStyle}>Network</a>
-                    </Link>
-                    <Link href="/">
-                        <a className={headerStyle}>Collaborate</a>
-                    </Link>
-                    <Menu colorScheme="blue">
-                        <MenuButton
-                            transitionProperty="transform"
-                            transitionDuration="0.5s"
-                            style={{ backgroundColor: "transparent" }}
-                            _hover={{
-                                cursor: "pointer",
-                                transform: "scale(1.1)",
-                            }}
-                        >
-                            <Icon as={FiUser} h="40px" w="auto" />
-                        </MenuButton>
-                        <MenuList textColor="black">
-                            <MenuGroup title={user.displayName ?? ""} />
-                            <MenuGroup title={user.email ?? ""} />
-                            <MenuDivider />
-                            <Link href="/userSettings">
-                                <MenuItem>Settings</MenuItem>
-                            </Link>
-                            <MenuItem onClick={logout}>Log out</MenuItem>
-                        </MenuList>
-                    </Menu>
-                </>
-            ) : (
-                // Else display the fragment below (Sign Up and Login)
-                <>
-                    <Spacer />
-                    <Link href={"/login?next=" + path}>
-                        <Button colorScheme="whiteAlpha">Login</Button>
-                    </Link>
-                    <Link href={"/signup?next=" + path}>
-                        <Button marginLeft="30px" colorScheme="whiteAlpha">
-                            Sign Up
-                        </Button>
-                    </Link>
-                </>
-            )}
+            {!loading && <TopNavContents user={user} />}
         </Flex>
     );
 };
