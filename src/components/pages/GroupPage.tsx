@@ -42,6 +42,7 @@ import { useRouter } from "next/router";
 
 import { useContext } from "react";
 import { UserContext } from "../../lib/context";
+import GroupAvatar from "../groupComponents/GroupAvatar";
 
 interface Props {
     group: Group;
@@ -170,16 +171,7 @@ const GroupPage = (props: Props) => {
                     background="white"
                 >
                     {/* Top bar with basic information */}
-                    <Avatar
-                        src={
-                            !props.groupID
-                                ? ""
-                                : getGroupAvatarURL(props.groupID)
-                        }
-                        width="100px"
-                        height="100px"
-                        margin="20px"
-                    />
+                    <GroupAvatar groupID={props.groupID}/>
                     <VStack flex="1 1 0" minWidth="0">
                         <GroupNameInput group={group} edit={edit} />
                         <HStack
