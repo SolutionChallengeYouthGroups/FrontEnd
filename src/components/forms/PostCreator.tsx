@@ -8,6 +8,7 @@ import {
     Spacer,
     Stack,
     Textarea,
+    Heading,
 } from "@chakra-ui/react";
 import React, { createRef, MouseEventHandler, useRef, useState } from "react";
 import { AiFillFileImage } from "react-icons/ai";
@@ -80,6 +81,7 @@ const PostCreator = (props: Props) => {
                 w: "100%",
             }}
         >
+            <Heading size="medium">Create new post</Heading>
             <Input
                 placeholder="Title"
                 w="100%"
@@ -88,7 +90,7 @@ const PostCreator = (props: Props) => {
                 onChange={handleChange}
             />
             <Textarea
-                placeholder="Write new post"
+                placeholder="Content..."
                 w="100%"
                 resize="vertical"
                 name="content"
