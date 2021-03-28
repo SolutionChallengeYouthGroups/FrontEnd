@@ -82,7 +82,7 @@ const GroupCard = ({ group, id }: Props) => {
                         backgroundColor={groupCategoryColorMapping.get(
                             group.category
                         )}
-                        textColor="black"
+                        textColor="pureWhite"
                     >
                         {group.category}
                     </Badge>

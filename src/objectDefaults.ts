@@ -42,7 +42,7 @@ export function defaultGroup(): Group {
     return {
         name: "New Group",
         description: "",
-        category: "",
+        category: "other",
         owners: [],
         createdAt: firebase.firestore.Timestamp.now(),
         links: defaultSocialLinks(),

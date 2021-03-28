@@ -37,11 +37,11 @@ export const GroupCategories = [
     "educational",
     "gaming",
     "faith-based",
-    "other",
     "political",
     "physical",
     "scouting",
     "social",
+    "other",
 ]; // create a list for looping
 
 interface Group {
