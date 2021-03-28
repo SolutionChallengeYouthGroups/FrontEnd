@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 // NextJS Stuff
 
 // CSS stuff
@@ -10,12 +9,6 @@ import { Grid, Text, VStack } from "@chakra-ui/react";
 import TopNav from "../components/TopNav";
 import SearchBox from "../components/search_page/SearchBox"
 import Results from "../components/search_page/SearchResults"
-
-//firebase
-import { useAll } from "@typesaurus/react";
-import { groups } from "../firestoreCollections";
-import Link from "next/link";
-import GroupCard from "../components/GroupCard";
 
 const Index = () => {
     // Using useState, get input value from SearchBox and pass the new value of
