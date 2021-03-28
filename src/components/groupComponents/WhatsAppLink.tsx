@@ -3,9 +3,9 @@ import React, { HTMLProps, useState } from "react";
 import isMobilePhone from "validator/lib/isMobilePhone";
 import LinkWithIcon from "../LinkWithIcon";
 import { SocialLinks } from "../../firestoreTypes";
-import { HStack, Icon, Input } from "@chakra-ui/react";
+import { Box, BoxProps, HStack, Icon, Input } from "@chakra-ui/react";
 
-interface Props extends HTMLProps<React.ReactFragment> {
+interface Props extends BoxProps {
     links: SocialLinks;
     edit?: boolean;
 }
@@ -18,7 +18,7 @@ const WhatsAppLink = ({ links, edit, ...rest }: Props) => {
     }
     if (edit === true) {
         return (
-            <React.Fragment {...rest}>
+            <Box {...rest}>
                 <HStack>
                     <Icon as={FaWhatsapp} />
                     <Input
@@ -28,7 +28,7 @@ const WhatsAppLink = ({ links, edit, ...rest }: Props) => {
                         placeholder="WhatsApp number"
                     />
                 </HStack>
-            </React.Fragment>
+            </Box>
         );
     }
     // removes chars that are not friendly
@@ -44,7 +44,7 @@ const WhatsAppLink = ({ links, edit, ...rest }: Props) => {
             />
         );
     }
-    return <React.Fragment {...rest} />;
+    return <></>;
 };
 
 export default WhatsAppLink;
