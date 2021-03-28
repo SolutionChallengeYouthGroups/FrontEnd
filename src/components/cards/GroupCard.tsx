@@ -1,9 +1,9 @@
 import { Heading, Text, Flex, Image, Badge } from "@chakra-ui/react";
 import React from "react";
-import { Group } from "../firestoreTypes";
-import { getGroupAvatarURL } from "../storageHelpers";
+import { Group } from "../../firestoreTypes";
+import { getGroupAvatarURL } from "../../storageHelpers";
 import { useRouter } from "next/router";
-import { convertAgeRange } from "../stringConverters"
+import { convertAgeRange } from "../../stringConverters"
 
 interface Props {
     group: Group;

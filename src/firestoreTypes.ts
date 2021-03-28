@@ -103,7 +103,7 @@ interface Post {
     author: Ref<User>;
     createdAt: Timestamp;
     content: string;
-    comments: CollectionReference;
+    comments?: CollectionReference;
 }
 interface Comment {
     author: Ref<User>; // reference to author

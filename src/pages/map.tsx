@@ -3,7 +3,7 @@ import { Box, Icon } from "@chakra-ui/react";
 import { useAll } from "@typesaurus/react";
 import GoogleMapReact from "google-map-react";
 import React, { useEffect, useState } from "react";
-import GroupCard from "../components/GroupCard";
+import GroupCard from "../components/cards/GroupCard";
 import MapMarker from "../components/map/MapMarker";
 import TopNav from "../components/TopNav";
 import { groups } from "../firestoreCollections";
@@ -51,7 +51,9 @@ const map = (props: Props) => {
                 >
                     {allGroups.map((group) => {
                         if (group.data.location) {
-                            let location = GeoPointLocation.fromGeoPoint(group.data.location);
+                            let location = GeoPointLocation.fromGeoPoint(
+                                group.data.location
+                            );
                             return (
                                 <MapMarker
                                     // @ts-ignore

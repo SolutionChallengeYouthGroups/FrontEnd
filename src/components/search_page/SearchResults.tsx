@@ -3,7 +3,7 @@ import firestore from "../../firebase";
 
 // ChakraUI
 import { Grid } from "@chakra-ui/react";
-import GroupCard from "../../components/GroupCard";
+import GroupCard from "../../components/cards/GroupCard";
 
 import { Group } from "../../firestoreTypes";
 import { collection, where } from "typesaurus";
