@@ -19,8 +19,6 @@ import styles from "./componentStyles.module.css";
 import firebase from "../firebase";
 import { useRouter } from "next/router";
 
-
-
 interface Props {
     user: firebase.User | null
 }
@@ -34,6 +32,7 @@ const TopNavContents = (props: Props) => {
     
     const router = useRouter();
     const path = router.asPath;
+    // Nice animation for header
     const headerStyle = styles.underlineLinkHover + " " + styles.largeFont;
     const user = props.user
     return (
