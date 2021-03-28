@@ -1,16 +1,16 @@
 import { Icon } from "@chakra-ui/icons";
-import React, { Fragment, HTMLProps, useState } from "react";
+import React, { useState } from "react";
 import isURL from "validator/lib/isURL";
 import LinkWithIcon from "../LinkWithIcon";
-import { socialLinkMapping } from "../../iconMappings";
+import { socialLinkMapping } from "../../typeMappings";
 import { Host } from "../../helperTypes";
 import { getSocialPropFromHost, title } from "../../helperFunctions";
 import { SocialLinks } from "../../firestoreTypes";
 import _ from "lodash";
-import { HStack } from "@chakra-ui/layout";
+import { Box, BoxProps, HStack } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/react";
 
-interface Props extends HTMLProps<React.ReactFragment> {
+interface Props extends BoxProps {
     links: SocialLinks;
     edit?: boolean;
     expectedHost: Host;
@@ -33,7 +33,7 @@ const ValidatedLinkWithIcon = ({
     }
     if (edit === true) {
         return (
-            <Fragment {...rest}>
+            <Box {...rest}>
                 <HStack>
                     <Icon as={icon} />
                     <Input
@@ -43,7 +43,7 @@ const ValidatedLinkWithIcon = ({
                         placeholder={title(prop)}
                     />
                 </HStack>
-            </Fragment>
+            </Box>
         );
     }
     // depending on what link it is, render a different icon + text etc ...
@@ -52,7 +52,7 @@ const ValidatedLinkWithIcon = ({
         value = "https://" + value;
     }
     if (!isURL(value)) {
-        return <Fragment {...rest} />;
+        return <></>;
     }
     if (expectedHost === "none") {
         return (
@@ -60,14 +60,22 @@ const ValidatedLinkWithIcon = ({
                 text={value.replace(/https?:\/\//, "")}
                 icon={icon}
                 link={value}
+                {...rest}
             />
         );
     }
     // probably a better way of checking but this will do for the time being
     if (value.includes(expectedHost)) {
-        return <LinkWithIcon text={title(prop)} icon={icon} link={value} />;
+        return (
+            <LinkWithIcon
+                text={title(prop)}
+                icon={icon}
+                link={value}
+                {...rest}
+            />
+        );
     }
-    return <Fragment {...rest} />;
+    return <></>;
 };
 
 export default ValidatedLinkWithIcon;
