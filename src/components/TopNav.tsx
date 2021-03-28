@@ -16,7 +16,7 @@ import { AddIcon, SettingsIcon, SearchIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import React, { useState } from "react";
 import Logo from "../media/GlinkLogo";
-import { FiUser } from "react-icons/fi";
+import { FiUser, FiMap } from "react-icons/fi";
 import firebase from "../firebase";
 
 import styles from "./componentStyles.module.css";
@@ -59,14 +59,13 @@ const TopNav = (props: Props) => {
             {user ? ( // If user is logged in (defined) then display the fragement before :
                 <>
                     <Menu colorScheme="blue">
-                        <MenuButton className={headerStyle} as="a" href="#">
+                        <MenuButton
+                            className={headerStyle}
+                            as="a"
+                        >
                             Groups
                         </MenuButton>
                         <MenuList textColor="black">
-                            <MenuItem icon={<SearchIcon />}>
-                                <Link href="/search">Search for a Group</Link>
-                            </MenuItem>
-                            <MenuDivider />
                             <Link href="/group/create">
                                 <MenuItem icon={<AddIcon />}>
                                     <a>Create Group</a>
@@ -77,13 +76,18 @@ const TopNav = (props: Props) => {
                                     Manage Groups
                                 </MenuItem>
                             </Link>
+                            <Link href="/map">
+                                <MenuItem icon={<Icon as={FiMap}/>}>
+                                    Map
+                                </MenuItem>
+                            </Link>
                         </MenuList>
                     </Menu>
                     <Link href="/network">
                         <a className={headerStyle}>Network</a>
                     </Link>
-                    <Link href="/map">
-                        <a className={headerStyle}>Map</a>
+                    <Link href="/">
+                        <a className={headerStyle}>Collaborate</a>
                     </Link>
                     <Menu colorScheme="blue">
                         <MenuButton
@@ -111,10 +115,10 @@ const TopNav = (props: Props) => {
                 // Else display the fragment below (Sign Up and Login)
                 <>
                     <Spacer />
-                    <Link href={"/login?next="+path}>
+                    <Link href={"/login?next=" + path}>
                         <Button colorScheme="whiteAlpha">Login</Button>
                     </Link>
-                    <Link href={"/signup?next="+path}>
+                    <Link href={"/signup?next=" + path}>
                         <Button marginLeft="30px" colorScheme="whiteAlpha">
                             Sign Up
                         </Button>

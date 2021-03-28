@@ -1,5 +1,12 @@
-import { FaTwitter, FaInstagram, FaFacebook, FaTheaterMasks, FaChess,
-         FaHandHoldingHeart, FaBalanceScale } from "react-icons/fa";
+import {
+    FaTwitter,
+    FaInstagram,
+    FaFacebook,
+    FaTheaterMasks,
+    FaChess,
+    FaHandHoldingHeart,
+    FaBalanceScale,
+} from "react-icons/fa";
 import { GoMortarBoard } from "react-icons/go";
 import { TiGroup } from "react-icons/ti";
 import { BiPulse } from "react-icons/bi";
