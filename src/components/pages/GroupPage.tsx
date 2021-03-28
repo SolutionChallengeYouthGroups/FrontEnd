@@ -42,7 +42,6 @@ import { useRouter } from "next/router";
 
 import { useContext } from "react";
 import { UserContext } from "../../lib/context";
-import TopNav from "../TopNav";
 
 interface Props {
     group: Group;
@@ -195,9 +194,6 @@ const GroupPage = (props: Props) => {
                     </VStack>
                     <SocialGrid group={group} edit={edit} />
                 </Flex>
-            </Portal>
-            <Portal>
-                <TopNav />
             </Portal>
             {props.group.owners.some((owner) => owner.id === uref?.id) ? (
                 <Portal>

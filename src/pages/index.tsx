@@ -7,8 +7,8 @@ import { Grid, Text, VStack } from "@chakra-ui/react";
 
 // Components
 import TopNav from "../components/TopNav";
-import SearchBox from "../components/search_page/SearchBox"
-import Results from "../components/search_page/SearchResults"
+import SearchBox from "../components/search_page/SearchBox";
+import Results from "../components/search_page/SearchResults";
 
 const Index = () => {
     // Using useState, get input value from SearchBox and pass the new value of
@@ -21,7 +21,6 @@ const Index = () => {
             justifyContent="flex-start"
             spacing="100"
         >
-            <TopNav />
             <VStack
                 width="100%"
                 maxW="90vw"
@@ -29,7 +28,7 @@ const Index = () => {
                 align="center"
             >
                 <SearchBox setSearch={setSearch} />
-                <Results search={search}/>
+                <Results search={search} />
             </VStack>
         </VStack>
     );

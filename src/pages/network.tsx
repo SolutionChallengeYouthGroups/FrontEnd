@@ -18,16 +18,14 @@ const network = (props: Props) => {
     }
     return (
         <Flex
-            paddingTop="16vh"
             flexDir="column"
             justifyContent="flex-start"
             alignItems="center"
-            paddingX="50px"
+            padding="50px"
             w="100%"
             maxW="800px"
             marginX="auto"
         >
-            <TopNav />
             <PostCreator />
             {allPosts.map((post) => (
                 <PostCard post={post.data} id={post.ref.id} key={post.ref.id} />

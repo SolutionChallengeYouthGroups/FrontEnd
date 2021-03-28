@@ -7,7 +7,6 @@ import TopNavContents from "./TopNavContents";
 import firebase from "../firebase";
 import { useEffect, useState } from "react";
 
-
 const TopNav = () => {
     // true: user still loading, false otherwise
     // This dictates whether TopNavContents should be returned or not
@@ -47,11 +46,12 @@ const TopNav = () => {
             wrap="wrap"
             w="100%"
             top="0px"
-            position="fixed"
+            position="sticky"
             backgroundColor="main"
             paddingY="6px"
             paddingX="40px"
             color="pureWhite"
+            zIndex={2}
         >
             <LinkBox>
                 <LinkOverlay href="/">
