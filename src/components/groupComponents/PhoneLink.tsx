@@ -31,12 +31,12 @@ const PhoneLink = ({ links, edit, ...rest }: Props) => {
             </Box>
         );
     }
-    let newNumber = links.phone.replace(/\+0*|\-|\(|\)/g, "");
+    let newNumber = links.phone.replace(/\+0*|\D/g, "");
     let link = "tel:" + newNumber;
-    if (isMobilePhone(newNumber)) {
+    if (isMobilePhone("+" + newNumber, undefined, { strictMode: true })) {
         return (
             <LinkWithIcon
-                text={"+" + newNumber}
+                text={links.phone}
                 icon={FaPhoneAlt}
                 link={link}
                 {...rest}

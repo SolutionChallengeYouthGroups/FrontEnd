@@ -46,6 +46,20 @@ const ValidatedLinkWithIcon = ({
             </Box>
         );
     }
+    if (expectedHost === "twitter.com" || expectedHost === "instagram.com") {
+        const validUName = value.match(/^[A-Za-z0-9_.]+$/);
+        if (validUName) {
+            const link = "https://" + expectedHost + "/" + value;
+            return (
+                <LinkWithIcon
+                    text={value.replace(/https?:\/\//, "")}
+                    icon={icon}
+                    link={link}
+                    {...rest}
+                />
+            );
+        }
+    }
     // depending on what link it is, render a different icon + text etc ...
     // E.g. a discord link would have a discord Icon Discord written next to it
     if (value.slice(0, 4) !== "http") {
