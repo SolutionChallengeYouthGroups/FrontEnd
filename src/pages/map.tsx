@@ -1,16 +1,25 @@
+// React:
+import React, { useState } from "react";
+
+// Chakra:
 import { Flex, HStack } from "@chakra-ui/layout";
-import { Text, Switch, Icon, Portal } from "@chakra-ui/react";
+import { Text, Switch, Icon } from "@chakra-ui/react";
+
+// firestore
 import { useAll } from "@typesaurus/react";
-import GoogleMapReact from "google-map-react";
-import React, { useEffect, useState } from "react";
-import GroupCard from "../components/cards/GroupCard";
 import MapMarker from "../components/map/MapMarker";
-import TopNav from "../components/TopNav";
 import { groups } from "../firestoreCollections";
+
+// map:
+import GoogleMapReact from "google-map-react";
 import { GeoPointLocation } from "../firestoreTypes";
+
+// componenets
+import InlineGroupCard from "../components/cards/InlineGroupCard";
 import { BiCurrentLocation } from "react-icons/bi";
+
+// others:
 import { groupCategoryColorMapping } from "../typeMappings";
-import MapGroupCard from "../components/map/MapGroupCard";
 
 interface Props {}
 
@@ -63,7 +72,7 @@ const map = (props: Props) => {
                                     lat={location.lat}
                                     lng={location.lon}
                                     popup={
-                                        <MapGroupCard
+                                        <InlineGroupCard
                                             group={group.data}
                                             id={group.ref.id}
                                         />

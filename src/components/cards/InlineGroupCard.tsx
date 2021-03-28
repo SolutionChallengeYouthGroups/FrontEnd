@@ -18,7 +18,7 @@ interface Props {
     group: Group;
     id: string;
 }
-const MapGroupCard = ({ group, id }: Props) => {
+const InlineGroupCard = ({ group, id }: Props) => {
     const router = useRouter();
     return (
         <Flex
@@ -93,4 +93,4 @@ const MapGroupCard = ({ group, id }: Props) => {
     );
 };
 
-export default MapGroupCard;
+export default InlineGroupCard;
