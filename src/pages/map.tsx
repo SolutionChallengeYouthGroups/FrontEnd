@@ -37,14 +37,11 @@ const map = (props: Props) => {
     };
     return (
         <Flex
-            height="100vh"
             width="100vw"
             flexDir="column"
             justifyContent="start"
+            flexGrow={2}
         >
-            <Portal>
-                <TopNav />
-            </Portal>
             <Flex height="100%" width="100vw">
                 <GoogleMapReact
                     bootstrapURLKeys={{
@@ -52,6 +49,8 @@ const map = (props: Props) => {
                     }}
                     center={mapCenter}
                     defaultZoom={14}
+                    // @ts-ignore not sure why typescript is saying flexGrow is not a valid property
+                    style={{ flexGrow: 2 }}
                 >
                     {allGroups.map((group) => {
                         if (group.data.location) {

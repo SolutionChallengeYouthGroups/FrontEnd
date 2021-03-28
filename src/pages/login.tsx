@@ -14,7 +14,7 @@ const login = () => {
     const router = useRouter();
     const { next: next_query } = router.query;
     let next = "/";
-    if (typeof next_query === "string"){
+    if (typeof next_query === "string") {
         next = next_query;
     }
     firebase.auth().onAuthStateChanged((user) => {
@@ -49,7 +49,13 @@ const login = () => {
     };
 
     return (
-        <Flex w="100vw" h="100vh" justifyContent="center" alignItems="center">
+        <Flex
+            w="100vw"
+            h="100%"
+            justifyContent="center"
+            alignItems="center"
+            flexGrow={2}
+        >
             <Formik
                 initialValues={{
                     email: "",
