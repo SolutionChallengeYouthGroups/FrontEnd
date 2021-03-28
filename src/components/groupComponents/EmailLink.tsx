@@ -3,10 +3,11 @@ import isEmail from "validator/lib/isEmail";
 import LinkWithIcon from "../LinkWithIcon";
 import { EmailIcon, Icon } from "@chakra-ui/icons";
 import { SocialLinks } from "../../firestoreTypes";
-import { HStack } from "@chakra-ui/layout";
+import { BoxProps, HStack } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
+import { Box } from "@chakra-ui/react";
 
-interface Props extends HTMLProps<React.ReactFragment> {
+interface Props extends BoxProps {
     links: SocialLinks;
     edit?: boolean;
 }
@@ -19,7 +20,7 @@ const EmailLink = ({ links, edit, ...rest }: Props) => {
     }
     if (edit === true) {
         return (
-            <React.Fragment {...rest}>
+            <Box {...rest}>
                 <HStack>
                     <Icon as={EmailIcon} />
                     <Input
@@ -29,7 +30,7 @@ const EmailLink = ({ links, edit, ...rest }: Props) => {
                         placeholder="Email address"
                     />
                 </HStack>
-            </React.Fragment>
+            </Box>
         );
     }
     let link = "mailto:" + links.email;
@@ -43,7 +44,7 @@ const EmailLink = ({ links, edit, ...rest }: Props) => {
             />
         );
     }
-    return <React.Fragment {...rest} />;
+    return <></>;
 };
 
 export default EmailLink;

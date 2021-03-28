@@ -240,7 +240,7 @@ const GroupPage = (props: Props) => {
                         h="auto"
                         padding="0 0 7px 5px"
                         border="2px solid"
-                        borderColor="mainLight"
+                        borderColor="main"
                         borderRadius="8px"
                     >
                         <Text fontSize="1.5em" fontWeight="bold">

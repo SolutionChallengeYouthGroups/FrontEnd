@@ -32,16 +32,16 @@ type GroupCategory =
     | "other"
     | "";
 export const GroupCategories = [
-    "scouting",
-    "physical",
-    "educational",
-    "social",
     "artistic",
     "board games",
+    "educational",
     "gaming",
     "faith-based",
-    "political",
     "other",
+    "political",
+    "physical",
+    "scouting",
+    "social",
 ]; // create a list for looping
 
 interface Group {

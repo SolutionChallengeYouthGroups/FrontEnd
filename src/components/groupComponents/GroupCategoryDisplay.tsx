@@ -1,13 +1,16 @@
 import { GroupCategories, Group, GroupCategory } from "../../firestoreTypes";
 import styles from "../componentStyles.module.css";
 import TextWithIcon from "../TextWithIcon";
-import { groupCategoryMapping } from "../../iconMappings";
+import {
+    groupCategoryColorMapping,
+    groupCategoryMapping,
+} from "../../typeMappings";
 import { title } from "../../helperFunctions";
 import { HTMLProps } from "react";
-import { HStack, Icon, Select } from "@chakra-ui/react";
+import { Box, BoxProps, HStack, Icon, Select } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-interface Props extends HTMLProps<React.ReactFragment> {
+interface Props extends BoxProps {
     group: Group;
     edit?: boolean;
 }
@@ -19,25 +22,19 @@ const GroupCategoryDisplay = ({ group, edit, ...rest }: Props) => {
         setCategoryState(category);
     }
     if (group.category == "" && edit !== true) {
-        return <React.Fragment {...rest} />;
+        return <></>;
     }
-    if (edit !== undefined) {
+    if (!!edit) {
         return (
-            <React.Fragment {...rest}>
-                <TextWithIcon
-                    title="Group Category"
-                    className={styles.greytext}
-                    display={edit ? "none" : "flex"}
-                    text={title(group.category)}
-                    icon={groupCategoryMapping.get(group.category)}
-                />
-                <HStack display={edit ? "flex" : "none"}>
-                    {group.category == "" ? (
+            <Box {...rest}>
+                <HStack>
+                    {group.category == "" || group.category == "other" ? (
                         <></>
                     ) : (
                         <Icon as={groupCategoryMapping.get(group.category)} />
                     )}
                     <Select
+                        bg={groupCategoryColorMapping.get(group.category)}
                         value={group.category}
                         variant="outline"
                         placeholder="Group category"
@@ -52,18 +49,20 @@ const GroupCategoryDisplay = ({ group, edit, ...rest }: Props) => {
                         ))}
                     </Select>
                 </HStack>
-            </React.Fragment>
+            </Box>
         );
     }
     return (
-        <React.Fragment {...rest}>
-            <TextWithIcon
-                title="Group Category"
-                className={styles.greytext}
-                text={title(group.category)}
-                icon={groupCategoryMapping.get(group.category)}
-            />
-        </React.Fragment>
+        <TextWithIcon
+            title="Group Category"
+            text={title(group.category)}
+            icon={groupCategoryMapping.get(group.category)}
+            bg={groupCategoryColorMapping.get(group.category)}
+            padding="5px"
+            borderRadius="10px"
+            border="1.5px solid black"
+            {...rest}
+        />
     );
 };
 

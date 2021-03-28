@@ -27,11 +27,14 @@ import {
     IconButton,
     HStack,
     Link,
+    BoxProps,
+    Box,
+    LinkBox,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import EditableMeetingTime from "./EditableMeetingTime";
 
-interface Props extends HTMLProps<React.ReactFragment> {
+interface Props extends BoxProps {
     group: Group;
     edit?: boolean;
 }
@@ -50,14 +53,14 @@ const MeetingTimeDisplay = ({ group, edit, ...rest }: Props) => {
             <Popover placement="bottom">
                 <PopoverTrigger>
                     <Link className={styles.underlineLinkHover}>
-                        <React.Fragment {...rest}>
+                        <Box {...rest}>
                             <TextWithIcon
                                 className={styles.greytext}
                                 icon={FaUserClock}
                                 text="Edit Meeting Times"
                                 title="Meeting Times"
                             />
-                        </React.Fragment>
+                        </Box>
                     </Link>
                 </PopoverTrigger>
                 <PopoverContent>
@@ -104,26 +107,26 @@ const MeetingTimeDisplay = ({ group, edit, ...rest }: Props) => {
     }
     if (group.meetingTimes.length === 0) {
         return (
-            <React.Fragment {...rest}>
+            <Box {...rest}>
                 <TextWithIcon
                     title="Meeting Time"
                     className={styles.greytext}
                     text="No meeting times"
                     icon={FaUserClock}
                 />
-            </React.Fragment>
+            </Box>
         );
     }
     if (group.meetingTimes.length === 1) {
         return (
-            <React.Fragment {...rest}>
+            <Box {...rest}>
                 <TextWithIcon
                     title="Meeting Time"
                     className={styles.greytext}
                     text={convertMeetingTime(group.meetingTimes[0])}
                     icon={FaUserClock}
                 />
-            </React.Fragment>
+            </Box>
         );
     }
     const sorted: MeetingTime[][] = Array(7)
@@ -141,7 +144,7 @@ const MeetingTimeDisplay = ({ group, edit, ...rest }: Props) => {
     }); // efficiently sorts the MeetingTimes into bins by day, and then by start time
 
     return (
-        <React.Fragment {...rest}>
+        <Box {...rest}>
             <a
                 className={styles.greytext + " " + styles.underlineLinkHover}
                 onClick={onOpen}
@@ -217,7 +220,7 @@ const MeetingTimeDisplay = ({ group, edit, ...rest }: Props) => {
                     <ModalFooter />
                 </ModalContent>
             </Modal>
-        </React.Fragment>
+        </Box>
     );
 };
 

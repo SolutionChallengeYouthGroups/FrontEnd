@@ -1,11 +1,7 @@
 // UI + Components
-import {
-    Flex,
-    LinkBox,
-    LinkOverlay,
-} from "@chakra-ui/react";
+import { Flex, LinkBox, LinkOverlay } from "@chakra-ui/react";
 import Logo from "../media/GlinkLogo";
-import TopNavContents from "./TopNavContents"
+import TopNavContents from "./TopNavContents";
 
 // Firebase, React
 import firebase from "../firebase";
@@ -21,21 +17,21 @@ const TopNav = (props: Props) => {
     const [user, setUser] = useState(() => {
         const usr = firebase.auth().currentUser;
         return usr;
-    })
+    });
 
     // hasMounted is a boolean which is only true when components have mounted
     const [hasMounted, setHasMounted] = useState(false);
 
-    // Because useEffect is only called when components are mounted, when there is 
+    // Because useEffect is only called when components are mounted, when there is
     // a change we can setHasMounted to true.
     useEffect(() => {
         setHasMounted(true);
         // On AuthStateChanged only changes when user is either logged in or out not loading.
-        firebase.auth().onAuthStateChanged(user => {
-            setUser(user);     // Since we know user has been loaded we can call setUser
+        firebase.auth().onAuthStateChanged((user) => {
+            setUser(user); // Since we know user has been loaded we can call setUser
             setLoading(false); // this is called when we know user has "loaded"
-        })
-    }, [])
+        });
+    }, []);
 
     // If our components have not mounted return nothing so the DOM fits React's expectations
     if (!hasMounted) {
@@ -57,7 +53,6 @@ const TopNav = (props: Props) => {
             paddingY="6px"
             paddingX="40px"
             color="pureWhite"
-            zIndex={2}
         >
             <LinkBox>
                 <LinkOverlay href="/">
