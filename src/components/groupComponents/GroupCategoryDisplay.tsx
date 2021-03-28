@@ -35,15 +35,23 @@ const GroupCategoryDisplay = ({ group, edit, ...rest }: Props) => {
                     )}
                     <Select
                         bg={groupCategoryColorMapping.get(group.category)}
+                        textColor="pureWhite"
                         value={group.category}
                         variant="outline"
-                        placeholder="Group category"
                         onChange={(e) =>
                             setCategory(e.target.value as GroupCategory)
                         }
                     >
                         {GroupCategories.map((gc) => (
-                            <option key={gc} value={gc}>
+                            <option
+                                key={gc}
+                                value={gc}
+                                style={{
+                                    backgroundColor: groupCategoryColorMapping.get(
+                                        gc as GroupCategory
+                                    ),
+                                }}
+                            >
                                 {title(gc)}
                             </option>
                         ))}
@@ -56,11 +64,14 @@ const GroupCategoryDisplay = ({ group, edit, ...rest }: Props) => {
         <TextWithIcon
             title="Group Category"
             text={title(group.category)}
+            color="pureWhite"
             icon={groupCategoryMapping.get(group.category)}
+            iconColor="white"
             bg={groupCategoryColorMapping.get(group.category)}
             padding="5px"
             borderRadius="10px"
             border="1.5px solid black"
+            paddingX="8px"
             {...rest}
         />
     );

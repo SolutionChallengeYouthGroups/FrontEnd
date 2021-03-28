@@ -44,19 +44,18 @@ if (groupCategoryMapping.size !== GroupCategories.length + 1) {
             GroupCategories.length
     );
 }
-
 export const groupCategoryColorMapping = new Map<GroupCategory, string>([
-    ["artistic", "#b58583"],
-    ["board games", "#98fb98"],
-    ["educational", "#ff7d54"],
-    ["faith-based", "#01fdee"],
-    ["gaming", "#00fa9a"],
-    ["other", "#ff6792"],
-    ["physical", "#32a4d4"],
-    ["political", "#fff9bf"],
-    ["scouting", "#d95cb5"],
-    ["social", "#aba4ff"],
-    ["", "#ffffff"],
+    ["artistic", "#dfab8c"],
+    ["board games", "#240095"],
+    ["educational", "#00bb30"],
+    ["faith-based", "#d37100"],
+    ["gaming", "#ff82d9"],
+    ["other", "#7aa6ff"],
+    ["physical", "#592700"],
+    ["political", "#00acc7"],
+    ["scouting", "#af0050"],
+    ["social", "#003e4f"],
+    ["", "#000000"],
 ]);
 if (groupCategoryColorMapping.size !== GroupCategories.length + 1) {
     throw RangeError(
