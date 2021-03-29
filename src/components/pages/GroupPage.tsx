@@ -171,7 +171,7 @@ const GroupPage = (props: Props) => {
                     background="white"
                 >
                     {/* Top bar with basic information */}
-                    <GroupAvatar groupID={props.groupID}/>
+                    <GroupAvatar groupID={props.groupID} editable={edit} />
                     <VStack flex="1 1 0" minWidth="0">
                         <GroupNameInput group={group} edit={edit} />
                         <HStack
