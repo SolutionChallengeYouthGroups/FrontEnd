@@ -52,6 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     >
                         <Head>
                             <title>GLink</title>
+                            <link rel="shortcut icon" href="/favicon.ico" />
                         </Head>
                         <TopNav />
                         <Component {...pageProps} />
