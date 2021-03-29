@@ -27,8 +27,8 @@ const PostDownloads = ({ postID }: DownloadsProps) => {
 
     return (
         <HStack margin="10px">
-            {files.map((file) => (
-                <DownloadLink file={file} />
+            {files.map((file, i) => (
+                <DownloadLink key={i} file={file} />
             ))}
         </HStack>
     );
@@ -44,7 +44,9 @@ const DownloadLink = ({ file }: DownloadLinkProps) => {
     }, []);
     return (
         <a href={url} download target="_blank">
-            <Button leftIcon={<DownloadIcon />} colorScheme="blue">{file.name}</Button>
+            <Button leftIcon={<DownloadIcon />} colorScheme="blue">
+                {file.name}
+            </Button>
         </a>
     );
 };

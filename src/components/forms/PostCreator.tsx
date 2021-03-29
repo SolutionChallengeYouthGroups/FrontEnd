@@ -73,7 +73,7 @@ const PostCreator = (props: Props) => {
             justifyContent="space-around"
             alignItems="flex-start"
             w="100%"
-            paddingY="10px"
+            paddingTop="30px"
             _after={{
                 content: `""`,
                 borderBottom: "1px solid",
