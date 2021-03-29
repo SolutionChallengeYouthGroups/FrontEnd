@@ -1,4 +1,4 @@
-import { Heading, Text, Flex, Image, Badge } from "@chakra-ui/react";
+import { Heading, Text, Flex, Image, Badge, Box, Spacer } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Group } from "../../firestoreTypes";
 import { getGroupAvatarURL } from "../../storageHelpers";
@@ -37,7 +37,7 @@ const GroupCard = ({ group, groupID }: Props) => {
             paddingTop="0px"
             transitionProperty="all"
             transitionDuration="0.3s"
-            justifyContent="flex-end"
+            justifyContent="space-between" // space-between so that image and badge flex are at the ends
             _hover={{
                 cursor: "pointer",
                 boxShadow:
@@ -53,11 +53,11 @@ const GroupCard = ({ group, groupID }: Props) => {
                 maxH="200px"
                 w="auto"
                 borderRadius="3px"
+                flex="auto"
+                objectFit="cover"
             />
             <Flex
                 flexDir="column"
-                borderBottom="1px solid"
-                borderColor="gray"
                 justifyContent="flex-end"
                 px="16px"
                 py="10px"
@@ -71,8 +71,10 @@ const GroupCard = ({ group, groupID }: Props) => {
             </Flex>
             <Flex
                 flexDir="row"
+                borderTop="1px solid"
+                borderColor="gray.300"        
                 justifyContent="space-around"
-                justifySelf="flex-end"
+                justifySelf="self-end"
                 py="10px"
             >
                 <Badge
