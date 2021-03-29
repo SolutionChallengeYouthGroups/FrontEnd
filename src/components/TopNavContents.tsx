@@ -47,6 +47,11 @@ const TopNavContents = (props: Props) => {
                             Groups
                         </MenuButton>
                         <MenuList textColor="black">
+                            <Link href="/">
+                                <MenuItem icon={<SearchIcon />}>
+                                    <a>Search for Groups</a>
+                                </MenuItem>
+                            </Link>
                             <Link href="/group/create">
                                 <MenuItem icon={<AddIcon />}>
                                     <a>Create Group</a>
