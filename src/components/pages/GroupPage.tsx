@@ -218,7 +218,6 @@ const GroupPage = (props: Props) => {
                 alignItems="center"
                 w="100%"
                 flex="auto"
-                padding="80px 0 0 0"
             >
                 <HStack
                     wrap="wrap"

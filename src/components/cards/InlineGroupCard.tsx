@@ -51,7 +51,7 @@ const InlineGroupCard = ({ group, id }: Props) => {
             <Image
                 src={getGroupAvatarURL(id)}
                 h="92px"
-                borderRadius="3px"
+                borderRadius="3px 0 0 0"
                 width="auto"
             />
             <VStack marginX="15px">
