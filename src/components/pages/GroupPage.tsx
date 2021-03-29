@@ -40,6 +40,7 @@ import { groups, users } from "../../firestoreCollections";
 import _ from "lodash";
 import { useRouter } from "next/router";
 
+import GroupAvatar from "../groupComponents/GroupAvatar";
 
 interface Props {
     group: Group;
@@ -168,16 +169,7 @@ const GroupPage = (props: Props) => {
                     background="white"
                 >
                     {/* Top bar with basic information */}
-                    <Avatar
-                        src={
-                            !props.groupID
-                                ? ""
-                                : getGroupAvatarURL(props.groupID)
-                        }
-                        width="100px"
-                        height="100px"
-                        margin="20px"
-                    />
+                    <GroupAvatar groupID={props.groupID} editable={edit} />
                     <VStack flex="1 1 0" minWidth="0">
                         <GroupNameInput group={group} edit={edit} />
                         <HStack
@@ -216,7 +208,6 @@ const GroupPage = (props: Props) => {
                 alignItems="center"
                 w="100%"
                 flex="auto"
-                padding="80px 0 0 0"
             >
                 <HStack
                     wrap="wrap"
