@@ -23,12 +23,12 @@ import { getGroupAvatarURL } from "../../storageHelpers";
 // Custom Components:
 import AgeRangeDisplay from "../groupComponents/AgeRangeDisplay";
 import Head from "next/head";
-import SocialGrid from "../../components/groupComponents/SocialGrid";
-import MeetingTimeDisplay from "../../components/groupComponents/MeetingTimeDisplay";
-import GroupCategoryDisplay from "../../components/groupComponents/GroupCategoryDisplay";
-import FloatingButton from "../../components/groupComponents/FloatingButton";
-import GroupNameInput from "../../components/groupComponents/GroupNameInput";
-import GroupDescInput from "../../components/groupComponents/GroupDescInput";
+import SocialGrid from "../groupComponents/SocialGrid";
+import MeetingTimeDisplay from "../groupComponents/MeetingTimeDisplay";
+import GroupCategoryDisplay from "../groupComponents/GroupCategoryDisplay";
+import FloatingButton from "../groupComponents/FloatingButton";
+import GroupNameInput from "../groupComponents/GroupNameInput";
+import GroupDescInput from "../groupComponents/GroupDescInput";
 import GroupLocation from "../groupComponents/GroupLocation";
 import { GeoPointLocation, Group, User } from "../../firestoreTypes";
 

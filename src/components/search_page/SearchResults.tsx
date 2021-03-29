@@ -2,7 +2,7 @@ import SearchBox from "./SearchBox";
 import firestore from "../../firebase";
 
 // ChakraUI
-import { Grid } from "@chakra-ui/react";
+import { Grid, Spinner } from "@chakra-ui/react";
 import GroupCard from "../../components/cards/GroupCard";
 
 import { Group } from "../../firestoreTypes";
@@ -20,7 +20,10 @@ const Results = (props: Props) => {
 
     // getting all the groups from firestore
     let [allGroups, { loading, error }] = useAll(groups);
-    if (loading || error || !allGroups) {
+    if (loading) {
+        return <Spinner color="main" />;
+    }
+    if (error || !allGroups) {
         // if it is loading/there is an error, set allGroups to [], so that the .map still works
         allGroups = [];
     }
@@ -40,24 +43,22 @@ const Results = (props: Props) => {
                 w="90%"
                 justifyContent="center"
                 templateColumns="repeat(auto-fit, minmax(250px,max-content))"
-                >
-                {searchTerm != "" ? (
-                    results?.map((group) => (
-                        <GroupCard
-                            group={group.data}
-                            groupID={group.ref.id}
-                            key={group.data.name}
-                        />
-                    ))
-                ) : (
-                    allGroups.map((group) => (
-                        <GroupCard
-                            group={group.data}
-                            groupID={group.ref.id}
-                            key={group.data.name}
-                        />
-                    ))
-                )}
+            >
+                {searchTerm != ""
+                    ? results?.map((group) => (
+                          <GroupCard
+                              group={group.data}
+                              groupID={group.ref.id}
+                              key={group.data.name}
+                          />
+                      ))
+                    : allGroups.map((group) => (
+                          <GroupCard
+                              group={group.data}
+                              groupID={group.ref.id}
+                              key={group.data.name}
+                          />
+                      ))}
             </Grid>
         </>
     );

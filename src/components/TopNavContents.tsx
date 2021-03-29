@@ -8,7 +8,7 @@ import {
     Spacer,
     MenuDivider,
     MenuGroup,
-    Icon
+    Icon,
 } from "@chakra-ui/react";
 import { AddIcon, SettingsIcon, SearchIcon } from "@chakra-ui/icons";
 import Link from "next/link";
@@ -20,30 +20,31 @@ import firebase from "../firebase";
 import { useRouter } from "next/router";
 
 interface Props {
-    user: firebase.User | null
+    user: firebase.User | null;
 }
 
 const TopNavContents = (props: Props) => {
-
     // Logs out the user when this function is called
     const logout = () => {
         firebase.auth().signOut();
     };
-    
+
     const router = useRouter();
-    const path = router.asPath;
+    let path = router.asPath;
+    if (path.startsWith("/login") || path.startsWith("/signup")) {
+        path = "";
+    } else {
+        path = "?next=" + path;
+    }
     // Nice animation for header
     const headerStyle = styles.underlineLinkHover + " " + styles.largeFont;
-    const user = props.user
+    const user = props.user;
     return (
         <>
             {user ? ( // If user is logged in (defined) then display the fragement before :
                 <>
                     <Menu colorScheme="blue">
-                        <MenuButton
-                            className={headerStyle}
-                            as="a"
-                        >
+                        <MenuButton className={headerStyle} as="a">
                             Groups
                         </MenuButton>
                         <MenuList textColor="black">
@@ -63,7 +64,7 @@ const TopNavContents = (props: Props) => {
                                 </MenuItem>
                             </Link>
                             <Link href="/map">
-                                <MenuItem icon={<Icon as={FiMap}/>}>
+                                <MenuItem icon={<Icon as={FiMap} />}>
                                     Map
                                 </MenuItem>
                             </Link>
@@ -101,10 +102,10 @@ const TopNavContents = (props: Props) => {
                 // Else display the fragment below (Sign Up and Login)
                 <>
                     <Spacer />
-                    <Link href={"/login?next=" + path}>
+                    <Link href={"/login" + path}>
                         <Button colorScheme="whiteAlpha">Login</Button>
                     </Link>
-                    <Link href={"/signup?next=" + path}>
+                    <Link href={"/signup" + path}>
                         <Button marginLeft="30px" colorScheme="whiteAlpha">
                             Sign Up
                         </Button>
@@ -112,7 +113,7 @@ const TopNavContents = (props: Props) => {
                 </>
             )}
         </>
-    )
-}
+    );
+};
 
-export default TopNavContents
+export default TopNavContents;

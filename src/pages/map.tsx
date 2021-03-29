@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 // Chakra:
 import { Flex, HStack } from "@chakra-ui/layout";
-import { Text, Switch, Icon } from "@chakra-ui/react";
+import { Text, Switch, Icon, Spinner } from "@chakra-ui/react";
 
 // firestore
 import { useAll } from "@typesaurus/react";
@@ -40,7 +40,12 @@ const map = (props: Props) => {
     // get all the groups to create the markers on the map
     let [allGroups, { loading, error }] = useAll(groups);
     let [isColored, setIsColored] = useState(true);
-    if (loading || error || !allGroups) {
+    if (loading) {
+        return (
+            <Spinner position="absolute" top="50%" left="50%" color="main" />
+        );
+    }
+    if (error || !allGroups) {
         allGroups = [];
     }
 
@@ -54,13 +59,8 @@ const map = (props: Props) => {
         });
     };
     return (
-        <Flex
-            width="100vw"
-            flexDir="column"
-            justifyContent="start"
-            flexGrow={2}
-        >
-            <Flex height="100%" width="100vw">
+        <Flex width="100%" flexDir="column" justifyContent="start" flexGrow={2}>
+            <Flex height="100%" width="100%">
                 <GoogleMapReact
                     bootstrapURLKeys={{
                         key: "AIzaSyCnQIAuAR3oMVYlYm_ahxLh5B89PT3YYwg",

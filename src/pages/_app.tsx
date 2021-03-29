@@ -18,6 +18,7 @@ import { useEffect } from "react";
 
 // Components
 import TopNav from "../components/TopNav";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
     const userData = useUserData();
@@ -49,6 +50,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                         minH="100vh"
                         w="100%"
                     >
+                        <Head>
+                            <title>GLink</title>
+                            <link rel="shortcut icon" href="/favicon.ico" />
+                        </Head>
                         <TopNav />
                         <Component {...pageProps} />
                     </Flex>
