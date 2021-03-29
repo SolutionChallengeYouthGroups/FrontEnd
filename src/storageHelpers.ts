@@ -22,6 +22,7 @@ export function setGroupAvatar(
         .storage()
         .ref("/groups/" + groupID + "/profile.png")
         .put(file);
+        
 }
 
 export function uploadPost(file: File, postID: string) {
