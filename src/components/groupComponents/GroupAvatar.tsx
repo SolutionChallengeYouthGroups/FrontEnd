@@ -32,7 +32,7 @@ const GroupAvatar = ({ editable, groupID }: Props) => {
 
     return (
         <div
-            onMouseEnter={() => setHoveringEdit(true && true)}
+            onMouseEnter={() => setHoveringEdit(true && editable)}
             onMouseLeave={() => setHoveringEdit(false)}
         >
             <Avatar
