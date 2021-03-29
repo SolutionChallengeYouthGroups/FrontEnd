@@ -44,7 +44,7 @@ const TopNavContents = (props: Props) => {
             {user ? ( // If user is logged in (defined) then display the fragement before :
                 <>
                     <Menu colorScheme="blue">
-                        <MenuButton className={headerStyle} as="a">
+                        <MenuButton className={headerStyle} as="a" href="#">
                             Groups
                         </MenuButton>
                         <MenuList textColor="black">
@@ -85,7 +85,7 @@ const TopNavContents = (props: Props) => {
                                 transform: "scale(1.1)",
                             }}
                         >
-                            <Icon as={FiUser} h="40px" w="auto" />
+                            <Icon as={FiUser} h="35px" w="auto" />
                         </MenuButton>
                         <MenuList textColor="black">
                             <MenuGroup title={user.displayName ?? ""} />
