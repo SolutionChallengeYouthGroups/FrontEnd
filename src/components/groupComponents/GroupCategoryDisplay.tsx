@@ -70,7 +70,6 @@ const GroupCategoryDisplay = ({ group, edit, ...rest }: Props) => {
             bg={groupCategoryColorMapping.get(group.category)}
             padding="5px"
             borderRadius="10px"
-            border="1.5px solid black"
             paddingX="8px"
             {...rest}
         />
