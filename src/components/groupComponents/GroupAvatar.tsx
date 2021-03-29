@@ -17,17 +17,14 @@ interface Props {
 const GroupAvatar = ({ editable, groupID }: Props) => {
     // indicates if the edit is being hovered or not
     const [hoveringEdit, setHoveringEdit] = useState<boolean>(false);
-    // state that will force component to realod
-    // const [fetchDate, setFetchDate] = useState<string>(
-    //     new Date().getTime().toString()
-    // );
+    // url of the image
     const [url, setUrl] = useState<string>(defaultGroupImage);
     let fileInput: HTMLInputElement | null = null;
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (groupID && e.currentTarget.files) {
             uploadGroupImage(e.currentTarget.files[0], groupID).then(
                 async () => {
-                    // setFetchDate(new Date().getTime().toString());
+                    // set the new url to the image, to cause a refresh
                     setUrl(await getGroupAvatarURL(groupID));
                 }
             );
@@ -35,10 +32,9 @@ const GroupAvatar = ({ editable, groupID }: Props) => {
     };
 
     useEffect(() => {
+        // get the image url on first load:
         if (groupID) {
             getGroupAvatarURL(groupID).then((newURL) => {
-                console.log("???");
-                console.log(newURL);
                 setUrl(newURL);
             });
         }
@@ -51,14 +47,6 @@ const GroupAvatar = ({ editable, groupID }: Props) => {
         >
             <Avatar
                 src={url}
-                // src={
-                //     groupID
-                //         ? getGroupAvatarURL(groupID) +
-                //           "&" +
-                //           // add the date, to force the browser to fetch the image (prevent caching)
-                //           fetchDate
-                //         : ""
-                // }
                 width="100px"
                 height="100px"
                 margin="20px"
