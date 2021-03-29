@@ -17,7 +17,6 @@ const Index = () => {
     return (
         <VStack
             width="100%"
-            maxW="90vw"
             justifyContent="space-around"
             align="center"
             paddingBottom="20px"
