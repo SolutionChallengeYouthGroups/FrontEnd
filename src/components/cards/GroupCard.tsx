@@ -55,6 +55,7 @@ const GroupCard = ({ group, groupID }: Props) => {
                 borderRadius="3px"
                 flex="auto"
                 objectFit="cover"
+                objectPosition="50% 30%" // 30% so that default group image head doesn't get cropped too much
             />
             <Flex
                 flexDir="column"
