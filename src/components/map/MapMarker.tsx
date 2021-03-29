@@ -31,6 +31,7 @@ const MapMarker = ({ popup, isOpen, color, ...rest }: Props) => {
             defaultIsOpen={!!isOpen}
             placement="top-end"
             initialFocusRef={focusRef}
+            trigger="hover"
         >
             <PopoverTrigger>
                 <Box marginTop="-17px">
