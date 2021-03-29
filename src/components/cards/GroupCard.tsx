@@ -1,18 +1,27 @@
 import { Heading, Text, Flex, Image, Badge } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Group } from "../../firestoreTypes";
 import { getGroupAvatarURL } from "../../storageHelpers";
 import { useRouter } from "next/router";
 import { convertAgeRange } from "../../stringConverters";
 import { groupCategoryColorMapping } from "../../typeMappings";
+import { defaultGroupImage } from "../../objectDefaults";
 
 interface Props {
     group: Group;
-    id: string;
+    groupID: string;
 }
 
-const GroupCard = ({ group, id }: Props) => {
+const GroupCard = ({ group, groupID }: Props) => {
     const router = useRouter();
+    const [url, setUrl] = useState<string>(defaultGroupImage);
+    useEffect(() => {
+        if (groupID) {
+            getGroupAvatarURL(groupID).then((newURL) => {
+                setUrl(newURL);
+            });
+        }
+    }, []);
     return (
         <Flex
             bg="white"
@@ -35,15 +44,14 @@ const GroupCard = ({ group, id }: Props) => {
                     "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
             }}
             onClick={() => {
-                router.push("./group/" + id);
+                router.push("./group/" + groupID);
             }}
             textColor="black"
         >
             <Image
-                src={getGroupAvatarURL(id)}
+                src={url}
                 maxH="200px"
                 w="auto"
-                marginTop="-8px"
                 borderRadius="3px"
             />
             <Flex

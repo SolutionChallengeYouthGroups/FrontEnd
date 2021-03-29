@@ -1,8 +1,9 @@
-import firebase from "firebase";
 import { Ref, ref } from "typesaurus";
-import { auth } from "./firebase";
+import { auth, storage } from "./firebase";
+import firebase from "./firebase";
 import { users } from "./firestoreCollections";
 import { User } from "./firestoreTypes";
+import { defaultGroupImage } from "./objectDefaults";
 export function storagePathToURL(path: string, args: string): string {
     return (
         "https://firebasestorage.googleapis.com/v0/b/glink-28cd3.appspot.com/o/" +
@@ -11,8 +12,17 @@ export function storagePathToURL(path: string, args: string): string {
         args
     );
 }
-export function getGroupAvatarURL(groupID: string): string {
-    return storagePathToURL("groups/" + groupID + "/profile.png", "alt=media");
+export async function getGroupAvatarURL(groupID: string): Promise<string> {
+    try {
+        // try to get the image:
+        let downloadURL = await storage
+            .ref(`groups/${groupID}/profile.png`)
+            .getDownloadURL();
+        return downloadURL;
+    } catch (error) {
+        // return the default group icon if the image is not found
+        return defaultGroupImage;
+    }
 }
 export function setGroupAvatar(
     file: Blob,

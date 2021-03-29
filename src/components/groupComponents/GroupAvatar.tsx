@@ -1,11 +1,12 @@
 // react
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { getGroupAvatarURL, uploadGroupImage } from "../../storageHelpers";
 
 //chakra
 import { Text, Avatar, Box, Button, Icon } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
+import { defaultGroupImage } from "../../objectDefaults";
 
 interface Props {
     // group id:
@@ -16,19 +17,28 @@ interface Props {
 const GroupAvatar = ({ editable, groupID }: Props) => {
     // indicates if the edit is being hovered or not
     const [hoveringEdit, setHoveringEdit] = useState<boolean>(false);
-    // state that will force component to realod
-    const [fetchDate, setFetchDate] = useState<string>(
-        new Date().getTime().toString()
-    );
+    // url of the image
+    const [url, setUrl] = useState<string>(defaultGroupImage);
     let fileInput: HTMLInputElement | null = null;
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (groupID && e.currentTarget.files) {
-            uploadGroupImage(e.currentTarget.files[0], groupID).then(() => {
-                // update the date to refresh the component and fetch the image again
-                setFetchDate(new Date().getTime().toString());
-            });
+            uploadGroupImage(e.currentTarget.files[0], groupID).then(
+                async () => {
+                    // set the new url to the image, to cause a refresh
+                    setUrl(await getGroupAvatarURL(groupID));
+                }
+            );
         }
     };
+
+    useEffect(() => {
+        // get the image url on first load:
+        if (groupID) {
+            getGroupAvatarURL(groupID).then((newURL) => {
+                setUrl(newURL);
+            });
+        }
+    }, []);
 
     return (
         <div
@@ -36,14 +46,7 @@ const GroupAvatar = ({ editable, groupID }: Props) => {
             onMouseLeave={() => setHoveringEdit(false)}
         >
             <Avatar
-                src={
-                    groupID
-                        ? getGroupAvatarURL(groupID) +
-                          "&" +
-                          // add the date, to force the browser to fetch the image (prevent caching)
-                          fetchDate
-                        : ""
-                }
+                src={url}
                 width="100px"
                 height="100px"
                 margin="20px"
