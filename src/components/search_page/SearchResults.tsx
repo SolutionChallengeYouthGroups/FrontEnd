@@ -39,7 +39,7 @@ const Results = (props: Props) => {
                 gap="15px"
                 w="90%"
                 justifyContent="center"
-                templateColumns="repeat(auto-fit, minmax(400px,max-content))"
+                templateColumns="repeat(auto-fit, minmax(250px,max-content))"
                 >
                 {searchTerm != "" ? (
                     results?.map((group) => (
