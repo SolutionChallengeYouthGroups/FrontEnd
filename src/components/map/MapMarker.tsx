@@ -68,6 +68,9 @@ const MapMarker = ({ popup, isOpen, trigger, color, ...rest }: Props) => {
                 bg="transparent"
                 minWidth="1000px"
                 border="transparent"
+                _focus={{
+                    outline: "none"
+                }}
             >
                 <HStack>
                     <Box ref={focusRef}>{popup}</Box>
