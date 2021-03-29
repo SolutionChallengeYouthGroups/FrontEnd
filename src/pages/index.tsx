@@ -16,21 +16,15 @@ const Index = () => {
     const [search, setSearch] = useState("");
     return (
         <VStack
-            height="100vh"
+            width="100%"
+            maxW="90vw"
+            justifyContent="space-around"
             align="center"
-            justifyContent="flex-start"
-            spacing="100"
+            paddingBottom="20px"
             alignItems="center"
         >
-            <VStack
-                width="100%"
-                maxW="90vw"
-                justifyContent="space-around"
-                align="center"
-            >
-                <SearchBox setSearch={setSearch} />
-                <Results search={search} />
-            </VStack>
+            <SearchBox setSearch={setSearch} />
+            <Results search={search} />
         </VStack>
     );
 };
