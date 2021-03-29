@@ -21,9 +21,10 @@ interface Props extends IconProps {
     lng: number;
     popup?: JSX.Element;
     isOpen?: boolean;
+    trigger?: "click" | "hover" | undefined;
 }
 
-const MapMarker = ({ popup, isOpen, color, ...rest }: Props) => {
+const MapMarker = ({ popup, isOpen, trigger, color, ...rest }: Props) => {
     // takes in a popup and will create a map maker, when clicked on will show the popup
     const focusRef = useRef(null);
     return popup ? (
@@ -31,6 +32,7 @@ const MapMarker = ({ popup, isOpen, color, ...rest }: Props) => {
             defaultIsOpen={!!isOpen}
             placement="top-end"
             initialFocusRef={focusRef}
+            trigger={trigger}
         >
             <PopoverTrigger>
                 <Box marginTop="-17px">
@@ -66,6 +68,9 @@ const MapMarker = ({ popup, isOpen, color, ...rest }: Props) => {
                 bg="transparent"
                 minWidth="1000px"
                 border="transparent"
+                _focus={{
+                    outline: "none"
+                }}
             >
                 <HStack>
                     <Box ref={focusRef}>{popup}</Box>

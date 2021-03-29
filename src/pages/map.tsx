@@ -23,7 +23,16 @@ import { groupCategoryColorMapping } from "../typeMappings";
 
 interface Props {}
 
+type Trigger = "click" | "hover" | undefined
+
 const map = (props: Props) => {
+    
+    // popupTrigger is set to "hover" by default, however if map zoom level is lower than
+    // hoverThreshold it will change to "click" - the more zoomed out the lower the zoom number
+    const [popupTrigger, setTrigger] = useState<Trigger>("hover");
+    // hoverThreshold defines the threshold for popupTrigger
+    const hoverThreshold = 11;
+
     // default start palce of the map is uni warwick
     const [mapCenter, setMapCenter] = useState({
         lat: 52.383599,
@@ -59,6 +68,13 @@ const map = (props: Props) => {
                     }}
                     center={mapCenter}
                     defaultZoom={14}
+                    onChange={(e) => { // onChange the zoom value will change
+                        setTrigger(
+                            e.zoom <= hoverThreshold
+                            ? "click"
+                            : "hover"
+                        )
+                    }}
                     // @ts-ignore not sure why typescript is saying flexGrow is not a valid property
                     style={{ flexGrow: 2 }}
                 >
@@ -71,6 +87,7 @@ const map = (props: Props) => {
                                 <MapMarker
                                     lat={location.lat}
                                     lng={location.lon}
+                                    trigger={popupTrigger}
                                     popup={
                                         <InlineGroupCard
                                             group={group.data}
