@@ -6,8 +6,37 @@ import { FaGoogle, FaUserSecret } from "react-icons/fa";
 import { useRouter } from "next/router";
 import isEmail from "validator/lib/isEmail";
 import TextInput from "../components/forms/TextInput";
+import { users } from "../firestoreCollections";
+import { set, update, get } from "typesaurus";
 
 interface Props {}
+
+async function addGoogleCreds(result: firebase.auth.UserCredential) {
+    const user = result.user;
+    if (!user) {
+        return;
+    }
+    const exists = await get(users, user.uid);
+    if (exists) {
+        await update(users, user.uid, {
+            email: user.email ?? "",
+            name: user.displayName ?? "",
+            // there's a bug in types with firebase ignore this type
+            // @ts-ignore
+            username: result?.additionalUserInfo?.profile?.given_name ?? "",
+        });
+    } else {
+        await set(users, user.uid, {
+            email: user.email ?? "",
+            name: user.displayName ?? "",
+            // there's a bug in types with firebase ignore this type
+            // @ts-ignore
+            username: result?.additionalUserInfo?.profile?.given_name ?? "",
+            groups: [],
+            createdAt: firebase.firestore.Timestamp.now(),
+        });
+    }
+}
 
 const login = () => {
     // page to login
@@ -29,7 +58,8 @@ const login = () => {
         firebase
             .auth()
             .signInWithPopup(provider)
-            .then(() => {
+            .then(async (result) => {
+                await addGoogleCreds(result);
                 // continue to home page
                 router.push(next);
             })
@@ -50,7 +80,7 @@ const login = () => {
 
     return (
         <Flex
-            w="100vw"
+            w="100%"
             h="100%"
             justifyContent="center"
             alignItems="center"

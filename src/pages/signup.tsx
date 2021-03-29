@@ -76,7 +76,7 @@ const signup = () => {
 
     return (
         <Flex
-            w="100vw"
+            w="100%"
             h="100%"
             justifyContent="center"
             alignItems="center"

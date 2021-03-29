@@ -54,13 +54,8 @@ const map = (props: Props) => {
         });
     };
     return (
-        <Flex
-            width="100vw"
-            flexDir="column"
-            justifyContent="start"
-            flexGrow={2}
-        >
-            <Flex height="100%" width="100vw">
+        <Flex width="100%" flexDir="column" justifyContent="start" flexGrow={2}>
+            <Flex height="100%" width="100%">
                 <GoogleMapReact
                     bootstrapURLKeys={{
                         key: "AIzaSyCnQIAuAR3oMVYlYm_ahxLh5B89PT3YYwg",
