@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/dist/client/router";
 
-import GroupPage from "../../components/pages/GroupPage";
+import GroupPage from "../../components/group_page/GroupPage";
 import LoginRequired from "../../components/LoginRequired";
 
 // Firestore stuff:
