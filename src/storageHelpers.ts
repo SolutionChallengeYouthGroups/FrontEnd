@@ -5,7 +5,7 @@ import { users } from "./firestoreCollections";
 import { User } from "./firestoreTypes";
 export function storagePathToURL(path: string, args: string): string {
     return (
-        "https://firebasestorage.googleapis.com/v0/b/soltuionchallenge.appspot.com/o/" +
+        "https://firebasestorage.googleapis.com/v0/b/glink-28cd3.appspot.com/o/" +
         encodeURIComponent(path) +
         "?" +
         args
