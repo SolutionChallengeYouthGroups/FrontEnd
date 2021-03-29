@@ -25,23 +25,28 @@ const AgeRangeDisplay = ({ group, edit, ...rest }: Props) => {
         let age = stringToAge(s);
         return age > 999 ? 999 : age;
     }
-    if (edit === true) {
+    
+    if (edit) {
         return (
             <HStack {...rest}>
                 <Icon as={IoPeople} />
                 <Input
                     variant="outline"
-                    value={group.ageRange.min === 0 ? "" : group.ageRange.min}
+                    value={range.min === 0 ? "" : range.min}
                     onChange={(e) => {
                         const newmin = sanitise(e.target.value);
                         const newRange = {
                             min: newmin,
-                            max:
-                                group.ageRange.max === 0
-                                    ? 0
-                                    : Math.max(group.ageRange.max, newmin),
+                            max: range.max
                         };
                         setRange(newRange);
+                    }}
+                    // when component loses focus we check if age range makes sense: min <= max
+                    // if it doesn't make sense, since this component is for min we change max to min
+                    onBlur={() => {
+                        if (range.min > range.max) {
+                            setRange({min: range.min, max: range.min})
+                        }
                     }}
                     placeholder="0"
                     maxW="100px"
@@ -49,22 +54,26 @@ const AgeRangeDisplay = ({ group, edit, ...rest }: Props) => {
                 <Text>-</Text>
                 <Input
                     variant="outline"
-                    value={group.ageRange.max === 0 ? "" : group.ageRange.max}
+                    value={range.max === 0 ? "" : range.max}
                     onChange={(e) => {
                         const newmax = sanitise(e.target.value);
                         let newRange;
                         if (newmax === 0) {
-                            newRange = { max: 0, min: group.ageRange.min };
+                            newRange = { max: 0, min: range.min };
                         } else {
                             newRange = {
                                 max: newmax,
-                                min:
-                                    group.ageRange.min === 0
-                                        ? 0
-                                        : Math.min(group.ageRange.min, newmax),
+                                min: range.min
                             };
                         }
                         setRange(newRange);
+                    }}
+                    // when component loses focus we check if age range makes sense: min <= max
+                    // if it doesn't make sense, since this component is for max we change min to max
+                    onBlur={() => {
+                        if (range.min > range.max) {
+                            setRange({min: range.max, max: range.max})
+                        }
                     }}
                     placeholder="0"
                     maxW="100px"

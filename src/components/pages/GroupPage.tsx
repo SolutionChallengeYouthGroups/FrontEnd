@@ -40,8 +40,6 @@ import { groups, users } from "../../firestoreCollections";
 import _ from "lodash";
 import { useRouter } from "next/router";
 
-import { useContext } from "react";
-import { UserContext } from "../../lib/context";
 
 interface Props {
     group: Group;
