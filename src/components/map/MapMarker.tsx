@@ -21,7 +21,7 @@ interface Props extends IconProps {
     lng: number;
     popup?: JSX.Element;
     isOpen?: boolean;
-    trigger: "click" | "hover" | undefined;
+    trigger?: "click" | "hover" | undefined;
 }
 
 const MapMarker = ({ popup, isOpen, trigger, color, ...rest }: Props) => {
