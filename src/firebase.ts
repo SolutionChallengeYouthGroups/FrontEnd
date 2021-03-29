@@ -5,13 +5,12 @@ import "firebase/storage"
 
 // SECRET KEY do not make public
 let firebaseConfig = {
-  apiKey: "AIzaSyDC7dHYwCfbhfr3XKlz8x1CRWiApoA0at4",
-  authDomain: "soltuionchallenge.firebaseapp.com",
-  projectId: "soltuionchallenge",
-  storageBucket: "soltuionchallenge.appspot.com",
-  messagingSenderId: "860919932925",
-  appId: "1:860919932925:web:ca64348dc16c78c6f81b94",
-  measurementId: "G-BWV8G22JDE",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: "glink-28cd3.firebaseapp.com",
+  projectId: "glink-28cd3",
+  storageBucket: "glink-28cd3.appspot.com",
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: "1:118909215413:web:ff857e0c9c57ad50f294fc"
 };
 
 if (!firebase.apps.length) {
