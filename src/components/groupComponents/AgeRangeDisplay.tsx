@@ -71,9 +71,10 @@ const AgeRangeDisplay = ({ group, edit, ...rest }: Props) => {
                     // when component loses focus we check if age range makes sense: min <= max
                     // if it doesn't make sense, since this component is for max we change min to max
                     onBlur={() => {
-                        if (range.min > range.max) {
-                            setRange({min: range.max, max: range.max})
-                        }
+                        // Added a condition to check if range.max !== 0 as 0 is placeholder for undefined
+                        // and it is therefore valid. 
+                        if (range.max !== 0 && range.min > range.max)
+                            setRange({min: range.max, max: range.max});
                     }}
                     placeholder="0"
                     maxW="100px"
