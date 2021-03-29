@@ -20,6 +20,7 @@ const Index = () => {
             align="center"
             justifyContent="flex-start"
             spacing="100"
+            alignItems="center"
         >
             <VStack
                 width="100%"
