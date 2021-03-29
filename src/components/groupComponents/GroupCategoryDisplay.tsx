@@ -1,12 +1,10 @@
 import { GroupCategories, Group, GroupCategory } from "../../firestoreTypes";
-import styles from "../componentStyles.module.css";
 import TextWithIcon from "../TextWithIcon";
 import {
     groupCategoryColorMapping,
     groupCategoryMapping,
 } from "../../typeMappings";
 import { title } from "../../helperFunctions";
-import { HTMLProps } from "react";
 import { Box, BoxProps, HStack, Icon, Select } from "@chakra-ui/react";
 import React, { useState } from "react";
 

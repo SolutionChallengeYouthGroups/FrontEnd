@@ -16,7 +16,7 @@ import { add } from "typesaurus";
 import { posts, users } from "../../firestoreCollections";
 import { Post } from "../../firestoreTypes";
 import { getCurrentUserRef, uploadPost } from "../../storageHelpers";
-import firebase from "firebase";
+import firebase from "../../firebase";
 import { IoConstructOutline } from "react-icons/io5";
 
 interface Props {}

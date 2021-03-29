@@ -7,7 +7,7 @@ import GroupPage from "../../components/pages/GroupPage";
 import { groups } from "../../firestoreCollections";
 import { useGet } from "@typesaurus/react";
 import { defaultGroup } from "../../objectDefaults";
-import firebase from "firebase";
+import firebase from "../../firebase";
 
 const Group = () => {
     // page for any kind of youth club, with their name location, contact details, members etc...
