@@ -1,4 +1,4 @@
-import { Heading, Text, Flex, Image, Badge, Box, Spacer } from "@chakra-ui/react";
+import { Heading, Text, Flex, Image, Badge } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Group } from "../../firestoreTypes";
 import { getGroupAvatarURL } from "../../storageHelpers";
@@ -75,7 +75,7 @@ const GroupCard = ({ group, groupID }: Props) => {
                 borderTop="1px solid"
                 borderColor="gray.300"        
                 justifyContent="space-around"
-                justifySelf="self-end"
+                justifySelf="flex-end"
                 py="10px"
             >
                 <Badge
