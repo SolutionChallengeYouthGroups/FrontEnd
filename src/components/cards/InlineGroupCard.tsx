@@ -8,18 +8,27 @@ import {
     HStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Group } from "../../firestoreTypes";
+import { defaultGroupImage } from "../../objectDefaults";
 import { getGroupAvatarURL } from "../../storageHelpers";
 import { convertAgeRange } from "../../stringConverters";
 import { groupCategoryColorMapping } from "../../typeMappings";
 
 interface Props {
     group: Group;
-    id: string;
+    groupID: string;
 }
-const InlineGroupCard = ({ group, id }: Props) => {
+const InlineGroupCard = ({ group, groupID }: Props) => {
     const router = useRouter();
+    const [url, setUrl] = useState<string>(defaultGroupImage);
+    useEffect(() => {
+        if (groupID) {
+            getGroupAvatarURL(groupID).then((newURL) => {
+                setUrl(newURL);
+            });
+        }
+    }, []);
     return (
         <Flex
             direction="row"
@@ -44,16 +53,11 @@ const InlineGroupCard = ({ group, id }: Props) => {
                     "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
             }}
             onClick={() => {
-                router.push("./group/" + id);
+                router.push("./group/" + groupID);
             }}
             textColor="black"
         >
-            <Image
-                src={getGroupAvatarURL(id)}
-                h="92px"
-                borderRadius="3px 0 0 0"
-                width="auto"
-            />
+            <Image src={url} h="92px" borderRadius="3px 0 0 0" width="auto" />
             <VStack marginX="15px">
                 <Heading fontSize="1.8rem" noOfLines={1}>
                     {group.name}

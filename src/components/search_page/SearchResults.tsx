@@ -45,7 +45,7 @@ const Results = (props: Props) => {
                     results?.map((group) => (
                         <GroupCard
                             group={group.data}
-                            id={group.ref.id}
+                            groupID={group.ref.id}
                             key={group.data.name}
                         />
                     ))
@@ -53,7 +53,7 @@ const Results = (props: Props) => {
                     allGroups.map((group) => (
                         <GroupCard
                             group={group.data}
-                            id={group.ref.id}
+                            groupID={group.ref.id}
                             key={group.data.name}
                         />
                     ))

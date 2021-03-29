@@ -53,3 +53,6 @@ export function defaultGroup(): Group {
 export function defaultGeoPointLocation(): GeoPointLocation {
     return new GeoPointLocation(52.383599, -1.56006);
 }
+
+export const defaultGroupImage: string =
+    "https://firebasestorage.googleapis.com/v0/b/glink-28cd3.appspot.com/o/groups%2Fdefaults%2FgroupDefault.png?alt=media";

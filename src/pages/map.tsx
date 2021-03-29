@@ -23,10 +23,9 @@ import { groupCategoryColorMapping } from "../typeMappings";
 
 interface Props {}
 
-type Trigger = "click" | "hover" | undefined
+type Trigger = "click" | "hover" | undefined;
 
 const map = (props: Props) => {
-    
     // popupTrigger is set to "hover" by default, however if map zoom level is lower than
     // hoverThreshold it will change to "click" - the more zoomed out the lower the zoom number
     const [popupTrigger, setTrigger] = useState<Trigger>("hover");
@@ -68,12 +67,11 @@ const map = (props: Props) => {
                     }}
                     center={mapCenter}
                     defaultZoom={14}
-                    onChange={(e) => { // onChange the zoom value will change
+                    onChange={(e) => {
+                        // onChange the zoom value will change
                         setTrigger(
-                            e.zoom <= hoverThreshold
-                            ? "click"
-                            : "hover"
-                        )
+                            e.zoom <= hoverThreshold ? "click" : "hover"
+                        );
                     }}
                     // @ts-ignore not sure why typescript is saying flexGrow is not a valid property
                     style={{ flexGrow: 2 }}
@@ -91,7 +89,7 @@ const map = (props: Props) => {
                                     popup={
                                         <InlineGroupCard
                                             group={group.data}
-                                            id={group.ref.id}
+                                            groupID={group.ref.id}
                                         />
                                     }
                                     color={
