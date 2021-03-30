@@ -1,53 +1,75 @@
-<h1 align="center">Welcome to DCS Solution Challenge Youth Group 👋</h1>
+<h1 align="center">Welcome to Glink👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1-blue.svg?cacheSeconds=2592000" />
-  <a href="#" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-  </a>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> University Of Warwick DCS Solution Challenge PWA to help Youth Groups
+> University of Warwick: Developer Student Club : Solution Challenge 
 
-## Technologies
+# Technologies
 
-### Technical
+## Technical
 
 [ReactJS](https://reactjs.org/) : Basic Front end framework <br/>
 [NextJS](https://nextjs.org/) : Work with React to help with routing and pre-render HTML <br/>
 [Next-PWA](https://www.npmjs.com/package/next-pwa) : PWA Plugin for Next.js works with [workbox](https://developers.google.com/web/tools/workbox/)
+<br/>
+[Yarn](https://yarnpkg.com/) : Alternative package manager to npm
 
-### Looks
+## React External Components
 
-[ChakraUI](https://chakra-ui.com/) : Relatively new Front-End UI Framework
+[google-map-react](https://github.com/google-map-react/google-map-react) : Simple react library to display a Google Map.
 
-### Firebase
+## Looks
 
-[Firestore](https://firebase.google.com/docs/firestore) <br/>
-[TypesaurusReact](https://www.npmjs.com/package/@typesaurus/react): Makes requesting/editing data way easier.<br/>
-[Typesaurus](https://typesaurus.com/)
+[ChakraUI](https://chakra-ui.com/) : New modern Front-End component library
 
-## Install
+## [Firebase](https://firebase.google.com)
 
+-   Firestore : Cloud based NoSQL Database
+-   Authentication : Easy authentication with firebase
+-   Storage : Image/File Hosting
+-   Hosting : Web content hosting
+
+[Typesaurus](https://typesaurus.com/): Adds type-safety to firestore. Also makes requesting data easier.
+<br/>
+[TypesaurusReact](https://www.npmjs.com/package/@typesaurus/react): React hooks for Typesaurus
+
+# Instructions
+Start by cloning this repository with `git clone `
+## Installing
+
+Make sure to run this before any other scripts.
 ```sh
 yarn install
 ```
 
-## Usage
+## Development server
+
+Runs a development server on localhost:3000
 
 ```sh
-yarn dev/yarn start
+yarn dev
 ```
 
-## Deployment
+## Local Deployment
+
+```sh
+yarn build
+yarn start
 ```
-npm run build
-npm run export
+
+## Deploying to Firebase hosting
+
+```
 firebase init hosting
 ```
+
 Use `.out` when specifying the public directory.
+
 ```sh
-firebase deploy --only hosting
+yarn deploy
 ```
+
 (Deploys hosting content and config.)
 
 ## Show your support
