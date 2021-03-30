@@ -1,25 +1,21 @@
 import React, { useState } from "react";
 
 import { Post } from "../../firestoreTypes";
-import firebase, { storage } from "../../firebase";
+import firebase from "../../firebase";
 
 import {
     Text,
-    Box,
     Flex,
-    Grid,
-    Stack,
     Heading,
-    AccordionItem,
-    Accordion,
     Collapse,
     HStack,
     Icon,
     IconButton,
+    Spacer,
 } from "@chakra-ui/react";
-import { Ref } from "typesaurus";
+import { remove } from "typesaurus";
 import { useGet } from "@typesaurus/react";
-import { users } from "../../firestoreCollections";
+import { posts } from "../../firestoreCollections";
 import { timestampToDate } from "../../storageHelpers";
 import PostDownloads from "../network_page/PostDownloads";
 import { ChevronDownIcon, DeleteIcon } from "@chakra-ui/icons";
@@ -27,15 +23,17 @@ import { ChevronDownIcon, DeleteIcon } from "@chakra-ui/icons";
 interface Props {
     post: Post;
     id: string;
-    deleteCallback?: () => void;
 }
 
-const PostCard = ({ post, id, deleteCallback }: Props) => {
+const PostCard = ({ post, id }: Props) => {
     const [author, { loading, error }] = useGet(post.author);
     const [open, setOpen] = useState<boolean>(false);
     const user = firebase.auth().currentUser;
     let createdAt: Date = timestampToDate(post.createdAt);
     const rot = open ? 180 : 0;
+    const deletePost = () => {
+        remove(posts, id);
+    };
     return (
         <Flex
             flexDirection="column"
@@ -45,7 +43,7 @@ const PostCard = ({ post, id, deleteCallback }: Props) => {
             w="100%"
             _hover={{ cursor: "pointer" }}
             borderBottom="1px solid"
-            borderColor="mainDark"
+            borderColor="main"
             onClick={() => setOpen(!open)}
             position="relative"
         >
@@ -55,24 +53,24 @@ const PostCard = ({ post, id, deleteCallback }: Props) => {
             </Text>
             <Collapse in={open}>
                 <Text marginTop="10px">{post.content}</Text>
-                <PostDownloads postID={id} />
+                <HStack>
+                    <PostDownloads postID={id} />
+                    <Spacer />
+                    {open && post.author.id === user?.uid ? (
+                        <IconButton
+                            aria-label="Delete post"
+                            icon={<DeleteIcon />}
+                            colorScheme="red"
+                            onClick={(e) => {
+                                deletePost();
+                                e.stopPropagation();
+                            }}
+                        />
+                    ) : (
+                        <></>
+                    )}
+                </HStack>
             </Collapse>
-            {deleteCallback && post.author.id === user?.uid ? (
-                <IconButton
-                    aria-label="Delete post"
-                    icon={<DeleteIcon />}
-                    colorScheme="red"
-                    onClick={(e) => {
-                        deleteCallback();
-                        e.stopPropagation();
-                    }}
-                    position="absolute"
-                    top="15px"
-                    right="60px"
-                />
-            ) : (
-                <></>
-            )}
 
             <Icon
                 transform={"scale(2) rotate(" + rot + "deg);"}

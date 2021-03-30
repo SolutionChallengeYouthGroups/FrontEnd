@@ -18,9 +18,6 @@ const network = (props: Props) => {
     if (error || !allPosts) {
         allPosts = [];
     }
-    async function deletePost(post: Doc<Post>) {
-        await remove(posts, post.ref.id);
-    }
     if (loading) {
         return (
             <Spinner position="absolute" top="50%" left="50%" color="main" />
@@ -42,7 +39,6 @@ const network = (props: Props) => {
                     post={post.data}
                     id={post.ref.id}
                     key={post.ref.id}
-                    deleteCallback={() => deletePost(post)}
                 />
             ))}
         </Flex>
