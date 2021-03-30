@@ -91,9 +91,9 @@ const GroupPage = (props: Props) => {
         setIsButtonLoading(true);
         if (!!props.groupID) {
             update(groups, props.groupID, group).then(
-                () => {
+                async () => {
                     success();
-                    avatarSaveRef[0](props.groupID || "", true); // to make TS happy but the check is done above
+                    await avatarSaveRef[0](props.groupID || "", true); // to make TS happy but the check is done above
                     setEdit(false);
                     setIsButtonLoading(false);
                 },
