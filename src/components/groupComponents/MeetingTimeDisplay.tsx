@@ -52,16 +52,22 @@ const MeetingTimeDisplay = ({ group, edit, ...rest }: Props) => {
         return (
             <Popover placement="bottom">
                 <PopoverTrigger>
-                    <Link className={styles.underlineLinkHover}>
-                        <Box {...rest}>
+                    <Box {...rest}>
+                        <a
+                            className={
+                                styles.greytext +
+                                " " +
+                                styles.underlineLinkHover
+                            }
+                        >
                             <TextWithIcon
-                                className={styles.greytext}
                                 icon={FaUserClock}
                                 text="Edit Meeting Times"
                                 title="Meeting Times"
+                                _hover={{ cursor: "pointer" }}
                             />
-                        </Box>
-                    </Link>
+                        </a>
+                    </Box>
                 </PopoverTrigger>
                 <PopoverContent>
                     <PopoverHeader>
