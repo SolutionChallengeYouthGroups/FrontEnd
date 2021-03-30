@@ -35,7 +35,9 @@ const Results = (props: Props) => {
             group.data.description.toLowerCase().includes(searchTerm) || // If search term in description
             group.data.category.toLowerCase().includes(searchTerm)
     ); // If search term in categories
-
+    console.log("RESULTS,ALLGROUPS")
+    console.log(results.length)
+    console.log(allGroups.length)
     return (
         <>
             <Grid
