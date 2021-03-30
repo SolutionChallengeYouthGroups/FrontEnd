@@ -66,7 +66,7 @@ const GroupCard = ({ group, groupID }: Props) => {
                 <Text textColor="gray.700" flex="auto" noOfLines={1}>
                     {group.description}
                 </Text>
-                <Heading fontSize="1.8rem" noOfLines={1}>
+                <Heading fontSize="1.5rem" noOfLines={1}>
                     {group.name}
                 </Heading>
             </Flex>
