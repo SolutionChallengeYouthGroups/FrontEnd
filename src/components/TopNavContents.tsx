@@ -9,6 +9,7 @@ import {
     MenuDivider,
     MenuGroup,
     Icon,
+    Divider,
 } from "@chakra-ui/react";
 import { AddIcon, SettingsIcon, SearchIcon } from "@chakra-ui/icons";
 import Link from "next/link";
@@ -53,6 +54,12 @@ const TopNavContents = (props: Props) => {
                                     <a>Search for Groups</a>
                                 </MenuItem>
                             </Link>
+                            <Link href="/map">
+                                <MenuItem icon={<Icon as={FiMap} />}>
+                                    Map
+                                </MenuItem>
+                            </Link>
+                            <Divider />
                             <Link href="/group/create">
                                 <MenuItem icon={<AddIcon />}>
                                     <a>Create Group</a>
@@ -61,11 +68,6 @@ const TopNavContents = (props: Props) => {
                             <Link href="/group/manage">
                                 <MenuItem icon={<SettingsIcon />}>
                                     Manage Groups
-                                </MenuItem>
-                            </Link>
-                            <Link href="/map">
-                                <MenuItem icon={<Icon as={FiMap} />}>
-                                    Map
                                 </MenuItem>
                             </Link>
                         </MenuList>
