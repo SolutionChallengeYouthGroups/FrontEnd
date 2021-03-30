@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next export"
+    "export": "next export",
+    "deploy":"echo Make sure you have run 'firebase init hosting' && next build && next export && firebase deploy --only hosting"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.0",
