@@ -24,15 +24,6 @@ export async function getGroupAvatarURL(groupID: string): Promise<string> {
         return defaultGroupImage;
     }
 }
-export function setGroupAvatar(
-    file: Blob,
-    groupID: string
-): firebase.storage.UploadTask {
-    return firebase
-        .storage()
-        .ref("/groups/" + groupID + "/profile.png")
-        .put(file);
-}
 
 export function uploadPost(file: File, postID: string) {
     let ref = firebase.storage().ref(`/posts/${postID}/${file.name}`);

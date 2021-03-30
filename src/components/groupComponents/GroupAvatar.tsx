@@ -12,25 +12,30 @@ interface Props {
     // group id:
     groupID?: string;
     editable: boolean;
+    onSaveRef: [(groupID: string, newGroup: boolean) => Promise<void>];
 }
-
-const GroupAvatar = ({ editable, groupID }: Props) => {
+const GroupAvatar = ({ editable, groupID, onSaveRef }: Props) => {
     // indicates if the edit is being hovered or not
     const [hoveringEdit, setHoveringEdit] = useState<boolean>(false);
     // url of the image
     const [url, setUrl] = useState<string>(defaultGroupImage);
     let fileInput: HTMLInputElement | null = null;
+    function setSaveRef(file: File) {
+        onSaveRef[0] = async (groupID: string, newGroup: boolean) => {
+            let sh = await uploadGroupImage(file, groupID);
+            if (!newGroup) {
+                let newurl = await sh.ref.getDownloadURL();
+                // set the new url to the image, to cause a refresh
+                setUrl(newurl as string);
+            }
+        };
+    }
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (groupID && e.currentTarget.files) {
-            uploadGroupImage(e.currentTarget.files[0], groupID).then(
-                async () => {
-                    // set the new url to the image, to cause a refresh
-                    setUrl(await getGroupAvatarURL(groupID));
-                }
-            );
+        if (e.currentTarget.files) {
+            setSaveRef(e.currentTarget.files[0]);
+            setUrl(URL.createObjectURL(e.currentTarget.files[0]));
         }
     };
-
     useEffect(() => {
         // get the image url on first load:
         if (groupID) {
@@ -38,7 +43,7 @@ const GroupAvatar = ({ editable, groupID }: Props) => {
                 setUrl(newURL);
             });
         }
-    }, []);
+    }, [editable]);
 
     return (
         <div

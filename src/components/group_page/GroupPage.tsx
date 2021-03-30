@@ -51,6 +51,9 @@ interface Props {
 }
 
 let lastGroup: Group;
+let avatarSaveRef: [(groupID: string, newGroup: boolean) => Promise<void>] = [
+    async (groupID: string, newGroup: boolean) => {},
+];
 const GroupPage = (props: Props) => {
     const user = props.user;
     let uref: null | Ref<User> = null;
@@ -62,6 +65,7 @@ const GroupPage = (props: Props) => {
     const [group, setGroup] = useState(_.cloneDeep(props.group));
     const [edit, setEdit] = useState(false);
     const [editOptionsOpen, setEditOptionsOpen] = useState(true);
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
     function success() {
         toast.closeAll();
         toast({
@@ -73,7 +77,7 @@ const GroupPage = (props: Props) => {
         });
         lastGroup = _.cloneDeep(group);
     }
-    function failure(element: Element) {
+    function failure() {
         toast({
             title: "Error saving Group",
             status: "error",
@@ -81,25 +85,30 @@ const GroupPage = (props: Props) => {
             isClosable: true,
             position: "bottom-left",
         });
+        setIsButtonLoading(false);
     }
     function saveClick(e: MouseEvent<HTMLButtonElement>) {
+        setIsButtonLoading(true);
         if (!!props.groupID) {
             update(groups, props.groupID, group).then(
                 () => {
                     success();
+                    avatarSaveRef[0](props.groupID || "", true); // to make TS happy but the check is done above
                     setEdit(false);
+                    setIsButtonLoading(false);
                 },
-                (error) => failure(e.target as Element)
+                (error) => failure()
             );
             return;
         }
         group.createdAt = firebase.firestore.Timestamp.now();
         group.owners = [uref as Ref<User>];
         add(groups, group).then(
-            (groupref) => {
+            async (groupref) => {
+                await avatarSaveRef[0](groupref.id, false);
                 router.push("/group/" + groupref.id);
             },
-            (error) => failure(e.target as Element)
+            (error) => failure()
         );
     }
     function cancelClick() {
@@ -142,7 +151,11 @@ const GroupPage = (props: Props) => {
                     background="white"
                 >
                     {/* Top bar with basic information */}
-                    <GroupAvatar groupID={props.groupID} editable={edit} />
+                    <GroupAvatar
+                        groupID={props.groupID}
+                        editable={edit}
+                        onSaveRef={avatarSaveRef}
+                    />
                     <VStack flex="1 1 0" minWidth="0">
                         <GroupNameInput group={group} edit={edit} />
                         <HStack
@@ -243,6 +256,7 @@ const GroupPage = (props: Props) => {
                             leftIcon={<FaSave />}
                             borderRadius="0px"
                             onClick={saveClick}
+                            isLoading={isButtonLoading}
                         >
                             Save
                         </Button>
