@@ -8,15 +8,17 @@ import {
     Avatar,
     Input,
     Textarea,
-    useToast,
     Button,
     Portal,
     Box,
+    useToast,
+    LinkBox,
+    Icon,
 } from "@chakra-ui/react";
 
 import { FiEdit } from "react-icons/fi";
 import { FaSave } from "react-icons/fa";
-import { CloseIcon } from "@chakra-ui/icons";
+import { CloseIcon, TriangleDownIcon } from "@chakra-ui/icons";
 
 import { getGroupAvatarURL } from "../../storageHelpers";
 
@@ -59,6 +61,7 @@ const GroupPage = (props: Props) => {
     const toast = useToast();
     const [group, setGroup] = useState(_.cloneDeep(props.group));
     const [edit, setEdit] = useState(false);
+    const [editOptionsOpen, setEditOptionsOpen] = useState(true);
     function success() {
         toast.closeAll();
         toast({
@@ -66,24 +69,26 @@ const GroupPage = (props: Props) => {
             status: "success",
             duration: 2000,
             isClosable: true,
+            position: "bottom-left",
         });
         lastGroup = _.cloneDeep(group);
-        setEdit(false);
     }
     function failure(element: Element) {
-        element.setAttribute("isLoading", "false");
         toast({
             title: "Error saving Group",
             status: "error",
             duration: 2000,
             isClosable: true,
+            position: "bottom-left",
         });
     }
     function saveClick(e: MouseEvent<HTMLButtonElement>) {
-        (e.target as Element).setAttribute("isLoading", "true");
         if (!!props.groupID) {
             update(groups, props.groupID, group).then(
-                () => success(),
+                () => {
+                    success();
+                    setEdit(false);
+                },
                 (error) => failure(e.target as Element)
             );
             return;
@@ -92,7 +97,6 @@ const GroupPage = (props: Props) => {
         group.owners = [uref as Ref<User>];
         add(groups, group).then(
             (groupref) => {
-                toast.closeAll();
                 router.push("/group/" + groupref.id);
             },
             (error) => failure(e.target as Element)
@@ -101,6 +105,7 @@ const GroupPage = (props: Props) => {
     function cancelClick() {
         if (!props.groupID) {
             router.push("/");
+            return;
         }
         setGroup(
             lastGroup === undefined
@@ -112,40 +117,8 @@ const GroupPage = (props: Props) => {
     }
 
     const setEditHandler = () => {
-        toast({
-            position: "bottom",
-            duration: null,
-            render: () => (
-                <Flex
-                    flexDir="row"
-                    justifyContent="space-around"
-                    backgroundColor="mainLight"
-                    boxShadow="0px 10px 10px 2px rgba(0, 0, 0, 0.6)"
-                >
-                    <Button
-                        size="sm"
-                        margin="10px 0px"
-                        colorScheme="green"
-                        leftIcon={<FaSave />}
-                        borderRadius="0px"
-                        onClick={saveClick}
-                    >
-                        Save
-                    </Button>
-                    <Button
-                        size="sm"
-                        margin="10px 0px"
-                        colorScheme="red"
-                        leftIcon={<CloseIcon />}
-                        borderRadius="0px"
-                        onClick={cancelClick}
-                    >
-                        Cancel
-                    </Button>
-                </Flex>
-            ),
-        });
         setEdit(true);
+        setEditOptionsOpen(true);
     };
     const icon = FiEdit({ color: "white", size: "30px" });
     useEffect(() => {
@@ -202,6 +175,90 @@ const GroupPage = (props: Props) => {
             <Head>
                 <title>{props.group.name}</title>
             </Head>
+            <Portal>
+                <VStack
+                    w="300px"
+                    zIndex={5}
+                    position="fixed"
+                    bottom="0px"
+                    left="50%"
+                    transform={
+                        "translate(-50%, " +
+                        (editOptionsOpen ? "0" : "52px") +
+                        ");"
+                    }
+                    transitionProperty="transform"
+                    transitionDuration="0.2s"
+                    spacing="0px"
+                    display={edit ? "flex" : "none"}
+                >
+                    <LinkBox
+                        boxShadow="0px 10px 10px 2px rgba(0, 0, 0, 0.6)"
+                        borderRadius="5px 5px 0 0"
+                        borderBottom="1px solid black"
+                        position="relative"
+                        bg="mainLight"
+                        _hover={{ bg: "main", cursor: "pointer" }}
+                        w="200px"
+                        padding="2px"
+                        transitionDuration="0.2s"
+                        transitionProperty="background-color"
+                        onClick={(e) => setEditOptionsOpen(!editOptionsOpen)}
+                    >
+                        <Flex
+                            flexDirection="row"
+                            justifyContent="space-around"
+                            alignItems="center"
+                        >
+                            <Text flex="auto" textAlign="center">
+                                Edit Mode
+                            </Text>
+                            <Icon
+                                as={TriangleDownIcon}
+                                height="100%"
+                                color="mainDark"
+                                transform={
+                                    "rotate(" +
+                                    (editOptionsOpen ? "0" : "180") +
+                                    "deg);"
+                                }
+                                marginRight="6px"
+                                transitionProperty="transform"
+                                transitionDuration="0.2s"
+                            />
+                        </Flex>
+                    </LinkBox>
+                    <Flex
+                        boxShadow="0px 10px 10px 2px rgba(0, 0, 0, 0.6)"
+                        flexDir="row"
+                        justifyContent="space-around"
+                        width="300px"
+                        bg="mainLight"
+                        position="relative"
+                    >
+                        <Button
+                            size="sm"
+                            margin="10px 0px"
+                            colorScheme="green"
+                            leftIcon={<FaSave />}
+                            borderRadius="0px"
+                            onClick={saveClick}
+                        >
+                            Save
+                        </Button>
+                        <Button
+                            size="sm"
+                            margin="10px 0px"
+                            colorScheme="red"
+                            leftIcon={<CloseIcon />}
+                            borderRadius="0px"
+                            onClick={cancelClick}
+                        >
+                            Cancel
+                        </Button>
+                    </Flex>
+                </VStack>
+            </Portal>
             <Flex
                 flexDir="column"
                 justifyContent="start"
