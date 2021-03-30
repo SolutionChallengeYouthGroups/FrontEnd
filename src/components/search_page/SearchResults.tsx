@@ -6,7 +6,7 @@ import { Grid, Spinner } from "@chakra-ui/react";
 import GroupCard from "../../components/cards/GroupCard";
 
 import { Group } from "../../firestoreTypes";
-import { collection, where } from "typesaurus";
+import { collection, Doc, where } from "typesaurus";
 import { useAll, useQuery } from "@typesaurus/react";
 
 interface Props {
@@ -28,16 +28,16 @@ const Results = (props: Props) => {
         allGroups = [];
     }
 
-    // Filter through all groups and only keep results if they satisfy the predicates inside
-    const results = allGroups?.filter(
-        (group) =>
-            group.data.name.toLowerCase().includes(searchTerm) || // If search term in group name
-            group.data.description.toLowerCase().includes(searchTerm) || // If search term in description
-            group.data.category.toLowerCase().includes(searchTerm)
-    ); // If search term in categories
-    console.log("RESULTS,ALLGROUPS")
-    console.log(results.length)
-    console.log(allGroups.length)
+    if (searchTerm) {
+        // If there is a search term:
+        // Filter through all groups and only keep results if they satisfy the predicates inside
+        allGroups = allGroups?.filter(
+            (group) =>
+                group.data.name.toLowerCase().includes(searchTerm) || // If search term in group name
+                group.data.description.toLowerCase().includes(searchTerm) || // If search term in description
+                group.data.category.toLowerCase().includes(searchTerm)
+        ); // If search term in categories
+    }
     return (
         <>
             <Grid
@@ -46,21 +46,13 @@ const Results = (props: Props) => {
                 justifyContent="center"
                 templateColumns="repeat(auto-fit, minmax(250px,max-content))"
             >
-                {searchTerm != ""
-                    ? results?.map((group) => (
-                          <GroupCard
-                              group={group.data}
-                              groupID={group.ref.id}
-                              key={group.data.name}
-                          />
-                      ))
-                    : allGroups.map((group) => (
-                          <GroupCard
-                              group={group.data}
-                              groupID={group.ref.id}
-                              key={group.data.name}
-                          />
-                      ))}
+                {allGroups.map((group) => (
+                    <GroupCard
+                        group={group.data}
+                        groupID={group.ref.id}
+                        key={group.ref.id}
+                    />
+                ))}
             </Grid>
         </>
     );
