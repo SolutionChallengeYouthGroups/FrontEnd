@@ -165,7 +165,7 @@ const GroupPage = (props: Props) => {
                     justifyContent="normal"
                     position="fixed"
                     top="0px"
-                    padding="80px 0 0 0"
+                    padding="62px 0 0 0"
                     background="white"
                 >
                     {/* Top bar with basic information */}
