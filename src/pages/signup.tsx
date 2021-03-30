@@ -165,9 +165,9 @@ const signup = () => {
                         />
                         <TextInput
                             name="password"
-                            label="Passowrd"
+                            label="Password"
                             type="password"
-                            placeholder="superSecretPassword123"
+                            placeholder="Password"
                             required
                         />
 
