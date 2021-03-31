@@ -64,7 +64,7 @@ yarn start
 firebase init hosting
 ```
 
-Use `.out` when specifying the public directory.
+Use `out` when specifying the public directory.
 
 ```sh
 yarn deploy
