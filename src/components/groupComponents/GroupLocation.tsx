@@ -20,6 +20,9 @@ const GroupLocation = ({ group, edit, originalLocation }: Props) => {
         group.location = location?.toGeoPoint();
         setLocationState(location);
     }
+    useEffect(() => {
+        setLocationState(group.location ? GeoPointLocation.fromGeoPoint(group.location) : null)
+    }, [group.location])
     if (!!edit) {
         return (
             <VStack w="100%" h="100%">
