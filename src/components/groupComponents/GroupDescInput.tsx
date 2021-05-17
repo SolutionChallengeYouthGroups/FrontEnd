@@ -18,7 +18,7 @@ const GroupDescInput = ({ group, edit, ...rest }: Props) => {
             flex="auto"
             variant="unstyled"
             isDisabled={!edit}
-            paddingLeft="10px"
+            paddingX="10px"
             onChange={(e) => setDesc(e.target.value)}
             value={group.description}
             placeholder="Group Description"
